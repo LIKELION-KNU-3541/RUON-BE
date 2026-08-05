@@ -1,5 +1,8 @@
 package com.springboot.ruon.global.exception;
 
+import com.springboot.ruon.global.exception.Image.ImageNotFoundException;
+import com.springboot.ruon.global.exception.Image.ImageStorageException;
+import com.springboot.ruon.global.exception.Image.ImageValidationException;
 import com.springboot.ruon.global.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,32 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(errorCode.getStatus())
                 .body(ApiResponse.fail(errorCode.name(), errorCode.getMessage()));
+    }
+
+    // 이미지 스토리지
+
+    @ExceptionHandler(ImageValidationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleImageValidation(ImageValidationException e) {
+        log.warn("이미지 검증 실패", e);
+        return ResponseEntity
+                .status(ErrorCode.INVALID_IMAGE.getStatus())
+                .body(ApiResponse.fail(ErrorCode.INVALID_IMAGE.name(), e.getMessage()));
+    }
+    @ExceptionHandler(ImageNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleImageNotFound(ImageNotFoundException e) {
+        log.warn("이미지 찾을 수 없음", e);
+        return ResponseEntity
+                .status(ErrorCode.IMAGE_NOT_FOUND.getStatus())
+                .body(ApiResponse.fail(ErrorCode.IMAGE_NOT_FOUND.name(), ErrorCode.IMAGE_NOT_FOUND.getMessage()));
+    }
+
+    /** 업로드·조회·삭제 실패. objectKey와 SDK 메시지는 로그에만 남긴다. */
+    @ExceptionHandler(ImageStorageException.class)
+    public ResponseEntity<ApiResponse<Void>> handleImageStorage(ImageStorageException e) {
+        log.error("S3 스토리지 오류", e);
+        return ResponseEntity
+                .status(ErrorCode.IMAGE_STORAGE_FAILED.getStatus())
+                .body(ApiResponse.fail(ErrorCode.IMAGE_STORAGE_FAILED.name(), ErrorCode.IMAGE_STORAGE_FAILED.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
