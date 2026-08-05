@@ -1,6 +1,6 @@
 package com.springboot.ruon.global.storage.validation;
 
-import com.springboot.ruon.global.storage.exception.ImageValidationException;
+import com.springboot.ruon.global.exception.Image.ImageValidationException;
 import java.io.IOException;
 import java.io.InputStream;
 import org.springframework.stereotype.Component;

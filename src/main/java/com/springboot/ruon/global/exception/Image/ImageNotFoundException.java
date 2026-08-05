@@ -1,4 +1,4 @@
-package com.springboot.ruon.global.storage.exception;
+package com.springboot.ruon.global.exception.Image;
 
 /** 요청한 objectKey가 버킷에 존재하지 않을 때 발생한다. */
 public class ImageNotFoundException extends ImageStorageException {

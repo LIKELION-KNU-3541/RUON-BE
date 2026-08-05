@@ -2,7 +2,7 @@ package com.springboot.ruon.global.storage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.springboot.ruon.global.storage.config.S3Properties;
+import com.springboot.ruon.global.config.S3Properties;
 import com.springboot.ruon.global.storage.key.ImageObjectKeyGenerator;
 import com.springboot.ruon.global.storage.service.ImageStorageService;
 import com.springboot.ruon.global.storage.service.S3ImageStorageService;

@@ -1,4 +1,4 @@
-package com.springboot.ruon.global.storage.config;
+package com.springboot.ruon.global.config;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

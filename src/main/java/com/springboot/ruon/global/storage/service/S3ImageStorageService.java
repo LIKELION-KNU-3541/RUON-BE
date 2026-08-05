@@ -1,10 +1,10 @@
 package com.springboot.ruon.global.storage.service;
 
-import com.springboot.ruon.global.storage.config.S3Properties;
-import com.springboot.ruon.global.storage.exception.ImageDeleteException;
-import com.springboot.ruon.global.storage.exception.ImageDownloadException;
-import com.springboot.ruon.global.storage.exception.ImageNotFoundException;
-import com.springboot.ruon.global.storage.exception.ImageUploadException;
+import com.springboot.ruon.global.config.S3Properties;
+import com.springboot.ruon.global.exception.Image.ImageDeleteException;
+import com.springboot.ruon.global.exception.Image.ImageDownloadException;
+import com.springboot.ruon.global.exception.Image.ImageNotFoundException;
+import com.springboot.ruon.global.exception.Image.ImageUploadException;
 import com.springboot.ruon.global.storage.key.ImageObjectKeyGenerator;
 import com.springboot.ruon.global.storage.validation.ImageFileValidator;
 import com.springboot.ruon.global.storage.validation.ImageFormat;

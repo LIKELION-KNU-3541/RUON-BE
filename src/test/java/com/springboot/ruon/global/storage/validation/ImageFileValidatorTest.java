@@ -3,7 +3,7 @@ package com.springboot.ruon.global.storage.validation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.springboot.ruon.global.storage.exception.ImageValidationException;
+import com.springboot.ruon.global.exception.Image.ImageValidationException;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
