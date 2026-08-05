@@ -22,6 +22,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation platform('software.amazon.awssdk:bom:2.46.7')
+    implementation 'software.amazon.awssdk:s3'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.projectlombok:lombok'
@@ -34,6 +36,36 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
+// AWS 자격 증명은 코드에 두지 않고, 실행 환경의 환경변수를 그대로 전달한다.
+def awsEnvironmentKeys = [
+        'AWS_REGION', 'AWS_S3_BUCKET', 'AWS_PROFILE',
+        'AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_SESSION_TOKEN'
+]
+
 tasks.named('test') {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        // 실제 AWS를 호출하는 스모크 테스트는 일반 테스트 실행에서 제외한다.
+        excludeTags 'integration'
+    }
+}
+
+// 실제 S3 버킷을 대상으로 하는 수동 스모크 테스트 (PR 전 1회 확인용).
+tasks.register('integrationTest', Test) {
+    group = 'verification'
+    description = '실제 AWS S3 버킷을 대상으로 스모크 테스트를 실행한다.'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform {
+        includeTags 'integration'
+    }
+    awsEnvironmentKeys.each { key ->
+        def value = System.getenv(key)
+        if (value != null) {
+            environment key, value
+        }
+    }
+    outputs.upToDateWhen { false }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
 }
