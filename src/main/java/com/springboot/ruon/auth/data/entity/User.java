@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 @Entity
 @Table(name = "user")
@@ -25,6 +26,9 @@ public class User {
     private String password;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private PregnancyStage pregnancyStage;
 
     @Column(nullable = false)
@@ -37,10 +41,11 @@ public class User {
     private RoutineTimeAvailable routineTimeAvailable;
 
     @Builder
-    public User(String email, String password, PregnancyStage pregnancyStage,
+    public User(String email, String password, String name, PregnancyStage pregnancyStage,
                 int pregnancyWeekNum, boolean breastfeeding, RoutineTimeAvailable routineTimeAvailable) {
         this.email = email;
         this.password = password;
+        this.name = name;
         this.pregnancyStage = pregnancyStage;
         this.pregnancyWeekNum = pregnancyWeekNum;
         this.breastfeeding = breastfeeding;
