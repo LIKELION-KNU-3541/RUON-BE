@@ -1,10 +1,8 @@
 package com.springboot.ruon.global.storage.service;
 
 import com.springboot.ruon.global.config.S3Properties;
-import com.springboot.ruon.global.exception.Image.ImageDeleteException;
-import com.springboot.ruon.global.exception.Image.ImageDownloadException;
-import com.springboot.ruon.global.exception.Image.ImageNotFoundException;
-import com.springboot.ruon.global.exception.Image.ImageUploadException;
+import com.springboot.ruon.global.exception.ErrorCode;
+import com.springboot.ruon.global.exception.Image.ImageStorageException;
 import com.springboot.ruon.global.storage.key.ImageObjectKeyGenerator;
 import com.springboot.ruon.global.storage.validation.ImageFileValidator;
 import com.springboot.ruon.global.storage.validation.ImageFormat;
@@ -48,7 +46,7 @@ public class S3ImageStorageService implements ImageStorageService {
         try {
             s3Client.putObject(request, RequestBody.fromBytes(bytes));
         } catch (SdkException e) {
-            throw new ImageUploadException("S3 이미지 업로드에 실패했습니다: " + objectKey, e);
+            throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "S3 이미지 업로드에 실패했습니다: " + objectKey, e);
         }
         return objectKey;
     }
@@ -63,9 +61,9 @@ public class S3ImageStorageService implements ImageStorageService {
         try {
             return s3Client.getObjectAsBytes(request).asByteArray();
         } catch (NoSuchKeyException e) {
-            throw new ImageNotFoundException(objectKey, e);
+            throw new ImageStorageException(ErrorCode.NOT_FOUND, "이미지를 찾을 수 없습니다: " + objectKey, e);
         } catch (SdkException e) {
-            throw new ImageDownloadException("S3 이미지 조회에 실패했습니다: " + objectKey, e);
+            throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "S3 이미지 조회에 실패했습니다: " + objectKey, e);
         }
     }
 
@@ -79,7 +77,7 @@ public class S3ImageStorageService implements ImageStorageService {
         try {
             s3Client.deleteObject(request);
         } catch (SdkException e) {
-            throw new ImageDeleteException("S3 이미지 삭제에 실패했습니다: " + objectKey, e);
+            throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "S3 이미지 삭제에 실패했습니다: " + objectKey, e);
         }
     }
 
@@ -87,7 +85,7 @@ public class S3ImageStorageService implements ImageStorageService {
         try {
             return file.getBytes();
         } catch (IOException e) {
-            throw new ImageUploadException("업로드 파일을 읽는 중 오류가 발생했습니다.", e);
+            throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "업로드 파일을 읽는 중 오류가 발생했습니다.", e);
         }
     }
 

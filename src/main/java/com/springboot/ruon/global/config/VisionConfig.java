@@ -21,10 +21,6 @@ public class VisionConfig {
     /** 키를 헤더로 보냄 **/
     private static final String API_KEY_HEADER = "X-Goog-Api-Key";
 
-    /**
-     * {@code RestClient.Builder} 빈을 주입받지 않고 직접 만든다.
-     * 그 빈은 spring-boot-restclient 모듈이 제공하는데 이 프로젝트 의존성에 없다.
-     */
     @Bean
     public RestClient visionRestClient(VisionProperties properties) {
         if (!properties.hasApiKey()) {

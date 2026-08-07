@@ -4,10 +4,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.springboot.ruon.global.exception.Image.ImageDeleteException;
-import com.springboot.ruon.global.exception.Image.ImageNotFoundException;
-import com.springboot.ruon.global.exception.Image.ImageUploadException;
-import com.springboot.ruon.global.exception.Image.ImageValidationException;
+import com.springboot.ruon.global.exception.Image.ImageStorageException;
+import com.springboot.ruon.global.exception.Ocr.OcrException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 
 /**
- * 이미지 스토리지 예외가 팀 공통 응답 포맷과 HTTP 상태로 변환되는지 검증한다.
- * <p>
- * Spring 컨텍스트를 띄우지 않는 standalone MockMvc라 DB 설정과 무관하게 실행된다.
+ * 이미지 스토리지 예외가 팀 공통 응답 포맷과 HTTP 상태로 변환되는지 검증.
  */
 class GlobalExceptionHandlerTest {
 
@@ -44,34 +40,34 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
-    @DisplayName("이미지 없음은 404와 IMAGE_NOT_FOUND로 변환된다")
+    @DisplayName("이미지 없음은 404와 NOT_FOUND로 변환된다")
     void 이미지_없음() throws Exception {
         mockMvc.perform(get("/test/not-found"))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.error.code").value("IMAGE_NOT_FOUND"));
+                .andExpect(jsonPath("$.error.code").value("NOT_FOUND"));
     }
 
     @Test
-    @DisplayName("업로드 실패는 500과 IMAGE_STORAGE_FAILED로 변환된다")
+    @DisplayName("업로드 실패는 500과 INTERNAL_ERROR로 변환된다")
     void 업로드_실패() throws Exception {
         mockMvc.perform(get("/test/upload"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.error.code").value("IMAGE_STORAGE_FAILED"));
+                .andExpect(jsonPath("$.error.code").value("INTERNAL_ERROR"));
     }
 
     @Test
-    @DisplayName("삭제 실패도 상위 타입 핸들러가 받아 IMAGE_STORAGE_FAILED로 변환된다")
+    @DisplayName("삭제 실패도 상위 타입 핸들러가 받아 INTERNAL_ERROR로 변환된다")
     void 삭제_실패() throws Exception {
         mockMvc.perform(get("/test/delete"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.error.code").value("IMAGE_STORAGE_FAILED"));
+                .andExpect(jsonPath("$.error.code").value("INTERNAL_ERROR"));
     }
 
     @Test
     @DisplayName("업로드 실패 응답에 objectKey 등 내부 정보가 노출되지 않는다")
     void 내부_정보_비노출() throws Exception {
         mockMvc.perform(get("/test/upload"))
-                .andExpect(jsonPath("$.error.message").value("이미지 저장소 처리에 실패했습니다."));
+                .andExpect(jsonPath("$.error.message").value("서버 오류"));
     }
 
     @Test
@@ -82,29 +78,59 @@ class GlobalExceptionHandlerTest {
                 .andExpect(jsonPath("$.error.code").value("INTERNAL_ERROR"));
     }
 
+    @Test
+    @DisplayName("OCR 예외는 별도 핸들러 없이 CustomException 경로로 ErrorCode에 맞게 변환된다")
+    void OCR_인식실패() throws Exception {
+        mockMvc.perform(get("/test/ocr-extraction"))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.error.code").value("OCR_EXTRACTION_FAILED"));
+    }
+
+    @Test
+    @DisplayName("OCR 호출 실패 응답에 외부 API 상세가 노출되지 않는다")
+    void OCR_호출실패() throws Exception {
+        mockMvc.perform(get("/test/ocr-request"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.error.code").value("INTERNAL_ERROR"))
+                .andExpect(jsonPath("$.error.message").value("서버 오류"));
+    }
+
     /** 예외만 던지는 테스트용 컨트롤러. */
     @RestController
     static class ThrowingController {
 
+        @GetMapping("/test/ocr-extraction")
+        void OCR인식실패() {
+            throw new OcrException(ErrorCode.OCR_EXTRACTION_FAILED, "이미지에서 텍스트를 찾지 못했습니다.");
+        }
+
+        @GetMapping("/test/ocr-request")
+        void OCR호출실패() {
+            throw new OcrException(ErrorCode.INTERNAL_ERROR,
+                    "Vision API 호출에 실패했습니다. (status 403 PERMISSION_DENIED)",
+                    new RuntimeException("api key invalid"));
+        }
+
         @GetMapping("/test/validation")
         void 검증실패() {
-            throw new ImageValidationException("파일 크기가 7MB를 초과했습니다.");
+            throw new ImageStorageException(ErrorCode.INVALID_IMAGE, "파일 크기가 7MB를 초과했습니다.");
         }
 
         @GetMapping("/test/not-found")
         void 이미지없음() {
-            throw new ImageNotFoundException("scans/1/test.jpg", NoSuchKeyException.builder().build());
+            throw new ImageStorageException(ErrorCode.NOT_FOUND, "이미지를 찾을 수 없습니다: scans/1/test.jpg",
+                    NoSuchKeyException.builder().build());
         }
 
         @GetMapping("/test/upload")
         void 업로드실패() {
-            throw new ImageUploadException("S3 이미지 업로드에 실패했습니다: scans/1/test.jpg",
+            throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "S3 이미지 업로드에 실패했습니다: scans/1/test.jpg",
                     new RuntimeException("access denied"));
         }
 
         @GetMapping("/test/delete")
         void 삭제실패() {
-            throw new ImageDeleteException("S3 이미지 삭제에 실패했습니다: scans/1/test.jpg",
+            throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "S3 이미지 삭제에 실패했습니다: scans/1/test.jpg",
                     new RuntimeException("access denied"));
         }
 

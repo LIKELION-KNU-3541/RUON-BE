@@ -10,9 +10,8 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-import com.springboot.ruon.global.exception.Ocr.OcrExtractionFailedException;
-import com.springboot.ruon.global.exception.Ocr.OcrImageTooLargeException;
-import com.springboot.ruon.global.exception.Ocr.OcrRequestFailedException;
+import com.springboot.ruon.global.exception.ErrorCode;
+import com.springboot.ruon.global.exception.Ocr.OcrException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,11 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestClient;
 
-/**
- * Vision 응답을 흉내 내어 OCR 서비스 로직을 검증한다.
- * <p>
- * 실제 Vision API를 호출하지 않으므로 API 키가 없어도 실행된다.
- */
 class GoogleVisionOcrServiceTest {
 
     private static final String ENDPOINT = "https://vision.googleapis.com/v1/images:annotate";
@@ -105,7 +99,8 @@ class GoogleVisionOcrServiceTest {
                         """, MediaType.APPLICATION_JSON));
 
         assertThatThrownBy(() -> ocrService.extractText(IMAGE))
-                .isInstanceOf(OcrExtractionFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.OCR_EXTRACTION_FAILED);
     }
 
     @Test
@@ -117,7 +112,8 @@ class GoogleVisionOcrServiceTest {
                         """, MediaType.APPLICATION_JSON));
 
         assertThatThrownBy(() -> ocrService.extractText(IMAGE))
-                .isInstanceOf(OcrExtractionFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.OCR_EXTRACTION_FAILED);
     }
 
     @Test
@@ -129,7 +125,8 @@ class GoogleVisionOcrServiceTest {
                         """, MediaType.APPLICATION_JSON));
 
         assertThatThrownBy(() -> ocrService.extractText(IMAGE))
-                .isInstanceOf(OcrRequestFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
     }
 
     @Test
@@ -141,7 +138,8 @@ class GoogleVisionOcrServiceTest {
                         """, MediaType.APPLICATION_JSON));
 
         assertThatThrownBy(() -> ocrService.extractText(IMAGE))
-                .isInstanceOf(OcrRequestFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
     }
 
     @Test
@@ -150,16 +148,19 @@ class GoogleVisionOcrServiceTest {
         server.expect(requestTo(ENDPOINT)).andRespond(withServerError());
 
         assertThatThrownBy(() -> ocrService.extractText(IMAGE))
-                .isInstanceOf(OcrRequestFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
     }
 
     @Test
     @DisplayName("빈 이미지는 API를 호출하지 않고 거부한다")
     void 빈_이미지() {
         assertThatThrownBy(() -> ocrService.extractText(new byte[0]))
-                .isInstanceOf(OcrRequestFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
         assertThatThrownBy(() -> ocrService.extractText(null))
-                .isInstanceOf(OcrRequestFailedException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
         server.verify();
     }
 
@@ -170,7 +171,8 @@ class GoogleVisionOcrServiceTest {
         int oversized = GoogleVisionOcrService.MAX_BASE64_LENGTH / 4 * 3 + 1024;
 
         assertThatThrownBy(() -> ocrService.extractText(new byte[oversized]))
-                .isInstanceOf(OcrImageTooLargeException.class);
+                .isInstanceOf(OcrException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
         server.verify();
     }
 
