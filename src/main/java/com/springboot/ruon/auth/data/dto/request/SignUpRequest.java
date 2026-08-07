@@ -17,10 +17,13 @@ public class SignUpRequest {
     private String password;
 
     @NotNull
+    private String name;
+
+    @NotNull
     private PregnancyStage pregnancyStage;
 
     @Min(0)
-    @Max(36)
+    @Max(40)
     private int pregnancyWeekNum;
 
     private boolean breastfeeding;
