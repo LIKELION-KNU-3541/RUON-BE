@@ -3,7 +3,8 @@ package com.springboot.ruon.global.storage.validation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.springboot.ruon.global.exception.Image.ImageValidationException;
+import com.springboot.ruon.global.exception.ErrorCode;
+import com.springboot.ruon.global.exception.Image.ImageStorageException;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,14 +54,16 @@ class ImageFileValidatorTest {
         MockMultipartFile file = new MockMultipartFile("image", "photo.jpg", "image/jpeg", new byte[0]);
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
     @DisplayName("null 파일은 거부한다")
     void nullFileIsRejected() {
         assertThatThrownBy(() -> validator.validate(null))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
@@ -69,7 +72,8 @@ class ImageFileValidatorTest {
         MockMultipartFile file = new MockMultipartFile("image", "doc.gif", "image/gif", new byte[]{1});
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
@@ -79,7 +83,8 @@ class ImageFileValidatorTest {
                 "image", "photo.png", "image/jpeg", validBytes(ImageFormat.JPEG));
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
@@ -89,7 +94,8 @@ class ImageFileValidatorTest {
                 "image", "photo", "image/jpeg", validBytes(ImageFormat.JPEG));
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
@@ -99,7 +105,8 @@ class ImageFileValidatorTest {
         MockMultipartFile file = new MockMultipartFile("image", "photo.jpg", "image/jpeg", htmlBytes);
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
@@ -109,7 +116,8 @@ class ImageFileValidatorTest {
                 "image", "photo.jpg", "image/jpeg", validBytes(ImageFormat.PNG));
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test
@@ -119,7 +127,8 @@ class ImageFileValidatorTest {
         MockMultipartFile file = new MockMultipartFile("image", "photo.jpg", "image/jpeg", oversized);
 
         assertThatThrownBy(() -> validator.validate(file))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
     }
 
     @Test

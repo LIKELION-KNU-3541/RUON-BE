@@ -1,17 +1,17 @@
 package com.springboot.ruon.global.exception.Image;
 
-/**
- * S3 스토리지 모듈의 최상위 예외.
- * <p>
- * 하위 예외는 GlobalExceptionHandler에서 팀 공통 ErrorCode로 변환된다.
- */
-public class ImageStorageException extends RuntimeException {
+import com.springboot.ruon.global.exception.CustomException;
+import com.springboot.ruon.global.exception.ErrorCode;
 
-    public ImageStorageException(String message) {
-        super(message);
+/**
+ * 이미지 스토리지 처리 중 발생하는 예외.*/
+public class ImageStorageException extends CustomException {
+
+    public ImageStorageException(ErrorCode errorCode, String detail) {
+        this(errorCode, detail, null);
     }
 
-    public ImageStorageException(String message, Throwable cause) {
-        super(message, cause);
+    public ImageStorageException(ErrorCode errorCode, String detail, Throwable cause) {
+        super(errorCode, detail, cause);
     }
 }
