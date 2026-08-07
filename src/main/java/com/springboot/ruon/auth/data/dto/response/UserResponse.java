@@ -11,6 +11,7 @@ import lombok.Getter;
 public class UserResponse {
     private Long id;
     private String email;
+    private String name;
     private PregnancyStage pregnancyStage;
     private int pregnancyWeekNum;
     private boolean breastfeeding;
@@ -20,6 +21,7 @@ public class UserResponse {
         return UserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail())
+                .name(user.getName())
                 .pregnancyStage(user.getPregnancyStage())
                 .pregnancyWeekNum(user.getPregnancyWeekNum())
                 .breastfeeding(user.isBreastfeeding())
