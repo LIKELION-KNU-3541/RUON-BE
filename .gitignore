@@ -40,3 +40,11 @@ out/
 
 ### Local dev ###
 application-local.properties
+
+### Python / secrets ###
+.env
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
