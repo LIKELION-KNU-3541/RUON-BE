@@ -3,6 +3,7 @@ package com.springboot.ruon.domain.scan.service;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.global.storage.service.ImageStorageService;
+import java.util.concurrent.RejectedExecutionException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class ScanService {
 
     private final ImageStorageService imageStorageService;
     private final ScanJobRepository scanJobRepository;
+    private final ScanProcessor scanProcessor;
 
     /**
      * 이미지를 저장하고 스캔 작업을 생성한다.
@@ -33,16 +35,34 @@ public class ScanService {
      */
     public ScanJob createScan(Long userId, MultipartFile image) {
         String objectKey = imageStorageService.upload(userId, image);
+
+        ScanJob scanJob;
         try {
-            ScanJob scanJob = ScanJob.builder()
+            scanJob = scanJobRepository.save(ScanJob.builder()
                     .userId(userId)
                     .uploadedImageObjectKey(objectKey)
-                    .build();
-            return scanJobRepository.save(scanJob);
+                    .build());
         } catch (RuntimeException e) {
             // 업로드는 됐는데 작업 생성에 실패하면 버킷에 고아 객체가 남으므로 되돌린다.
             deleteQuietly(objectKey);
             throw e;
+        }
+
+        startProcessing(scanJob, objectKey);
+        return scanJob;
+    }
+
+    /**
+     * 스레드풀이 가득 차 작업을 넘기지 못하면 그대로 두면 UPLOADED인 채로 방치된다.
+     * 사용자가 재시도할 수 있도록 실패로 기록한다.
+     */
+    private void startProcessing(ScanJob scanJob, String objectKey) {
+        try {
+            scanProcessor.process(scanJob.getScanId(), objectKey);
+        } catch (RejectedExecutionException e) {
+            log.error("스캔 처리를 시작하지 못했습니다: scanId={}", scanJob.getScanId(), e);
+            scanJob.markFailed();
+            scanJobRepository.save(scanJob);
         }
     }
 
