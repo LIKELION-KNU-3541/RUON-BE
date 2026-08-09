@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 @Entity
 @Table(name = "user")

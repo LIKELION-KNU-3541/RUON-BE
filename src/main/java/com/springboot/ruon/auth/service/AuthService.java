@@ -9,6 +9,7 @@ import com.springboot.ruon.auth.data.entity.User;
 import com.springboot.ruon.auth.data.repository.UserRepository;
 import com.springboot.ruon.auth.security.JwtTokenProvider;
 import com.springboot.ruon.global.exception.BusinessException;
+import com.springboot.ruon.global.exception.CustomException;
 import com.springboot.ruon.global.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,13 @@ public class AuthService {
         }
 
         return issueToken(user);
+    }
+
+    public UserResponse getMyInfo(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+
+        return UserResponse.from(user);
     }
 
     private TokenResponse issueToken(User user) {
