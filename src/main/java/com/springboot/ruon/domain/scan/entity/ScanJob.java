@@ -46,8 +46,9 @@ public class ScanJob {
 
 
     //OCR이 추출한 원문 전체
+    // 길이를 안 주면 기본값 255로 TINYTEXT가 되어 성분표 원문이 잘린다. (한글은 글자당 3바이트)
     @Lob
-    @Column(name = "raw_ingredient_text")
+    @Column(name = "raw_ingredient_text", length = 100_000)
     private String rawIngredientText;
 
     @Builder

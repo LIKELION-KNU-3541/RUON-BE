@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
         return errorCode.getMessage();
     }
 
-    //500에 걸리지 않고 400애 처리하기 위함.
+    //400처리
     @ExceptionHandler({
             MethodArgumentNotValidException.class,
             MissingServletRequestPartException.class,
