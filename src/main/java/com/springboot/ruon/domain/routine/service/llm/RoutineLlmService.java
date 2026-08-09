@@ -1,6 +1,8 @@
 package com.springboot.ruon.domain.routine.service.llm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.ruon.auth.data.entity.PregnancyStage;
+import com.springboot.ruon.auth.data.entity.RoutineTimeAvailable;
 import com.springboot.ruon.auth.data.entity.User;
 import com.springboot.ruon.domain.product.entity.Product;
 import com.springboot.ruon.domain.routine.dto.request.SkinFeeling;
@@ -93,7 +95,7 @@ public class RoutineLlmService {
         sb.append('\n');
 
         sb.append("[오늘 사용 가능한 시간]\n")
-                .append(user.getRoutineTimeAvailable()).append('\n')
+                .append(describeRoutineTimeAvailable(user.getRoutineTimeAvailable())).append('\n')
                 .append("아침 루틴과 저녁 루틴 각각 최대 ").append(maxStepsPerTimeOfDay).append("개의 스텝(steps)만 포함해야 합니다 ")
                 .append("(아침 최대 ").append(maxStepsPerTimeOfDay).append("개 + 저녁 최대 ").append(maxStepsPerTimeOfDay).append("개). ")
                 .append("가장 중요한 케어 단계부터 우선 선택하세요.\n");
@@ -101,18 +103,39 @@ public class RoutineLlmService {
         return sb.toString();
     }
 
-    // routineTimeAvailable 문자열 → 아침/저녁 루틴 각각에 포함할 최대 스텝 개수
-    // 주의: "30초 퀵루틴"/"기본 루틴"/"여유 루틴" 문자열이 User 저장 값과 정확히 일치해야 함.
-    // 값이 다르게 저장되고 있다면(예: 담당자가 다른 문구/enum 사용) 이 매핑을 맞춰서 수정 필요.
-    private int resolveMaxSteps(String routineTimeAvailable) {
+    // routineTimeAvailable(User 도메인 enum) → 아침/저녁 루틴 각각에 포함할 최대 스텝 개수
+    // LOW(짧게) = 3, MEDIUM(보통) = 4, HIGH(여유) = 5
+    private int resolveMaxSteps(RoutineTimeAvailable routineTimeAvailable) {
         if (routineTimeAvailable == null) {
             return 4;
         }
         return switch (routineTimeAvailable) {
-            case "30초 퀵루틴" -> 3;
-            case "기본 루틴" -> 4;
-            case "여유 루틴" -> 5;
-            default -> 4;
+            case LOW -> 3;
+            case MEDIUM -> 4;
+            case HIGH -> 5;
+        };
+    }
+
+    // User 도메인 enum들을 LLM 프롬프트용 한국어 설명으로 변환
+    private String describeRoutineTimeAvailable(RoutineTimeAvailable routineTimeAvailable) {
+        if (routineTimeAvailable == null) {
+            return "알 수 없음";
+        }
+        return switch (routineTimeAvailable) {
+            case LOW -> "30초 퀵루틴 (시간 짧음)";
+            case MEDIUM -> "기본 루틴 (보통)";
+            case HIGH -> "여유 루틴 (시간 넉넉함)";
+        };
+    }
+
+    private String describePregnancyStage(PregnancyStage pregnancyStage) {
+        if (pregnancyStage == null) {
+            return "알 수 없음";
+        }
+        return switch (pregnancyStage) {
+            case PRE_PREGNANCY -> "임신 전";
+            case PREGNANT -> "임신 중";
+            case POSTPARTUM -> "출산 후";
         };
     }
 
@@ -120,10 +143,10 @@ public class RoutineLlmService {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[사용자 정보]\n")
-                .append("임신 상태: ").append(user.getPregnancyStage()).append('\n')
+                .append("임신 상태: ").append(describePregnancyStage(user.getPregnancyStage())).append('\n')
                 .append("임신 주차: ").append(user.getPregnancyWeekNum()).append('\n')
                 .append("수유 여부: ").append(user.isBreastfeeding() ? "예" : "아니오").append('\n')
-                .append("루틴 가능 시간대: ").append(user.getRoutineTimeAvailable()).append("\n\n");
+                .append("루틴 가능 시간대: ").append(describeRoutineTimeAvailable(user.getRoutineTimeAvailable())).append("\n\n");
 
         sb.append("[화장대에 등록된 제품]\n");
         if (products.isEmpty()) {
