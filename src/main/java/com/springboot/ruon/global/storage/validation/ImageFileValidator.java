@@ -1,6 +1,7 @@
 package com.springboot.ruon.global.storage.validation;
 
-import com.springboot.ruon.global.exception.Image.ImageValidationException;
+import com.springboot.ruon.global.exception.ErrorCode;
+import com.springboot.ruon.global.exception.Image.ImageStorageException;
 import java.io.IOException;
 import java.io.InputStream;
 import org.springframework.stereotype.Component;
@@ -18,27 +19,27 @@ public class ImageFileValidator {
      * Content-Type과 확장자는 클라이언트가 조작할 수 있으므로,
      * 마지막에 파일 선두 바이트(매직 바이트)로 실제 형식을 확인한다.
      *
-     * @throws ImageValidationException 파일이 비었거나, 크기를 초과했거나,
+     * @throws ImageStorageException 파일이 비었거나, 크기를 초과했거나,
      *         지원하지 않는 Content-Type이거나, 확장자가 일치하지 않거나,
      *         실제 파일 내용이 선언된 형식과 다른 경우
      */
     public ImageFormat validate(MultipartFile file) {
         if (file == null || file.isEmpty()) {
-            throw new ImageValidationException("업로드된 이미지 파일이 비어 있습니다.");
+            throw new ImageStorageException(ErrorCode.INVALID_IMAGE, "업로드된 이미지 파일이 비어 있습니다.");
         }
         if (file.getSize() > MAX_FILE_SIZE_BYTES) {
-            throw new ImageValidationException(
+            throw new ImageStorageException(ErrorCode.INVALID_IMAGE,
                     "이미지 크기는 7MB를 초과할 수 없습니다. (현재: " + file.getSize() + " bytes)");
         }
         ImageFormat format = ImageFormat.fromContentType(file.getContentType())
-                .orElseThrow(() -> new ImageValidationException(
+                .orElseThrow(() -> new ImageStorageException(ErrorCode.INVALID_IMAGE,
                         "지원하지 않는 이미지 형식입니다. (JPEG, PNG, WEBP만 허용): " + file.getContentType()));
         if (!format.supportsExtension(extractExtension(file.getOriginalFilename()))) {
-            throw new ImageValidationException(
+            throw new ImageStorageException(ErrorCode.INVALID_IMAGE,
                     "파일 확장자가 Content-Type과 일치하지 않습니다: " + file.getOriginalFilename());
         }
         if (!format.matchesSignature(readHeader(file))) {
-            throw new ImageValidationException(
+            throw new ImageStorageException(ErrorCode.INVALID_IMAGE,
                     "파일 내용이 선언된 이미지 형식과 일치하지 않습니다: " + file.getContentType());
         }
         return format;
@@ -48,7 +49,7 @@ public class ImageFileValidator {
         try (InputStream inputStream = file.getInputStream()) {
             return inputStream.readNBytes(ImageFormat.SIGNATURE_HEADER_LENGTH);
         } catch (IOException e) {
-            throw new ImageValidationException("업로드 파일을 읽는 중 오류가 발생했습니다.");
+            throw new ImageStorageException(ErrorCode.INVALID_IMAGE, "업로드 파일을 읽는 중 오류가 발생했습니다.");
         }
     }
 

@@ -18,8 +18,6 @@ public enum ErrorCode {
     LLM_GENERATION_FAILED(HttpStatus.BAD_GATEWAY, "루틴 생성(LLM 호출)에 실패했습니다."),
     OCR_EXTRACTION_FAILED(HttpStatus.UNPROCESSABLE_ENTITY, "성분표 인식 실패"),
     INVALID_IMAGE(HttpStatus.BAD_REQUEST, "올바르지 않은 이미지입니다."),
-    IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다."),
-    IMAGE_STORAGE_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 저장소 처리에 실패했습니다."),
     TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "요청 한도 초과"),
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류");
 

@@ -8,11 +8,8 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import com.springboot.ruon.global.config.S3Properties;
-import com.springboot.ruon.global.exception.Image.ImageDeleteException;
-import com.springboot.ruon.global.exception.Image.ImageDownloadException;
-import com.springboot.ruon.global.exception.Image.ImageNotFoundException;
-import com.springboot.ruon.global.exception.Image.ImageUploadException;
-import com.springboot.ruon.global.exception.Image.ImageValidationException;
+import com.springboot.ruon.global.exception.ErrorCode;
+import com.springboot.ruon.global.exception.Image.ImageStorageException;
 import com.springboot.ruon.global.storage.key.ImageObjectKeyGenerator;
 import com.springboot.ruon.global.storage.validation.ImageFileValidator;
 import com.springboot.ruon.global.storage.validation.ImageFormat;
@@ -96,18 +93,20 @@ class S3ImageStorageServiceTest {
         MockMultipartFile invalid = new MockMultipartFile("image", "doc.pdf", "application/pdf", new byte[]{1});
 
         assertThatThrownBy(() -> service.upload(1L, invalid))
-                .isInstanceOf(ImageValidationException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INVALID_IMAGE);
         verifyNoInteractions(s3Client);
     }
 
     @Test
-    @DisplayName("업로드 중 SDK 예외는 ImageUploadException으로 변환된다")
+    @DisplayName("업로드 중 SDK 예외는 INTERNAL_ERROR로 변환된다")
     void uploadSdkExceptionIsTranslated() {
         when(s3Client.putObject(any(PutObjectRequest.class), any(RequestBody.class)))
                 .thenThrow(SdkClientException.create("connection failed"));
 
         assertThatThrownBy(() -> service.upload(1L, validJpeg()))
-                .isInstanceOf(ImageUploadException.class)
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR)
                 .hasCauseInstanceOf(SdkClientException.class);
     }
 
@@ -128,23 +127,25 @@ class S3ImageStorageServiceTest {
     }
 
     @Test
-    @DisplayName("존재하지 않는 objectKey 조회는 ImageNotFoundException으로 변환된다")
+    @DisplayName("존재하지 않는 objectKey 조회는 NOT_FOUND로 변환된다")
     void downloadMissingKeyIsTranslated() {
         when(s3Client.getObjectAsBytes(any(GetObjectRequest.class)))
                 .thenThrow(NoSuchKeyException.builder().message("no such key").build());
 
         assertThatThrownBy(() -> service.download("scans/1/missing.jpg"))
-                .isInstanceOf(ImageNotFoundException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.NOT_FOUND);
     }
 
     @Test
-    @DisplayName("조회 중 그 외 SDK 예외는 ImageDownloadException으로 변환된다")
+    @DisplayName("조회 중 그 외 SDK 예외는 INTERNAL_ERROR로 변환된다")
     void downloadSdkExceptionIsTranslated() {
         when(s3Client.getObjectAsBytes(any(GetObjectRequest.class)))
                 .thenThrow(SdkClientException.create("connection failed"));
 
         assertThatThrownBy(() -> service.download("scans/1/some-key.jpg"))
-                .isInstanceOf(ImageDownloadException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
     }
 
     @Test
@@ -159,13 +160,14 @@ class S3ImageStorageServiceTest {
     }
 
     @Test
-    @DisplayName("삭제 중 SDK 예외는 ImageDeleteException으로 변환된다")
+    @DisplayName("삭제 중 SDK 예외는 INTERNAL_ERROR로 변환된다")
     void deleteSdkExceptionIsTranslated() {
         when(s3Client.deleteObject(any(DeleteObjectRequest.class)))
                 .thenThrow(SdkClientException.create("connection failed"));
 
         assertThatThrownBy(() -> service.delete("scans/1/some-key.jpg"))
-                .isInstanceOf(ImageDeleteException.class);
+                .isInstanceOf(ImageStorageException.class)
+                .hasFieldOrPropertyWithValue("errorCode", ErrorCode.INTERNAL_ERROR);
     }
 
     @Test
