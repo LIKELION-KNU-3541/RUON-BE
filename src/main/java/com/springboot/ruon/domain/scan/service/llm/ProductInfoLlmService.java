@@ -128,6 +128,19 @@ public class ProductInfoLlmService {
         }
     }
 
+    //저장해둔 Json 문자열 -> 객체 , 구조화 전 값 null, 값이 꺠진 경우도 null로 처리.
+    public ProductInfoLlmResult fromJson(String structuredResult) {
+        if (structuredResult == null || structuredResult.isBlank()) {
+            return null;
+        }
+        try {
+            return objectMapper.readValue(structuredResult, ProductInfoLlmResult.class);
+        } catch (Exception e) {
+            log.error("저장된 제품 정보를 읽지 못했습니다: {}", structuredResult, e);
+            return null;
+        }
+    }
+
     //OpenAiClient는 루틴 생성용 에러 코드를 던지므로 스캔용으로 바꿔서 올리도록 처리.
     private String requestExtraction(String rawIngredientText) {
         try {
