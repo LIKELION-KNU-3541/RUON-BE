@@ -21,7 +21,7 @@ public class VisionConfig {
     /** 키를 헤더로 보냄 **/
     private static final String API_KEY_HEADER = "X-Goog-Api-Key";
 
-    @Bean
+    @Bean("visionRestClient")
     public RestClient visionRestClient(VisionProperties properties) {
         if (!properties.hasApiKey()) {
             log.warn("GOOGLE_VISION_API_KEY가 설정되지 않았습니다. OCR 호출은 인증 실패로 처리됩니다.");

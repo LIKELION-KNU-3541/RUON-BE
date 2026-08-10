@@ -1,0 +1,3878 @@
+[
+  {
+    "inciName": "RETINOL",
+    "aliases": [
+      "VITAMIN A",
+      "VITAMIN A ALCOHOL"
+    ],
+    "casNumber": "68-26-8",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Vitamin A (retinol). Potent anti-aging ingredient. Converts to retinoic acid in skin.",
+    "functions": [
+      "SKIN CONDITIONING",
+      "ANTIOXIDANT"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": 0,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "efficacies": [
+      {
+        "target": "anti_wrinkle",
+        "mechanism": "Converted intracellularly to retinoic acid; binds RAR/RXR nuclear receptors, normalises keratinocyte turnover and reduces wrinkle depth. Meta-analytic evidence supports clinical efficacy across multiple RCTs.",
+        "direction": "reduces",
+        "biomarker": "Wrinkle depth",
+        "magnitude": "-44% fine wrinkle depth at 24 weeks (0.4% retinol)",
+        "effectStrength": "strong",
+        "evidenceLevel": "meta_analysis",
+        "clinicalConcentration": "0.1-1.0%",
+        "notes": "Kafi et al. JAAD 2007 — 0.4% retinol applied 3x/week vs vehicle.",
+        "references": [
+          "PubMed:17515510"
+        ],
+        "targetSkinTypes": []
+      },
+      {
+        "target": "collagen_stimulating",
+        "mechanism": "Upregulates COL1A1 / COL3A1 transcription via RAR-γ signalling and induces pro-collagen I synthesis in photoaged dermis.",
+        "direction": "upregulates",
+        "biomarker": "COL1A1",
+        "magnitude": "+80% procollagen-1 immunostain after 7 days",
+        "effectStrength": "strong",
+        "evidenceLevel": "rct",
+        "clinicalConcentration": "0.1-1.0%",
+        "notes": null,
+        "references": [
+          "PubMed:17515510"
+        ],
+        "targetSkinTypes": []
+      },
+      {
+        "target": "collagen_stimulating",
+        "mechanism": "Induces dermal pro-collagen production in long-term cohort follow-up of retinol-treated photoaged subjects.",
+        "direction": "induces",
+        "biomarker": "Procollagen I",
+        "magnitude": null,
+        "effectStrength": "moderate",
+        "evidenceLevel": "cohort",
+        "clinicalConcentration": "0.1-1.0%",
+        "notes": null,
+        "references": [
+          "PubMed:17515510"
+        ],
+        "targetSkinTypes": []
+      },
+      {
+        "target": "firming",
+        "mechanism": "Thickens viable epidermis and reorganises dermal collagen architecture, improving clinical firmness scores.",
+        "direction": "increases",
+        "biomarker": "Epidermal thickness",
+        "magnitude": "+8-12% epidermal thickness",
+        "effectStrength": "moderate",
+        "evidenceLevel": "rct",
+        "clinicalConcentration": "0.25-1.0%",
+        "notes": null,
+        "references": [
+          "PubMed:17515510"
+        ],
+        "targetSkinTypes": []
+      }
+    ],
+    "skinTypeProfiles": [
+      {
+        "skinType": "dry",
+        "fit": "good",
+        "reason": "Strong anti-aging benefit; pair with emollients to offset retinoid dryness.",
+        "references": []
+      },
+      {
+        "skinType": "normal",
+        "fit": "excellent",
+        "reason": "Gold-standard anti-aging active; well tolerated at 0.1-0.5%.",
+        "references": []
+      },
+      {
+        "skinType": "oily",
+        "fit": "excellent",
+        "reason": "Comedolytic + anti-aging; ideal for photoaged seborrheic skin.",
+        "references": []
+      },
+      {
+        "skinType": "combination",
+        "fit": "good",
+        "reason": "Tolerated when introduced gradually.",
+        "references": []
+      },
+      {
+        "skinType": "sensitive",
+        "fit": "avoid",
+        "reason": "High irritation potential — erythema, peeling, and barrier disruption common in reactive skin. Prefer bakuchiol or HPR alternatives.",
+        "references": []
+      },
+      {
+        "skinType": "acne_prone",
+        "fit": "good",
+        "reason": "Anti-comedogenic; ramp slowly to avoid retinoid dermatitis.",
+        "references": []
+      }
+    ],
+    "incompatibilities": [
+      {
+        "withInci": "BENZOYL PEROXIDE",
+        "severity": "moderate",
+        "reason": "Benzoyl peroxide is a strong oxidiser that chemically degrades the retinoid backbone when co-applied; the retinoid + BPO + light combination drives rapid oxidative inactivation of the retinoid, blunting its efficacy. Demonstrated for tretinoin (>50% degradation in ~2 h, ~95% in 24 h under light); retinol is converted along the same retinoic-acid pathway and shares the oxidation-prone polyene structure.",
+        "mitigation": "Apply at separate times of day (e.g. retinoid PM, BPO AM) or on alternating days. Adapalene is the BPO-stable retinoid if a same-routine combination is required.",
+        "references": [
+          "PubMed:9990414"
+        ]
+      }
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Vitamin A derivative. Teratogenic — linked to birth defects. Avoid all retinoids during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": "0.3% RE (leave-on and rinse-off) / 0.05% RE (body lotion)",
+    "euAnnex": "III",
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "Not restricted by FDA in cosmetics",
+        "regulation": "CIR",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "0.2% total retinol equivalents (full-body leave-on) / 1.0% (other cosmetics)",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": "Retinol and its esters limited to 0.2% total retinol equivalents in leave-on products intended for full body application and 1.0% in other cosmetics",
+        "references": [
+          "Health Canada Cosmetic Ingredient Hotlist (accessed 2026-05-30)",
+          "CAS 68-26-8"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "jp",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "Allowed in cosmetics",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.5%",
+        "notes": "Max 0.5% in leave-on",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "0.5%",
+        "notes": "Max 0.5%",
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "au",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Industrial Chemicals Act 2019",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "eu",
+        "status": "restricted",
+        "maxConcentration": "0.3% RE (leave-on and rinse-off) / 0.05% RE (body lotion)",
+        "notes": "Mandatory label: \"Contains Vitamin A. Consider your daily intake before use.\" Placed on the EU market from 1 November 2025; made available to end users from 1 May 2027.",
+        "regulation": "EU Regulation 1223/2009 Annex III No. 376 (added by (EU) 2024/996)",
+        "reason": "Cumulative Vitamin A intake concern (SCCS/1639/21) — the retinol-equivalent (RE) budget is SHARED across retinol + retinyl acetate + retinyl palmitate",
+        "references": [
+          "SCCS/1639/21",
+          "EU 2024/996",
+          "CELEX:32024R0996"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "incidecoder",
+      "cscp",
+      "huggingface_cied",
+      "pubchem",
+      "wikipedia",
+      "obf_taxonomy_ingredients",
+      "en:retinol",
+      "regulatory-merged-seed",
+      "efficacy-seed",
+      "California Safe Cosmetics Program (CSCP)",
+      "Cosmetic Ingredient Review (CIR)",
+      "china_cosing",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "comedogenicity": {
+        "references": [
+          "Fulton-1989:Acta-Derm-Venereol-Suppl-89:1-19"
+        ],
+        "basis": "fulton-1989",
+        "rationale": "Fulton 1989 comedogenicity scale (0-5)",
+        "assessedAt": "2026-05-23T19:47:05.312Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Vitamin A derivative. Teratogenic — linked to birth defects. Avoid all retinoids during pregnancy.",
+        "assessedAt": "2026-05-23T19:47:05.312Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Vitamin A (retinol). Potent anti-aging ingredient. Converts to retinoic acid in skin.",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Vitamin A (retinol). Potent anti-aging ingredient. Converts to retinoic acid in skin.",
+        "assessedAt": "2026-07-11T22:03:29.418Z"
+      }
+    }
+  },
+  {
+    "inciName": "RETINOL/RETINYL ESTERS, WHEN IN DAILY DOSAGES IN EXCESS OF 10,000 IU, OR 3,000 RETINOL EQUIVALENTS.",
+    "aliases": [],
+    "casNumber": "79-81-2",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": null,
+    "functions": [],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "US",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "California CSCP: reported in 2154 cosmetic product(s)",
+        "regulation": "California Safe Cosmetics Act (AB 1700)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-06-12T13:28:24.801Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "California Safe Cosmetics Program (CSCP)"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "derived",
+        "rationale": null,
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      }
+    }
+  },
+  {
+    "inciName": "RETINOL PALMITATE",
+    "aliases": [],
+    "casNumber": null,
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "RETINOL PALMITATE. Formula: C36H60O2. MW: 524.9. IUPAC: [(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] hexadecanoate",
+    "functions": [],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "US",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "California CSCP: reported in 1 cosmetic product(s)",
+        "regulation": "California Safe Cosmetics Act (AB 1700)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-06-12T13:28:24.801Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "pubchem",
+      "California Safe Cosmetics Program (CSCP)"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "RETINOL PALMITATE. Formula: C36H60O2. MW: 524.9. IUPAC: [(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] hexadecanoate",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      }
+    }
+  },
+  {
+    "inciName": "HYDROXYPINACOLONE RETINOATE",
+    "aliases": [
+      "HPR",
+      "GRANACTIVE RETINOID",
+      "RETINOIC ACID ESTER"
+    ],
+    "casNumber": "893412-73-2",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Retinoic-acid ester binding directly to retinoid receptors. Retinoid-grade efficacy with lower irritation.",
+    "functions": [
+      "SKIN CONDITIONING",
+      "ANTIOXIDANT"
+    ],
+    "safetyScore": 7,
+    "safetyLevel": "low_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": 1,
+    "irritancyPotential": "low",
+    "suitableForSkinTypes": [
+      "normal",
+      "combination",
+      "dry"
+    ],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Retinoid ester binding the retinoic-acid receptor. Conservative dermatological guidance: avoid during pregnancy and breastfeeding.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "cn",
+        "status": "allowed",
+        "maxConcentration": "leave-on 0.3%",
+        "notes": "中文名称: 羟基频哪酮视黄酸酯",
+        "regulation": "IECIC 2021 (Inventory of Existing Cosmetic Ingredients in China)",
+        "reason": null,
+        "references": [
+          "IECIC:2021"
+        ],
+        "updatedAt": "2026-06-20T12:34:54.690Z"
+      }
+    ],
+    "sources": [
+      "cosing",
+      "incidecoder",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:hydroxypinacolone-retinoate",
+      "pubchem",
+      "actives-extension-seed",
+      "efficacy-seed",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "comedogenicity": {
+        "references": [
+          "Fulton-1989:Acta-Derm-Venereol-Suppl-89:1-19"
+        ],
+        "basis": "fulton-1989",
+        "rationale": "Fulton 1989 comedogenicity scale (0-5)",
+        "assessedAt": "2026-05-23T19:47:05.319Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Retinoid ester binding the retinoic-acid receptor. Conservative dermatological guidance: avoid during pregnancy and breastfeeding.",
+        "assessedAt": "2026-05-23T19:47:05.319Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cosing",
+        "rationale": "Retinoic-acid ester binding directly to retinoid receptors. Retinoid-grade efficacy with lower irritation.",
+        "assessedAt": "2026-05-23T19:47:05.319Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cosing",
+        "rationale": "Retinoic-acid ester binding directly to retinoid receptors. Retinoid-grade efficacy with lower irritation.",
+        "assessedAt": "2026-06-20T19:55:24.380Z"
+      }
+    }
+  },
+  {
+    "inciName": "RETINAL",
+    "aliases": [
+      "RETINALDEHYDE"
+    ],
+    "casNumber": "116-31-4",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Retinaldehyde. More potent than retinol, one conversion step from retinoic acid.",
+    "functions": [
+      "SKIN CONDITIONING"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "efficacies": [
+      {
+        "target": "anti_wrinkle",
+        "mechanism": "Retinaldehyde is the direct metabolic precursor of retinoic acid; oxidised in one step to atRA, it engages RAR signalling, normalises keratinocyte turnover and reduces crow’s-feet wrinkle depth with markedly less irritation than retinol/atRA.",
+        "direction": "reduces",
+        "biomarker": "Wrinkle depth",
+        "magnitude": "Significant crow’s-feet wrinkle-depth reduction at 8 weeks (Antera 3D)",
+        "effectStrength": "moderate",
+        "evidenceLevel": "rct",
+        "clinicalConcentration": "0.05-0.1%",
+        "notes": "Kim et al. J Cosmet Dermatol 2021 — split-face MLV-retinaldehyde 0.05/0.1% vs retinol; wrinkle depth, elasticity and facial contour improved on both sides.",
+        "references": [
+          "PubMed:33569865"
+        ],
+        "targetSkinTypes": []
+      },
+      {
+        "target": "elasticity",
+        "mechanism": "Restores dermal elastic recovery via retinoid-driven matrix remodelling in photoaged skin.",
+        "direction": "increases",
+        "biomarker": "Skin elasticity",
+        "magnitude": null,
+        "effectStrength": "moderate",
+        "evidenceLevel": "rct",
+        "clinicalConcentration": "0.05-0.1%",
+        "notes": null,
+        "references": [
+          "PubMed:33569865"
+        ],
+        "targetSkinTypes": []
+      }
+    ],
+    "skinTypeProfiles": [
+      {
+        "skinType": "sensitive",
+        "fit": "good",
+        "reason": "Retinoid-strength anti-aging with substantially lower irritation than retinol/tretinoin — a preferred retinoid for reactive skin.",
+        "references": [
+          "PubMed:33569865"
+        ]
+      },
+      {
+        "skinType": "normal",
+        "fit": "excellent",
+        "reason": "Effective, well-tolerated retinoid for photoaging.",
+        "references": []
+      },
+      {
+        "skinType": "dry",
+        "fit": "good",
+        "reason": "Pair with emollients to offset residual retinoid dryness.",
+        "references": []
+      },
+      {
+        "skinType": "oily",
+        "fit": "good",
+        "reason": "Retinoid turnover benefit with good tolerance.",
+        "references": []
+      }
+    ],
+    "incompatibilities": [
+      {
+        "withInci": "BENZOYL PEROXIDE",
+        "severity": "moderate",
+        "reason": "Benzoyl peroxide is a strong oxidiser that chemically degrades the retinoid backbone when co-applied; the retinoid + BPO + light combination drives rapid oxidative inactivation, blunting efficacy. Demonstrated for tretinoin (>50% degradation in ~2 h, ~95% in 24 h under light); retinaldehyde is the direct one-step precursor of retinoic acid and shares the same oxidation-prone polyene structure.",
+        "mitigation": "Apply at separate times of day (e.g. retinoid PM, BPO AM) or on alternating days. Adapalene is the BPO-stable retinoid if a same-routine combination is required.",
+        "references": [
+          "PubMed:9990414"
+        ]
+      }
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Retinaldehyde. Teratogenic — linked to birth defects. Avoid all retinoids during pregnancy.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "Not restricted by FDA",
+        "regulation": "CIR",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.5%",
+        "notes": null,
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "0.5%",
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "0.01% (full-body leave-on) / 0.05% (other cosmetics)",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": "Retinal (retinaldehyde) limited to 0.01% in leave-on products intended for full body application and 0.05% in other cosmetics",
+        "references": [
+          "Health Canada Cosmetic Ingredient Hotlist (accessed 2026-05-30)",
+          "CAS 116-31-4"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "cosing",
+      "incidecoder",
+      "pubchem",
+      "wikipedia",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:retinal",
+      "regulatory-merged-seed",
+      "efficacy-seed",
+      "Health Canada Cosmetic Ingredient Hotlist",
+      "china_cosing",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Retinaldehyde. Teratogenic — linked to birth defects. Avoid all retinoids during pregnancy.",
+        "assessedAt": "2026-05-23T19:47:05.315Z"
+      },
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": "Health Canada restricted. Max concentration: 0.01%; 0.05%. Conditions: a) Leave-on products intended for full body application; b) Other cosmetics",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cosing",
+        "rationale": "Retinaldehyde. More potent than retinol, one conversion step from retinoic acid.",
+        "assessedAt": "2026-07-11T22:03:29.418Z"
+      }
+    }
+  },
+  {
+    "inciName": "RETINYL ACETATE",
+    "aliases": [
+      "RETINIL-ACETÁT",
+      "RETINYYLIASETAATTI",
+      "RETINIL ACETAT",
+      "ACETATO DE RETINILO",
+      "RETINILACETATAS",
+      "ACÉTATE DE RÉTINYLE.",
+      "RETINYLACETAT",
+      "RETINÜÜLATSETAAT",
+      "RETINILACETĀTS",
+      "RETINYLACETAAT",
+      "ΟΞΙΚΌ ΡΕΤΙΝΎΛΙΟ",
+      "RETINYLACETÁT",
+      "ACETATO DI RETINILE",
+      "OCTAN RETINYLU",
+      "视黄醇乙酸酯",
+      "酢酸レチノール",
+      "레티닐아세테이트"
+    ],
+    "casNumber": "127-47-9",
+    "ecNumber": null,
+    "cosIngRefNo": "37480",
+    "description": "Retinyl acetate",
+    "functions": [
+      "Skin conditioning",
+      "SKIN CONDITIONING",
+      "SKIN CONDITIONING - MISCELLANEOUS"
+    ],
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "0.2% total retinol equivalents (full-body leave-on) / 1.0% (other cosmetics)",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": "Retinol and its esters limited to 0.2% total retinol equivalents in leave-on products intended for full body application and 1.0% in other cosmetics",
+        "references": [
+          "Health Canada Cosmetic Ingredient Hotlist (accessed 2026-05-30)",
+          "CAS 127-47-9"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "eu",
+        "status": "restricted",
+        "maxConcentration": "0.3% RE (leave-on and rinse-off) / 0.05% RE (body lotion)",
+        "notes": "RE budget shared across retinol + retinyl acetate + retinyl palmitate. Mandatory label: \"Contains Vitamin A. Consider your daily intake before use.\" Placed on the EU market from 1 November 2025; made available to end users from 1 May 2027.",
+        "regulation": "EU Regulation 1223/2009 Annex III No. 376 (added by (EU) 2024/996)",
+        "reason": "Cumulative Vitamin A intake concern — the general population can exceed the EFSA tolerable upper intake via diet; the retinol-equivalent (RE) budget is SHARED across retinol + retinyl acetate + retinyl palmitate",
+        "references": [
+          "SCCS/1639/21",
+          "EU 2024/996",
+          "CELEX:32024R0996"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.328Z"
+      },
+      {
+        "country": "uk",
+        "status": "restricted",
+        "maxConcentration": "0.3% RE (leave-on and rinse-off) / 0.05% RE (body lotion)",
+        "notes": null,
+        "regulation": "UK Cosmetics Regulation Schedule 34 (mirrors (EU) 2024/996 Annex III No. 376)",
+        "reason": "OPSS endorsed the SCCS Vitamin A intake assessment; RE budget shared with retinol",
+        "references": [
+          "OPSS Cosmetics Notification 2024-08",
+          "SCCS/1639/21"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.328Z"
+      },
+      {
+        "country": "ru",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "EAEU TR CU 009/2011",
+        "reason": "No specific EAEU limit on retinyl esters as of 2024",
+        "references": [
+          "EAEU TR CU 009/2011 consolidated 2024"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.328Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "pubchem",
+      "obf_taxonomy_ingredients",
+      "en:retinyl-acetate",
+      "regulatory-merged-seed",
+      "California Safe Cosmetics Program (CSCP)",
+      "china_cosing",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-23T19:47:04.981Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "Retinyl acetate",
+        "assessedAt": "2026-05-23T19:47:04.981Z"
+      }
+    }
+  },
+  {
+    "inciName": "RETINYL PALMITATE",
+    "aliases": [
+      "VITAMIN A PALMITATE"
+    ],
+    "casNumber": "79-81-2",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Vitamin A ester form. Milder than retinol but still converts to active retinoids.",
+    "functions": [
+      "SKIN CONDITIONING",
+      "ANTIOXIDANT"
+    ],
+    "safetyScore": 4,
+    "safetyLevel": "moderate",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": 0,
+    "irritancyPotential": "moderate",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "efficacies": [
+      {
+        "target": "anti_wrinkle",
+        "mechanism": "Retinyl palmitate is an ester pro-retinoid hydrolysed in skin to retinol and then retinaldehyde/retinoic acid; the released retinoid engages RAR signalling and modestly smooths fine surface wrinkling. The weakest, slowest of the topical retinoids.",
+        "direction": "reduces",
+        "biomarker": "Skin wrinkling (SEw)",
+        "magnitude": "-6.7% to -8.3% surface wrinkling at 60 days (Visioscan SEw)",
+        "effectStrength": "mild",
+        "evidenceLevel": "controlled_trial",
+        "clinicalConcentration": "OTC cosmetic levels",
+        "notes": "Farooq et al. J Cosmet Dermatol 2018 — split-face, 11 volunteers, two retinyl palmitate creams; small but measurable wrinkling reduction. No placebo arm (vehicle-controlled split-face).",
+        "references": [
+          "PubMed:29363259"
+        ],
+        "targetSkinTypes": []
+      }
+    ],
+    "skinTypeProfiles": [
+      {
+        "skinType": "sensitive",
+        "fit": "neutral",
+        "reason": "Gentlest retinoid ester — low irritation but correspondingly weak effect.",
+        "references": []
+      },
+      {
+        "skinType": "normal",
+        "fit": "neutral",
+        "reason": "Entry-level retinoid; modest anti-aging benefit.",
+        "references": []
+      },
+      {
+        "skinType": "dry",
+        "fit": "good",
+        "reason": "Often emollient-formulated; low dryness risk.",
+        "references": []
+      }
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Vitamin A ester. Converts to retinol in skin. Lower risk than retinol but still advised to avoid during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": "0.3% RE (leave-on and rinse-off) / 0.05% RE (body lotion)",
+    "euAnnex": "III",
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "Not restricted by FDA",
+        "regulation": "CIR",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "jp",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.5%",
+        "notes": "Retinol equivalent max 0.5%",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "0.5%",
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "0.2% total retinol equivalents (full-body leave-on) / 1.0% (other cosmetics)",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": "Retinol and its esters limited to 0.2% total retinol equivalents in leave-on products intended for full body application and 1.0% in other cosmetics",
+        "references": [
+          "Health Canada Cosmetic Ingredient Hotlist (accessed 2026-05-30)",
+          "CAS 79-81-2"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "eu",
+        "status": "restricted",
+        "maxConcentration": "0.3% RE (leave-on and rinse-off) / 0.05% RE (body lotion)",
+        "notes": "Mandatory label: \"Contains Vitamin A. Consider your daily intake before use.\" Placed on the EU market from 1 November 2025; made available to end users from 1 May 2027.",
+        "regulation": "EU Regulation 1223/2009 Annex III No. 376 (added by (EU) 2024/996)",
+        "reason": "Cumulative Vitamin A intake concern (SCCS/1639/21) — shares the retinol-equivalent (RE) budget with retinol + retinyl acetate",
+        "references": [
+          "SCCS/1639/21",
+          "EU 2024/996",
+          "CELEX:32024R0996"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "incidecoder",
+      "cscp",
+      "pubchem",
+      "wikipedia",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:retinyl-palmitate",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "efficacy-seed",
+      "California Safe Cosmetics Program (CSCP)",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "comedogenicity": {
+        "references": [
+          "Fulton-1989:Acta-Derm-Venereol-Suppl-89:1-19"
+        ],
+        "basis": "fulton-1989",
+        "rationale": "Fulton 1989 comedogenicity scale (0-5)",
+        "assessedAt": "2026-05-24T16:45:24.297Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Vitamin A ester. Converts to retinol in skin. Lower risk than retinol but still advised to avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.297Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Vitamin A ester form. Milder than retinol but still converts to active retinoids.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "ACETIC ACID, RETINYL ESTER",
+    "aliases": [],
+    "casNumber": "127-47-9",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "ACETIC ACID, RETINYL ESTER. Formula: C22H32O2. MW: 328.5. IUPAC: [(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] acetate",
+    "functions": [],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "US",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "California CSCP: reported in 3 cosmetic product(s)",
+        "regulation": "California Safe Cosmetics Act (AB 1700)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-06-12T13:28:24.801Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "pubchem",
+      "California Safe Cosmetics Program (CSCP)"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "ACETIC ACID, RETINYL ESTER. Formula: C22H32O2. MW: 328.5. IUPAC: [(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] acetate",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      }
+    }
+  },
+  {
+    "inciName": "TRETINOIN",
+    "aliases": [
+      "RETINOIC ACID",
+      "ALL-TRANS RETINOIC ACID"
+    ],
+    "casNumber": "302-79-4",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Prescription retinoid (Retin-A). Most potent form. Category X pregnancy risk.",
+    "functions": [
+      "SKIN CONDITIONING"
+    ],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "All-trans retinoic acid. Prescription retinoid. Category X teratogen — absolutely contraindicated in pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Prescription drug only (Retin-A); not for OTC cosmetics",
+        "regulation": "FDA",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Medical ingredient; prescription required",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "Prohibited in cosmetics; prescription drug only",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "Prohibited in cosmetics",
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": "Listed as prohibited on the Health Canada Cosmetic Ingredient Hotlist (Retinoic Acid and its salts)",
+        "references": [
+          "Health Canada Cosmetic Ingredient Hotlist (accessed 2026-05-30)",
+          "CAS 302-79-4"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Prescription only",
+        "regulation": "TGA",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Prescription drug; not for cosmetics",
+        "regulation": "ANVISA",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "incidecoder",
+      "huggingface_cied",
+      "pubchem",
+      "wikipedia",
+      "regulatory-merged-seed"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "All-trans retinoic acid. Prescription retinoid. Category X teratogen — absolutely contraindicated in pregnancy.",
+        "assessedAt": "2026-05-23T19:47:04.648Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "Prescription retinoid (Retin-A). Most potent form. Category X pregnancy risk.",
+        "assessedAt": "2026-05-23T19:47:04.648Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "Prescription retinoid (Retin-A). Most potent form. Category X pregnancy risk.",
+        "assessedAt": "2026-07-11T22:03:29.418Z"
+      }
+    }
+  },
+  {
+    "inciName": "SALICYLIC ACID",
+    "aliases": [
+      "BHA",
+      "BETA HYDROXY ACID",
+      "2-HYDROXYBENZOIC ACID"
+    ],
+    "casNumber": "69-72-7",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Beta hydroxy acid. Oil-soluble exfoliant for acne and pore clearing.",
+    "functions": [
+      "EXFOLIANT",
+      "KERATOLYTIC",
+      "PRESERVATIVE"
+    ],
+    "safetyScore": 4,
+    "safetyLevel": "moderate",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": 0,
+    "irritancyPotential": "moderate",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "efficacies": [
+      {
+        "target": "anti_acne",
+        "mechanism": "Lipophilic beta-hydroxy acid penetrates the sebaceous follicle and is keratolytic, comedolytic and anti-inflammatory. Bissonnette 2009 RCT (n=80) compared a lipohydroxy acid derivative of salicylic acid with 5% benzoyl peroxide over 12 weeks; both reduced inflammatory lesions to a comparable degree with no significant between-group difference.",
+        "direction": "reduces",
+        "biomarker": "Inflammatory lesion count",
+        "magnitude": "-44% inflammatory lesions at 12 weeks (vs -47% for 5% BPO; NS)",
+        "effectStrength": "moderate",
+        "evidenceLevel": "rct",
+        "clinicalConcentration": "Topical leave-on (LHA derivative); 0.5-2% OTC range",
+        "notes": "Bissonnette 2009 (PubMed:19250161).",
+        "references": [
+          "PubMed:19250161"
+        ],
+        "targetSkinTypes": [
+          "oily",
+          "acne_prone",
+          "combination"
+        ]
+      },
+      {
+        "target": "exfoliating",
+        "mechanism": "Desmolytic / comedolytic action loosens corneocyte cohesion in the follicular ostium. Dayal 2017 RCT (n=40) of serial 30% salicylic-acid peels showed a significantly greater decrease in comedone counts and overall acne-score improvement vs Jessner solution.",
+        "direction": "reduces",
+        "biomarker": "Comedone count",
+        "magnitude": "Significant comedone reduction with serial 30% SA peels (6 peels / 12 weeks)",
+        "effectStrength": "moderate",
+        "evidenceLevel": "rct",
+        "clinicalConcentration": "30% peel (in-office); 0.5-2% leave-on",
+        "notes": "Dayal 2017 (PubMed:27557589).",
+        "references": [
+          "PubMed:27557589"
+        ],
+        "targetSkinTypes": [
+          "oily",
+          "acne_prone",
+          "combination"
+        ]
+      }
+    ],
+    "skinTypeProfiles": [
+      {
+        "skinType": "oily",
+        "fit": "good",
+        "reason": "Oil-soluble BHA clears sebaceous follicles; first-line for oily, congested skin.",
+        "references": [
+          "PubMed:19250161"
+        ]
+      },
+      {
+        "skinType": "acne_prone",
+        "fit": "good",
+        "reason": "Keratolytic + comedolytic; reduces both inflammatory and comedonal lesions.",
+        "references": [
+          "PubMed:27557589"
+        ]
+      },
+      {
+        "skinType": "combination",
+        "fit": "neutral",
+        "reason": "Effective; localise to oily zones to avoid over-drying.",
+        "references": []
+      },
+      {
+        "skinType": "dry",
+        "fit": "caution",
+        "reason": "Can over-dry; limit frequency and pair with moisturiser.",
+        "references": []
+      },
+      {
+        "skinType": "sensitive",
+        "fit": "caution",
+        "reason": "May sting/irritate compromised barriers; start low and infrequent.",
+        "references": []
+      }
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "BHA. High-dose systemic salicylate exposure linked to pregnancy complications. Topical use at <2% may be acceptable, but dermatologist consultation recommended.",
+    "euStatus": "restricted",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "OTC drug at 0.5-2% for acne; not regulated as cosmetic at lower levels",
+        "regulation": "21 CFR 310.545",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Max 2% as preservative/keratolytic",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": null,
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Max 2% rinse-off, 0.5% leave-on for children products prohibited",
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": null,
+        "regulation": "Industrial Chemicals Act 2019",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "incidecoder",
+      "pubchem",
+      "wikipedia",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:salicylic-acid",
+      "sccs_opinions",
+      "regulatory-merged-seed",
+      "efficacy-seed",
+      "Health Canada Cosmetic Ingredient Hotlist",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "comedogenicity": {
+        "references": [
+          "Fulton-1989:Acta-Derm-Venereol-Suppl-89:1-19"
+        ],
+        "basis": "fulton-1989",
+        "rationale": "Fulton 1989 comedogenicity scale (0-5)",
+        "assessedAt": "2026-05-23T19:47:05.442Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "BHA. High-dose systemic salicylate exposure linked to pregnancy complications. Topical use at <2% may be acceptable, but dermatologist consultation recommended.",
+        "assessedAt": "2026-05-23T19:47:05.442Z"
+      },
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": "Health Canada restricted. Max concentration: 2%.",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Beta hydroxy acid. Oil-soluble exfoliant for acne and pore clearing.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "BHA",
+    "aliases": [
+      "BUTYLATED HYDROXYANISOLE",
+      "BUTYLHYDROXYANISOLE"
+    ],
+    "casNumber": "25013-16-5",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Synthetic antioxidant. Prevents rancidity. Possible carcinogen and endocrine disruptor.",
+    "functions": [
+      "ANTIOXIDANT",
+      "PRESERVATIVE"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": 0,
+    "irritancyPotential": "low",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "IARC classifies BHA as possibly carcinogenic. Endocrine disruptor. Avoid during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": "0.1% (CIR)",
+        "notes": null,
+        "regulation": "CIR Final Report / 21 CFR 172.115 (food use)",
+        "reason": "CIR safe as used; possible endocrine disruptor flagged by NTP",
+        "references": [
+          "CIR Final Report BHA (2008)",
+          "NTP Report on Carcinogens 15th Ed"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist 2022",
+        "reason": "Anticipated human carcinogen — restricted for safety",
+        "references": [
+          "Health Canada Hotlist 2022-12",
+          "IARC Monograph V40"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "br",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": "Allowed antioxidant within GMP limits",
+        "references": [
+          "ANVISA RDC 7/2015"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "enrichment-20-point-seed",
+      "cosing",
+      "incidecoder",
+      "pubchem",
+      "wikipedia",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:bha",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "comedogenicity": {
+        "references": [
+          "Fulton-1989:Acta-Derm-Venereol-Suppl-89:1-19"
+        ],
+        "basis": "fulton-1989",
+        "rationale": "Fulton 1989 comedogenicity scale (0-5)",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "IARC classifies BHA as possibly carcinogenic. Endocrine disruptor. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Synthetic antioxidant. Prevents rancidity. Possible carcinogen and endocrine disruptor.",
+        "assessedAt": "2026-07-11T22:03:29.455Z"
+      }
+    }
+  },
+  {
+    "inciName": "HYDROQUINONE",
+    "aliases": [
+      "1,4-BENZENEDIOL",
+      "P-DIHYDROXYBENZENE"
+    ],
+    "casNumber": "123-31-9",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Skin lightening agent. High systemic absorption. Banned in EU cosmetics at >2%.",
+    "functions": [
+      "SKIN BLEACHING",
+      "REDUCING AGENT"
+    ],
+    "safetyScore": 2,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Skin lightening agent. 25-35% systemic absorption. Insufficient pregnancy safety data. Avoid during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Max 2%",
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "OTC drug monograph limit 2%; FDA proposed further restrictions",
+        "regulation": "21 CFR 310.545",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Max 2% in quasi-drug products",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Restricted to 2%",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "cn",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "Prohibited in cosmetics",
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Prescription only above 2%",
+        "regulation": "Industrial Chemicals Act 2019",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": "2%",
+        "notes": "Restricted above 2%",
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "cosing",
+      "pubchem",
+      "wikipedia",
+      "obf_taxonomy_ingredients",
+      "en:hydroquinone",
+      "credo",
+      "sephora_clean",
+      "iarc_monographs",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Health Canada Cosmetic Ingredient Hotlist",
+      "Cosmetic Ingredient Review (CIR)",
+      "china_cosing",
+      "iecic_2021",
+      "jcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Skin lightening agent. 25-35% systemic absorption. Insufficient pregnancy safety data. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": "Health Canada restricted. Max concentration: a) 0.3%; b) 0.1%\n      If hydroquinone and p-hydroxyanisole are used in the same product, the total concentration of the 2 ingredients may not exceed 0.1%; c) 0.1%. Conditions: a) Oxidizing colouring agent for hair dyes; b) Nail produc",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Skin lightening agent. High systemic absorption. Banned in EU cosmetics at >2%.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "OXYBENZONE",
+    "aliases": [
+      "BENZOPHENONE-3",
+      "BP-3"
+    ],
+    "casNumber": "131-57-7",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "UV filter (UVA/UVB). Endocrine disruptor. Detected in breast milk. Banned in Hawaii (coral reef damage).",
+    "functions": [
+      "UV FILTER",
+      "UV ABSORBER"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "moderate",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Chemical sunscreen with endocrine-disrupting potential. Absorbed systemically. Use mineral sunscreens instead during pregnancy.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": "6%",
+        "notes": "OTC monograph limit 6%; FDA proposed additional data requirements",
+        "regulation": "21 CFR 352",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": "5%",
+        "notes": null,
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "5%",
+        "notes": null,
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "5%",
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "6%",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": "10%",
+        "notes": "Max 10% in sunscreens",
+        "regulation": "TGA",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": "5%",
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "pubchem",
+      "wikipedia",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Chemical sunscreen with endocrine-disrupting potential. Absorbed systemically. Use mineral sunscreens instead during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "UV filter (UVA/UVB). Endocrine disruptor. Detected in breast milk. Banned in Hawaii (coral reef damage).",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "BENZOPHENONE-3",
+    "aliases": [
+      "OXYBENZONE",
+      "BP-3"
+    ],
+    "casNumber": "131-57-7",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Chemical UVA/UVB filter. Endocrine disruptor. Found in breast milk. Banned in Hawaii (coral damage).",
+    "functions": [
+      "UV FILTER",
+      "UV ABSORBER"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": 0,
+    "irritancyPotential": "moderate",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Endocrine disruptor. Crosses placenta. Associated with lower birth weight. Avoid during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": "6% (under review for reduction)",
+    "euAnnex": "VI",
+    "regulations": [
+      {
+        "country": "eu",
+        "status": "restricted",
+        "maxConcentration": "6% (face, hand and lip products); 2.2% body products; 0.5% other",
+        "notes": "Oxybenzone. CAS 131-57-7 / EC 205-031-5 confirmed. SCCS/1625/20 (final opinion, adopted 2021) found 6% safe for face/hand/lip but not body; 2.2% safe for body/propellant/pump sprays; 0.5% for product-protection use. Implemented via Reg (EU) 2022/1176 (7 July 2022), in force fully 28 July 2023. Both references verified to exist (SCCS doc sccs_o_247.pdf; Reg 2022/1176).",
+        "regulation": "EU Regulation 1223/2009 Annex VI No. 4 (amended by Commission Regulation (EU) 2022/1176); SCCS opinion SCCS/1625/20",
+        "reason": "Potential endocrine-disrupting concern; SCCS reduced safe UV-filter concentrations. Restricted UV filter under Annex VI.",
+        "references": [
+          "SCCS/1625/20",
+          "Commission Regulation (EU) 2022/1176"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      },
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": "6% (FDA OTC sunscreen monograph active ingredient)",
+        "notes": "Verified: 6% OTC cap and not-GRASE proposal confirmed. Hawaii ban on oxybenzone + octinoxate (Act 104, SB2571 enacted 2018) took effect 1 Jan 2021; sale prohibited without a prescription. Original candidate cited 'HRS §342D-21' — the ban was enacted as Act 104 and codified within HRS Chapter 342D (Water Pollution); the specific section reference is plausible but the primary citation is Act 104/SB2571, which I added. US Virgin Islands ban effective 2020. Wikipedia Oxybenzone article corroborates the state bans.",
+        "regulation": "FDA OTC sunscreen rulemaking (Final Administrative Order); state sales bans: Hawaii (Act 104 / SB2571, HRS ch. 342D) and US Virgin Islands",
+        "reason": "Permitted as an OTC sunscreen active up to 6%; FDA has proposed it is not yet GRASE pending additional safety data (only zinc oxide and titanium dioxide are currently GRASE). State-level sales bans (Hawaii, USVI) over coral-reef toxicity.",
+        "references": [
+          "FDA Final Administrative Order on OTC sunscreens (OTC000006)",
+          "Hawaii Act 104 (SB2571, 2018), codified HRS ch. 342D",
+          "https://en.wikipedia.org/wiki/Oxybenzone"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": "5% (UV filter, Standards for Cosmetics)",
+        "notes": "Verified: Japan limits Benzophenone-3 (oxybenzone) to 5% maximum. Consistent with multiple regulatory comparison sources.",
+        "regulation": "Japan Standards for Cosmetics (MHLW), positive list of UV absorbers",
+        "reason": "Permitted UV filter capped at 5% maximum concentration under the MHLW Standards for Cosmetics.",
+        "references": [
+          "Japan MHLW Standards for Cosmetics (UV absorber positive list)",
+          "https://www.sciencedirect.com/science/article/pii/S0160412022003324"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "10% (UV filter)",
+        "notes": "Verified: China permits Benzophenone-3 as a sunscreen agent up to 10%, consistent with the STSC permitted-UV-filter list and peer-reviewed regulatory comparisons.",
+        "regulation": "China Safety and Technical Standards for Cosmetics (STSC), permitted UV filters list",
+        "reason": "Permitted UV filter capped at 10% maximum concentration under the STSC.",
+        "references": [
+          "China Safety and Technical Standards for Cosmetics (STSC 2015) — permitted sunscreen agents",
+          "https://www.sciencedirect.com/science/article/pii/S0160412022003324"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": "10% (sunscreen active)",
+        "notes": "Verified: TGA currently permits oxybenzone (Benzophenone-3) up to 10%. IMPORTANT UPDATE: the TGA's 2025 safety review of seven active sunscreen ingredients proposed reducing the permitted oxybenzone limit; an interim decision was due for public consultation in early 2026. The 10% figure is accurate as of now but is under active review and may be lowered. The cited TGA safety-review PDF is genuine and supports both the current limit and the pending reduction.",
+        "regulation": "Australian Regulatory Guidelines for Sunscreens (ARGS) / TGA",
+        "reason": "Permitted sunscreen active ingredient currently capped at 10% maximum concentration; therapeutic sunscreens regulated by the TGA.",
+        "references": [
+          "TGA Australian Regulatory Guidelines for Sunscreens (ARGS)",
+          "https://www.tga.gov.au/sites/default/files/2025-04/safety-review-seven-active-sunscreen-ingredients.pdf"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "enrichment-20-point-seed",
+      "incidecoder",
+      "cscp",
+      "pubchem",
+      "wikipedia",
+      "tedx",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:benzophenone-3",
+      "California Safe Cosmetics Program (CSCP)",
+      "Cosmetic Ingredient Review (CIR)",
+      "regulatory-merged-seed",
+      "china_cosing",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "comedogenicity": {
+        "references": [
+          "Fulton-1989:Acta-Derm-Venereol-Suppl-89:1-19"
+        ],
+        "basis": "fulton-1989",
+        "rationale": "Fulton 1989 comedogenicity scale (0-5)",
+        "assessedAt": "2026-05-23T19:47:02.932Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Endocrine disruptor. Crosses placenta. Associated with lower birth weight. Avoid during pregnancy.",
+        "assessedAt": "2026-05-23T19:47:02.932Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Chemical UVA/UVB filter. Endocrine disruptor. Found in breast milk. Banned in Hawaii (coral damage).",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Chemical UVA/UVB filter. Endocrine disruptor. Found in breast milk. Banned in Hawaii (coral damage).",
+        "assessedAt": "2026-07-11T22:03:29.455Z"
+      }
+    }
+  },
+  {
+    "inciName": "DIBUTYL PHTHALATE",
+    "aliases": [
+      "DBP",
+      "DI-N-BUTYL PHTHALATE"
+    ],
+    "casNumber": "84-74-2",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Plasticizer formerly used in nail polishes. Banned in EU cosmetics.",
+    "functions": [
+      "PLASTICIZER"
+    ],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "low",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Phthalate — endocrine disruptor. Reproductive toxicant. Banned in EU cosmetics. Absolutely avoid during pregnancy.",
+    "euStatus": "banned",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "Not banned by FDA; industry self-regulated, phased out of most nail polishes",
+        "regulation": "FDA",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "eu",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "DBP, CAS 84-74-2 confirmed. Banned in EU cosmetics under Annex II as a CMR 1B reproductive toxicant; also SVHC / endocrine disruptor on ECHA Candidate List. Banned status confirmed by EU cosmetics regulation sources.",
+        "regulation": "EU Regulation 1223/2009 Annex II (prohibited substances); ECHA Candidate List (SVHC, incl. endocrine-disruptor identification)",
+        "reason": "CMR (Repr. 1B) and SVHC; also identified for endocrine-disrupting properties. Prohibited as a cosmetic ingredient.",
+        "references": [
+          "ECHA Candidate List: Dibutyl phthalate (DBP)",
+          "EU Regulation 1223/2009 Annex II (prohibited substances in cosmetics)"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      },
+      {
+        "country": "jp",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "Prohibited as plasticizer in cosmetics",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "Banned following EU",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "au",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Industrial Chemicals Act 2019",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "tedx",
+      "pubchem",
+      "wikipedia",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Cosmetic Ingredient Review (CIR)",
+      "jcia_namelist",
+      "iarc_monographs"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "stateBans": [
+      {
+        "state": "CA",
+        "statute": "AB 2762",
+        "effectiveDate": "2025-01-01",
+        "reason": "California Toxic-Free Cosmetics Act of 2020 (24-ingredient ban).",
+        "_id": "6a0a2ec8c488bd6ab3deca14"
+      },
+      {
+        "state": "WA",
+        "statute": "SB 5703",
+        "effectiveDate": "2025-01-01",
+        "reason": "Washington Toxic-Free Cosmetics Act (RCW 70A.560).",
+        "_id": "6a0a2ec8c488bd6ab3deca69"
+      },
+      {
+        "state": "OR",
+        "statute": "SB 546",
+        "effectiveDate": "2027-01-01",
+        "reason": "Oregon Toxic Free Cosmetics Act.",
+        "_id": "6a0a2ec8c488bd6ab3deca8b"
+      },
+      {
+        "state": "MD",
+        "statute": "HB 643",
+        "effectiveDate": "2025-01-01",
+        "reason": "Maryland cosmetic ingredient ban (mirrors CA AB 2762).",
+        "_id": "6a0a2ec8c488bd6ab3decaa1"
+      }
+    ],
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Phthalate — endocrine disruptor. Reproductive toxicant. Banned in EU cosmetics. Absolutely avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Plasticizer formerly used in nail polishes. Banned in EU cosmetics.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "DIETHYLHEXYL PHTHALATE",
+    "aliases": [
+      "DEHP",
+      "BIS(2-ETHYLHEXYL) PHTHALATE",
+      "フタル酸ジオクチル",
+      "フタル酸ジエチルヘキシル"
+    ],
+    "casNumber": "117-81-7",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+    "functions": [],
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Prohibited by Health Canada Cosmetic Ingredient Hotlist. Synonyms: DEHP.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "CPSIA 2008 / California Prop 65",
+        "reason": "Known reproductive toxicant; ban in children's products extends to cosmetics for kids",
+        "references": [
+          "CPSIA Section 108",
+          "IARC Monograph V101"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "ca",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist 2022",
+        "reason": "Reproductive toxicant — prohibited in cosmetics",
+        "references": [
+          "Health Canada Hotlist 2022-12"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "eu",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "DEHP, CAS 117-81-7 confirmed. Banned in EU cosmetics under Annex II (driven primarily by CMR 1B reprotoxicity classification; also SVHC/endocrine-disruptor on the ECHA Candidate List). Minor imprecision in the original 'Authorisation List (Annex XIV)' framing for the cosmetic ban — the cosmetic prohibition flows from Annex II / the CMR Omnibus mechanism, not Annex XIV authorisation — but the banned status and SVHC claim are correct.",
+        "regulation": "EU Regulation 1223/2009 Annex II (prohibited substances, ref to CMR 1B entries); ECHA Candidate List (SVHC, incl. endocrine-disruptor identification)",
+        "reason": "CMR (Repr. 1B) and SVHC; also identified for endocrine-disrupting properties. Prohibited as a cosmetic ingredient.",
+        "references": [
+          "ECHA Candidate List: Bis(2-ethylhexyl) phthalate (DEHP)",
+          "EU Regulation 1223/2009 Annex II (prohibited substances in cosmetics)"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.348Z"
+      },
+      {
+        "country": "br",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015 Annex II",
+        "reason": "Reproductive toxicant prohibited in cosmetics",
+        "references": [
+          "ANVISA RDC 7/2015"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "mx",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "COFEPRIS — Cosmetic prohibited substances list",
+        "reason": "Reproductive toxicant prohibited",
+        "references": [
+          "COFEPRIS NOM-141-SSA1/SSA2-2012"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      },
+      {
+        "country": "ar",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANMAT Disp. 1110/99",
+        "reason": "DEHP prohibited — reproductive toxicity",
+        "references": [
+          "ANMAT Disp. 1110/99"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.324Z"
+      }
+    ],
+    "sources": [
+      "credo",
+      "sephora_clean",
+      "wikipedia",
+      "pubchem",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Health Canada Cosmetic Ingredient Hotlist",
+      "jcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": false,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "stateBans": [
+      {
+        "state": "CA",
+        "statute": "AB 2762",
+        "effectiveDate": "2025-01-01",
+        "reason": "California Toxic-Free Cosmetics Act of 2020 (24-ingredient ban).",
+        "_id": "6a0a2ec8c488bd6ab3deca17"
+      },
+      {
+        "state": "WA",
+        "statute": "SB 5703",
+        "effectiveDate": "2025-01-01",
+        "reason": "Washington Toxic-Free Cosmetics Act (RCW 70A.560).",
+        "_id": "6a0a2ec8c488bd6ab3deca6b"
+      },
+      {
+        "state": "OR",
+        "statute": "SB 546",
+        "effectiveDate": "2027-01-01",
+        "reason": "Oregon Toxic Free Cosmetics Act.",
+        "_id": "6a0a2ec8c488bd6ab3deca8d"
+      },
+      {
+        "state": "MD",
+        "statute": "HB 643",
+        "effectiveDate": "2025-01-01",
+        "reason": "Maryland cosmetic ingredient ban (mirrors CA AB 2762).",
+        "_id": "6a0a2ec8c488bd6ab3decaa3"
+      }
+    ],
+    "evidence": {
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Prohibited by Health Canada Cosmetic Ingredient Hotlist. Synonyms: DEHP.",
+        "assessedAt": "2026-07-10T20:10:30.949Z"
+      }
+    }
+  },
+  {
+    "inciName": "DIETHYL PHTHALATE",
+    "aliases": [
+      "DEP"
+    ],
+    "casNumber": "84-66-2",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Plasticizer and fragrance solvent. Used in nail polishes and hair sprays.",
+    "functions": [
+      "SOLVENT",
+      "DENATURANT",
+      "PLASTICIZER"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "low",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Phthalate — endocrine disruptor linked to developmental and reproductive toxicity. Avoid during pregnancy.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "Not banned by FDA; used as fragrance solvent",
+        "regulation": "FDA",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "jp",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Restricted use",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Listed on Hotlist",
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "cosing",
+      "ifra",
+      "tedx",
+      "pubchem",
+      "wikipedia",
+      "obf_taxonomy_ingredients",
+      "en:diethyl-phthalate",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Phthalate — endocrine disruptor linked to developmental and reproductive toxicity. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Plasticizer and fragrance solvent. Used in nail polishes and hair sprays.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "DI-N-BUTYL PHTHALATE (DBP)",
+    "aliases": [],
+    "casNumber": "84-74-2",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": null,
+    "functions": [],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "US",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "California CSCP: reported in 17 cosmetic product(s)",
+        "regulation": "California Safe Cosmetics Act (AB 1700)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-06-12T13:28:24.801Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "California Safe Cosmetics Program (CSCP)"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "derived",
+        "rationale": null,
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      }
+    }
+  },
+  {
+    "inciName": "TRICLOSAN",
+    "aliases": [
+      "5-CHLORO-2-(2,4-DICHLOROPHENOXY)PHENOL"
+    ],
+    "casNumber": "3380-34-5",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Antimicrobial agent. Endocrine disruptor (thyroid, estrogen). Contributes to antibiotic resistance.",
+    "functions": [
+      "PRESERVATIVE",
+      "ANTIMICROBIAL"
+    ],
+    "safetyScore": 2,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "moderate",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Antimicrobial endocrine disruptor. Affects thyroid hormones. Banned in FDA-regulated hand soaps. Avoid during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": "Banned in OTC hand/body wash (2016 FDA rule); allowed in toothpaste and some products at 0.3%",
+        "regulation": "21 CFR 310.545",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": "0.1%",
+        "notes": null,
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": "Follows EU limits",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": null,
+        "regulation": "Industrial Chemicals Act 2019",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "eu",
+        "status": "restricted",
+        "maxConcentration": "0.3%",
+        "notes": "Allowed in toothpastes, hand soaps, body soaps/shower gels, non-spray deodorants, face powders/blemish concealers and nail-cleaning products. Mouthwash use REMOVED by (EU) 2024/996 Annex V (non-compliant products may be made available until 31 October 2025; effectively from 1 November 2025). Not to be used in toothpaste intended for children under 3 years of age.",
+        "regulation": "EU Regulation 1223/2009 Annex V No. 25 (amended by (EU) 2024/996)",
+        "reason": "Preservative permitted only in defined product categories; endocrine-activity concern",
+        "references": [
+          "EU 2024/996",
+          "CELEX:32024R0996"
+        ],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "tedx",
+      "pubchem",
+      "wikipedia",
+      "obf_taxonomy_ingredients",
+      "en:triclosan",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Health Canada Cosmetic Ingredient Hotlist",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "stateBans": [
+      {
+        "state": "CA",
+        "statute": "AB 2762",
+        "effectiveDate": "2025-01-01",
+        "reason": "California Toxic-Free Cosmetics Act of 2020 (24-ingredient ban).",
+        "_id": "6a0a2ec8c488bd6ab3deca2b"
+      },
+      {
+        "state": "WA",
+        "statute": "SB 5703",
+        "effectiveDate": "2025-01-01",
+        "reason": "Washington Toxic-Free Cosmetics Act (RCW 70A.560).",
+        "_id": "6a0a2ec8c488bd6ab3deca67"
+      },
+      {
+        "state": "OR",
+        "statute": "SB 546",
+        "effectiveDate": "2027-01-01",
+        "reason": "Oregon Toxic Free Cosmetics Act.",
+        "_id": "6a0a2ec8c488bd6ab3deca89"
+      },
+      {
+        "state": "MD",
+        "statute": "HB 643",
+        "effectiveDate": "2025-01-01",
+        "reason": "Maryland cosmetic ingredient ban (mirrors CA AB 2762).",
+        "_id": "6a0a2ec8c488bd6ab3decab7"
+      }
+    ],
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Antimicrobial endocrine disruptor. Affects thyroid hormones. Banned in FDA-regulated hand soaps. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": "Health Canada restricted. Max concentration: a) 0.03%; b) 0.3%. Conditions: a) Mouthwashes; b) Other cosmetics; c) All oral products must meet the following conditions:\n      Manufacturers must ensure that polychlorinated dibenzo-p-dioxin (PCDD) and polychlorinated dibenzofuran (",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Antimicrobial agent. Endocrine disruptor (thyroid, estrogen). Contributes to antibiotic resistance.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "TOLUENE DIISOCYANATES",
+    "aliases": [
+      "TOLUENE DIISOCYANATES"
+    ],
+    "casNumber": "26471-62-5",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": null,
+    "functions": [],
+    "safetyScore": 4,
+    "safetyLevel": "moderate",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Prohibited by Health Canada Cosmetic Ingredient Hotlist. Synonyms: TDIs;\n      2,4-diisocyanato-1-methyl-benzene (2,4-toluene diisocyanate);\n      2,6-diisocyanato-1-methyl-benzene (2,6 toluene diisocyanate);\n      1,3-diisocyanatomethyl-benzene (mixed isomers of toluene diisocyanate).",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "ca",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "updatedAt": "2026-05-25T06:33:08.660Z"
+      }
+    ],
+    "sources": [
+      "iarc_monographs",
+      "Health Canada Cosmetic Ingredient Hotlist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": "group_2b",
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": null,
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Prohibited by Health Canada Cosmetic Ingredient Hotlist. Synonyms: TDIs;\n      2,4-diisocyanato-1-methyl-benzene (2,4-toluene diisocyanate);\n      2,6-diisocyanato-1-methyl-benzene (2,6 toluene diisocyanate);\n      1,3-diisocyanatomethyl-benzene (mixed isomers of toluene diisocya",
+        "assessedAt": "2026-07-10T20:10:32.195Z"
+      }
+    }
+  },
+  {
+    "inciName": "TOLUENE",
+    "aliases": [
+      "METHYLBENZENE"
+    ],
+    "casNumber": "108-88-3",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Solvent in nail polishes and hair dyes. Neurotoxic. Part of \"Toxic Trio\" in nail polish.",
+    "functions": [
+      "SOLVENT"
+    ],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Neurotoxic solvent. Linked to fetal developmental delays and low birth weight. Avoid during pregnancy.",
+    "euStatus": "restricted",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Allowed in nail products; OSHA workplace exposure limits apply",
+        "regulation": "OSHA PEL",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Restricted use in nail products",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Limited use",
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.319Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "cscp",
+      "pubchem",
+      "wikipedia",
+      "obf_taxonomy_ingredients",
+      "en:toluene",
+      "iarc_monographs",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "California Safe Cosmetics Program (CSCP)",
+      "Cosmetic Ingredient Review (CIR)",
+      "china_cosing",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "stateBans": [
+      {
+        "state": "CA",
+        "statute": "AB 2762",
+        "effectiveDate": "2025-01-01",
+        "reason": "California Toxic-Free Cosmetics Act of 2020 (24-ingredient ban).",
+        "_id": "6a0a2ec8c488bd6ab3deca35"
+      },
+      {
+        "state": "MD",
+        "statute": "HB 643",
+        "effectiveDate": "2025-01-01",
+        "reason": "Maryland cosmetic ingredient ban (mirrors CA AB 2762).",
+        "_id": "6a0a2ec8c488bd6ab3decabb"
+      }
+    ],
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Neurotoxic solvent. Linked to fetal developmental delays and low birth weight. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.297Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Solvent in nail polishes and hair dyes. Neurotoxic. Part of \"Toxic Trio\" in nail polish.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "FORMALDEHYDE",
+    "aliases": [
+      "FORMALIN",
+      "METHANAL"
+    ],
+    "casNumber": "50-00-0",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Preservative and hardening agent. IARC Group 1 carcinogen.",
+    "functions": [
+      "PRESERVATIVE"
+    ],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Known human carcinogen. Developmental toxicant. Avoid during pregnancy.",
+    "euStatus": "banned",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Not explicitly banned in cosmetics; OSHA workplace limits apply. Industry self-regulation limits use.",
+        "regulation": "29 CFR 1910.1048",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": "0.2%",
+        "notes": "Max 0.2% free formaldehyde",
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "jp",
+        "status": "banned",
+        "maxConcentration": null,
+        "notes": "Prohibited in cosmetics",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.2%",
+        "notes": "Max 0.2% free formaldehyde",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "0.2%",
+        "notes": "Max 0.2% as preservative",
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "au",
+        "status": "restricted",
+        "maxConcentration": "0.2%",
+        "notes": "Follows ASEAN limits",
+        "regulation": "Industrial Chemicals Act 2019",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": "0.2%",
+        "notes": "Max 0.2% as preservative; banned in hair straighteners above this",
+        "regulation": "ANVISA RDC 36/2009",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "cscp",
+      "tedx",
+      "pubchem",
+      "wikipedia",
+      "credo",
+      "sephora_clean",
+      "iarc_monographs",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "California Safe Cosmetics Program (CSCP)",
+      "Health Canada Cosmetic Ingredient Hotlist",
+      "Cosmetic Ingredient Review (CIR)",
+      "china_cosing",
+      "iecic_2021"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "stateBans": [
+      {
+        "state": "CA",
+        "statute": "AB 2762",
+        "effectiveDate": "2025-01-01",
+        "reason": "California Toxic-Free Cosmetics Act of 2020 (24-ingredient ban).",
+        "_id": "6a0a2ec8c488bd6ab3deca19"
+      },
+      {
+        "state": "WA",
+        "statute": "SB 5703",
+        "effectiveDate": "2025-01-01",
+        "reason": "Washington Toxic-Free Cosmetics Act (RCW 70A.560).",
+        "_id": "6a0a2ec8c488bd6ab3deca5d"
+      },
+      {
+        "state": "OR",
+        "statute": "SB 546",
+        "effectiveDate": "2027-01-01",
+        "reason": "Oregon Toxic Free Cosmetics Act.",
+        "_id": "6a0a2ec8c488bd6ab3deca7f"
+      },
+      {
+        "state": "MD",
+        "statute": "HB 643",
+        "effectiveDate": "2025-01-01",
+        "reason": "Maryland cosmetic ingredient ban (mirrors CA AB 2762).",
+        "_id": "6a0a2ec8c488bd6ab3decaa5"
+      }
+    ],
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Known human carcinogen. Developmental toxicant. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [
+          "Health-Canada-Hotlist-2022"
+        ],
+        "basis": "health-canada",
+        "rationale": "Health Canada restricted. Max concentration: b) 0.01%; c) 0.1%; d) 0.2%; e) 5.0%. Conditions: a) Not permitted in aerosol products.; b) Non-aerosol products that release formaldehyde vapours when used according to directions.; c) Oral products; d) Non-oral products as a preservat",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Preservative and hardening agent. IARC Group 1 carcinogen.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "FORMALDEHYDE SOLUTION",
+    "aliases": [],
+    "casNumber": null,
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": null,
+    "functions": [],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "US",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "California CSCP: reported in 5 cosmetic product(s)",
+        "regulation": "California Safe Cosmetics Act (AB 1700)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-06-12T13:28:24.801Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "California Safe Cosmetics Program (CSCP)"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "derived",
+        "rationale": null,
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      }
+    }
+  },
+  {
+    "inciName": "FORMALDEHYDE (GAS)",
+    "aliases": [],
+    "casNumber": "50-00-0",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "FORMALDEHYDE (GAS). Formula: CH2O. MW: 30.026. IUPAC: formaldehyde",
+    "functions": [],
+    "safetyScore": 1,
+    "safetyLevel": "hazardous",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": null,
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "US",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "California CSCP: reported in 142 cosmetic product(s)",
+        "regulation": "California Safe Cosmetics Act (AB 1700)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-06-12T13:28:24.801Z"
+      }
+    ],
+    "sources": [
+      "cscp",
+      "pubchem",
+      "California Safe Cosmetics Program (CSCP)"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Listed in California Safe Cosmetics Program as carcinogen or reproductive toxicant",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "pubchem-ghs",
+        "rationale": "FORMALDEHYDE (GAS). Formula: CH2O. MW: 30.026. IUPAC: formaldehyde",
+        "assessedAt": "2026-05-16T13:06:34.159Z"
+      }
+    }
+  },
+  {
+    "inciName": "DMDM HYDANTOIN",
+    "aliases": [],
+    "casNumber": "6440-58-0",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Formaldehyde-releasing preservative. Slowly releases formaldehyde as antimicrobial.",
+    "functions": [
+      "PRESERVATIVE"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Formaldehyde-releasing preservative. Releases formaldehyde over time. Avoid during pregnancy.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "CIR assessed as safe at current use levels; releases formaldehyde",
+        "regulation": "CIR",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Subject to formaldehyde release limits",
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.6%",
+        "notes": "Limited as preservative",
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": "0.6%",
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": "Subject to formaldehyde release limits",
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "br",
+        "status": "restricted",
+        "maxConcentration": "0.6%",
+        "notes": null,
+        "regulation": "ANVISA RDC 7/2015",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      }
+    ],
+    "sources": [
+      "base-ingredients-seed",
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "cosing",
+      "incidecoder",
+      "pubchem",
+      "huggingface_cied",
+      "obf_taxonomy_ingredients",
+      "en:dmdm-hydantoin",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Formaldehyde-releasing preservative. Releases formaldehyde over time. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Formaldehyde-releasing preservative. Slowly releases formaldehyde as antimicrobial.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  },
+  {
+    "inciName": "QUATERNIUM-15",
+    "aliases": [
+      "DOWICIL 200"
+    ],
+    "casNumber": "4080-31-3",
+    "ecNumber": null,
+    "cosIngRefNo": null,
+    "description": "Quaternary ammonium compound that releases formaldehyde. Potent sensitizer.",
+    "functions": [
+      "PRESERVATIVE"
+    ],
+    "safetyScore": 3,
+    "safetyLevel": "high_risk",
+    "isEuAllergen": false,
+    "allergenTypes": [],
+    "comedogenicityRating": null,
+    "irritancyPotential": "high",
+    "suitableForSkinTypes": [],
+    "avoidForSkinTypes": [
+      "sensitive"
+    ],
+    "pregnancySafe": false,
+    "pregnancyNotes": "Formaldehyde-releasing preservative. Releases the highest amount of free formaldehyde. Avoid during pregnancy.",
+    "euStatus": "allowed",
+    "euMaxConcentration": null,
+    "euAnnex": null,
+    "regulations": [
+      {
+        "country": "us",
+        "status": "allowed",
+        "maxConcentration": null,
+        "notes": "CIR assessed as safe; highest formaldehyde releaser",
+        "regulation": "CIR",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "jp",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "MHLW Standards for Cosmetics",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "kr",
+        "status": "restricted",
+        "maxConcentration": "0.2%",
+        "notes": null,
+        "regulation": "MFDS Cosmetics Act",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "cn",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "NMPA Safety and Technical Standards for Cosmetics (2015)",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      },
+      {
+        "country": "ca",
+        "status": "restricted",
+        "maxConcentration": null,
+        "notes": null,
+        "regulation": "Health Canada Cosmetic Ingredient Hotlist",
+        "reason": null,
+        "references": [],
+        "updatedAt": "2026-07-28T00:19:14.318Z"
+      }
+    ],
+    "sources": [
+      "pregnancy-unsafe-seed",
+      "regulatory-seed",
+      "enrichment-20-point-seed",
+      "pubchem",
+      "wikipedia",
+      "obf_taxonomy_ingredients",
+      "en:quaternium-15",
+      "credo",
+      "sephora_clean",
+      "clean_beauty_dirty_lists",
+      "regulatory-merged-seed",
+      "Cosmetic Ingredient Review (CIR)",
+      "iecic_2021",
+      "jcia_namelist",
+      "kcia_namelist"
+    ],
+    "breastfeedingSafe": null,
+    "breastfeedingNotes": null,
+    "photosensitivityRisk": null,
+    "environmentalImpact": null,
+    "biodegradable": null,
+    "bioaccumulative": null,
+    "endocrineDisruptionRisk": null,
+    "carcinogenicityClass": null,
+    "cleanBeautyCompatible": null,
+    "vegan": null,
+    "naturalOriginPercent": null,
+    "reefSafe": null,
+    "fungalAcneSafe": null,
+    "phSensitivity": null,
+    "optimalPhRange": null,
+    "stability": null,
+    "evidenceQuality": null,
+    "pubmedCitationCount": null,
+    "lastResearchUpdate": null,
+    "stateBans": [
+      {
+        "state": "CA",
+        "statute": "AB 2762",
+        "effectiveDate": "2025-01-01",
+        "reason": "California Toxic-Free Cosmetics Act of 2020 (24-ingredient ban).",
+        "_id": "6a0a2ec8c488bd6ab3deca1f"
+      },
+      {
+        "state": "WA",
+        "statute": "SB 5703",
+        "effectiveDate": "2025-01-01",
+        "reason": "Washington Toxic-Free Cosmetics Act (RCW 70A.560).",
+        "_id": "6a0a2ec8c488bd6ab3deca63"
+      },
+      {
+        "state": "OR",
+        "statute": "SB 546",
+        "effectiveDate": "2027-01-01",
+        "reason": "Oregon Toxic Free Cosmetics Act.",
+        "_id": "6a0a2ec8c488bd6ab3deca85"
+      },
+      {
+        "state": "MD",
+        "statute": "HB 643",
+        "effectiveDate": "2025-01-01",
+        "reason": "Maryland cosmetic ingredient ban (mirrors CA AB 2762).",
+        "_id": "6a0a2ec8c488bd6ab3decaab"
+      }
+    ],
+    "evidence": {
+      "pregnancy": {
+        "references": [],
+        "basis": "expert-consensus",
+        "rationale": "Formaldehyde-releasing preservative. Releases the highest amount of free formaldehyde. Avoid during pregnancy.",
+        "assessedAt": "2026-05-24T16:45:24.296Z"
+      },
+      "safety": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Restricted by both Credo Beauty Dirty List and Clean at Sephora program",
+        "assessedAt": "2026-05-25T06:34:42.926Z"
+      },
+      "irritancy": {
+        "references": [],
+        "basis": "cir",
+        "rationale": "Quaternary ammonium compound that releases formaldehyde. Potent sensitizer.",
+        "assessedAt": "2026-07-11T22:03:29.419Z"
+      }
+    }
+  }
+]
