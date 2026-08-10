@@ -1,10 +1,15 @@
 package com.springboot.ruon.domain.scan.service;
 
+import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
+import com.springboot.ruon.domain.rag.service.RagService;
+import com.springboot.ruon.domain.scan.entity.ScanFailureStage;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmResult;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
 import com.springboot.ruon.global.config.AsyncConfig;
+import com.springboot.ruon.global.exception.CustomException;
+import com.springboot.ruon.global.exception.ErrorCode;
 import com.springboot.ruon.global.ocr.service.OcrService;
 import com.springboot.ruon.global.storage.service.ImageStorageService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +28,7 @@ public class ScanProcessor {
     private final ImageStorageService imageStorageService;
     private final OcrService ocrService;
     private final ProductInfoLlmService productInfoLlmService;
+    private final RagService ragService;
     private final RepresentativeImageService representativeImageService;
 
     @Async(AsyncConfig.SCAN_EXECUTOR)
@@ -33,34 +39,53 @@ public class ScanProcessor {
             return;
         }
 
+        ScanFailureStage currentStage = ScanFailureStage.IMAGE_DOWNLOAD;
         try {
             scanJob.markOcrProcessing();
             scanJobRepository.save(scanJob);
 
             byte[] image = imageStorageService.download(objectKey);
+
+            currentStage = ScanFailureStage.OCR;
             String rawIngredientText = ocrService.extractText(image);
 
             scanJob.completeOcr(rawIngredientText);
             scanJobRepository.save(scanJob);
 
+            currentStage = ScanFailureStage.STRUCTURING;
             ProductInfoLlmResult productInfo = productInfoLlmService.extract(rawIngredientText);
             scanJob.completeStructuring(productInfoLlmService.toJson(productInfo));
             scanJobRepository.save(scanJob);
 
+            currentStage = ScanFailureStage.RAG_ANALYSIS;
+            IngredientAnalysisResponse ingredientAnalysis =
+                    ragService.analyzeIngredients(productInfo.fullIngredients());
+            scanJob.completeAnalysis(ragService.toJson(ingredientAnalysis));
+            scanJobRepository.save(scanJob);
+
             //대표 이미지는 선택 기능이라 못 찾으면 null이 오고, 그래도 완료로 본다.
+            currentStage = ScanFailureStage.REPRESENTATIVE_IMAGE;
             String representativeImageObjectKey =
                     representativeImageService.findAndStore(scanJob.getUserId(), productInfo);
             scanJob.complete(representativeImageObjectKey);
             scanJobRepository.save(scanJob);
         } catch (RuntimeException e) {
-            log.error("스캔 처리에 실패했습니다: scanId={}", scanId, e);
-            markFailedQuietly(scanJob);
+            log.error("스캔 처리에 실패했습니다: scanId={}, failureStage={}", scanId, currentStage, e);
+            markFailedQuietly(scanJob, currentStage, failureCode(e));
         }
     }
 
-    private void markFailedQuietly(ScanJob scanJob) {
+    private String failureCode(RuntimeException exception) {
+        if (exception instanceof CustomException customException) {
+            return customException.getErrorCode().name();
+        }
+        return ErrorCode.INTERNAL_ERROR.name();
+    }
+
+    private void markFailedQuietly(
+            ScanJob scanJob, ScanFailureStage failureStage, String failureCode) {
         try {
-            scanJob.markFailed();
+            scanJob.markFailed(failureStage, failureCode);
             scanJobRepository.save(scanJob);
         } catch (RuntimeException e) {
             log.error("실패 상태 저장에 실패했습니다: scanId={}", scanJob.getScanId(), e);

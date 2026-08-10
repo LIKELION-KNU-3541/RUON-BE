@@ -18,6 +18,7 @@ public enum ErrorCode {
     LLM_GENERATION_FAILED(HttpStatus.BAD_GATEWAY, "루틴 생성(LLM 호출)에 실패했습니다."),
     OCR_EXTRACTION_FAILED(HttpStatus.UNPROCESSABLE_ENTITY, "성분표 인식 실패"),
     PRODUCT_INFO_EXTRACTION_FAILED(HttpStatus.BAD_GATEWAY, "제품 정보 추출에 실패했습니다."),
+    INGREDIENT_ANALYSIS_FAILED(HttpStatus.UNPROCESSABLE_ENTITY, "성분 분석에 실패했습니다."),
     RAG_SERVICE_ERROR(HttpStatus.BAD_GATEWAY, "성분 분석 서비스 응답 오류"),
     RAG_SERVICE_UNAVAILABLE(HttpStatus.SERVICE_UNAVAILABLE, "성분 분석 서비스를 사용할 수 없습니다."),
     INVALID_IMAGE(HttpStatus.BAD_REQUEST, "올바르지 않은 이미지입니다."),

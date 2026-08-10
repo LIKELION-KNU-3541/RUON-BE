@@ -1,6 +1,8 @@
 package com.springboot.ruon.domain.scan.service;
 
 import com.springboot.ruon.domain.scan.dto.response.ScanDetailResponse;
+import com.springboot.ruon.domain.rag.service.RagService;
+import com.springboot.ruon.domain.scan.entity.ScanFailureStage;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
@@ -29,6 +31,7 @@ public class ScanService {
     private final ScanJobRepository scanJobRepository;
     private final ScanProcessor scanProcessor;
     private final ProductInfoLlmService productInfoLlmService;
+    private final RagService ragService;
 
     /**
      * 이미지를 저장하고 스캔 작업을 생성한다.
@@ -69,6 +72,7 @@ public class ScanService {
         return ScanDetailResponse.from(
                 scanJob,
                 productInfoLlmService.fromJson(scanJob.getStructuredResult()),
+                ragService.fromJson(scanJob.getIngredientAnalysisResult()),
                 imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)));
     }
 
@@ -101,7 +105,7 @@ public class ScanService {
             scanProcessor.process(scanJob.getScanId(), objectKey);
         } catch (RejectedExecutionException e) {
             log.error("스캔 처리를 시작하지 못했습니다: scanId={}", scanJob.getScanId(), e);
-            scanJob.markFailed();
+            scanJob.markFailed(ScanFailureStage.PROCESSING_START, ErrorCode.TOO_MANY_REQUESTS.name());
             scanJobRepository.save(scanJob);
         }
     }

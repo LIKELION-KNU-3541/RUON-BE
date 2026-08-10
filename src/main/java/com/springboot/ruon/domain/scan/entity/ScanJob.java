@@ -59,6 +59,21 @@ public class ScanJob {
     @Column(name = "structured_result", length = 100_000)
     private String structuredResult;
 
+    //구조화된 fullIngredients를 RAG DB와 대조한 분석 결과
+    @Lob
+    @Column(name = "ingredient_analysis_result", length = 500_000)
+    private String ingredientAnalysisResult;
+
+    //FAILED 상태일 때 어느 처리 단계에서 실패했는지 구분
+    @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(name = "failure_stage", length = 30)
+    private ScanFailureStage failureStage;
+
+    //실패 원인을 클라이언트가 공통 ErrorCode 기준으로 구분할 수 있도록 저장
+    @Column(name = "failure_code", length = 50)
+    private String failureCode;
+
     @Builder
     public ScanJob(Long userId, String uploadedImageObjectKey) {
         this.userId = userId;
@@ -79,6 +94,11 @@ public class ScanJob {
     //구조화 단계 완료
     public void completeStructuring(String structuredResult) {
         this.structuredResult = structuredResult;
+        this.status = ScanStatus.ANALYZING;
+    }
+
+    public void completeAnalysis(String ingredientAnalysisResult) {
+        this.ingredientAnalysisResult = ingredientAnalysisResult;
         this.status = ScanStatus.IMAGE_SEARCHING;
     }
 
@@ -89,6 +109,16 @@ public class ScanJob {
     }
 
     public void markFailed() {
+        markFailed(ScanFailureStage.PROCESSING_START, "INTERNAL_ERROR");
+    }
+
+    public void markFailed(ScanFailureStage failureStage) {
+        markFailed(failureStage, "INTERNAL_ERROR");
+    }
+
+    public void markFailed(ScanFailureStage failureStage, String failureCode) {
+        this.failureStage = failureStage;
+        this.failureCode = failureCode;
         this.status = ScanStatus.FAILED;
     }
 }
