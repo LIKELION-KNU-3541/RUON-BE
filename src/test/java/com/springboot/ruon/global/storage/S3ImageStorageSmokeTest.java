@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 /**
  * 실제 AWS S3 버킷을 대상으로 하는 수동 스모크 테스트.
@@ -58,6 +59,10 @@ class S3ImageStorageSmokeTest {
         try {
             ImageStorageService storageService = new S3ImageStorageService(
                     s3Client,
+                    S3Presigner.builder()
+                            .region(Region.of(region))
+                            .credentialsProvider(DefaultCredentialsProvider.builder().build())
+                            .build(),
                     new S3Properties(region, bucket),
                     new ImageFileValidator(),
                     new ImageObjectKeyGenerator());
