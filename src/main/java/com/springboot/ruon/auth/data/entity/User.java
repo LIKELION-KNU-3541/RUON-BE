@@ -27,6 +27,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PregnancyStage pregnancyStage;
 
@@ -36,6 +37,7 @@ public class User {
     @Column(nullable = false)
     private boolean breastfeeding;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoutineTimeAvailable routineTimeAvailable;
 
