@@ -7,6 +7,7 @@ from app.generation.rag_chain import answer_question
 from app.ingestion.loader import load_ingredients_csv
 from app.ingestion.embedder import embed_and_insert
 from app.db import get_conn
+from app.analysis.ingredient_analysis import analyze_ingredients
 
 router = APIRouter()
 
@@ -31,6 +32,10 @@ class PregnancyCheckRequest(BaseModel):
     ingredients: List[str]  # 전성분표 리스트 (한글명 또는 영문명 섞여있어도 됨)
 
 
+class IngredientAnalysisRequest(BaseModel):
+    ingredients: List[str]
+
+
 @router.post("/search")
 def search(req: SearchRequest):
     """벡터 + 키워드 하이브리드 검색만 수행 (LLM 호출 없음)"""
@@ -42,6 +47,12 @@ def search(req: SearchRequest):
 def answer(req: AnswerRequest):
     """검색 + LLM 답변 생성"""
     return answer_question(req.query, top_k=req.top_k)
+
+
+@router.post("/ingredient-analysis")
+def ingredient_analysis(req: IngredientAnalysisRequest):
+    """전성분 목록을 RAG DB와 대조해 성분별 기능·주의·안전성 정보를 반환."""
+    return analyze_ingredients(req.ingredients)
 
 
 @router.post("/ingest")
