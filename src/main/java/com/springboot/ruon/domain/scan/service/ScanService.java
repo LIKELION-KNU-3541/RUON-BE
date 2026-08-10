@@ -1,7 +1,11 @@
 package com.springboot.ruon.domain.scan.service;
 
+import com.springboot.ruon.domain.scan.dto.response.ScanDetailResponse;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
+import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
+import com.springboot.ruon.global.exception.CustomException;
+import com.springboot.ruon.global.exception.ErrorCode;
 import com.springboot.ruon.global.storage.service.ImageStorageService;
 import java.util.concurrent.RejectedExecutionException;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +28,7 @@ public class ScanService {
     private final ImageStorageService imageStorageService;
     private final ScanJobRepository scanJobRepository;
     private final ScanProcessor scanProcessor;
+    private final ProductInfoLlmService productInfoLlmService;
 
     /**
      * 이미지를 저장하고 스캔 작업을 생성한다.
@@ -49,6 +54,41 @@ public class ScanService {
         }
 
         startProcessing(scanJob, objectKey);
+        return scanJob;
+    }
+
+    /**
+     * 스캔 작업을 조회한다.
+     * 처리가 비동기라 프론트는 이 메서드를 폴링해서 완료를 확인한다.
+     *
+     * @throws CustomException 스캔이 없거나(404) 다른 사용자의 스캔인 경우(403)
+     */
+    public ScanDetailResponse getScanDetail(Long userId, Long scanId) {
+        ScanJob scanJob = getScan(userId, scanId);
+        //DB에는 JSON 문자열로 있어서, 그대로 내보내면 프론트가 한 번 더 파싱해야 한다.
+        return ScanDetailResponse.from(
+                scanJob,
+                productInfoLlmService.fromJson(scanJob.getStructuredResult()),
+                imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)));
+    }
+
+    //대표 이미지는 못 찾을 수 있다. 그때는 사용자가 올린 사진을 보여준다.
+    private String viewImageObjectKey(ScanJob scanJob) {
+        String representativeImageObjectKey = scanJob.getRepresentativeImageObjectKey();
+        return representativeImageObjectKey != null
+                ? representativeImageObjectKey
+                : scanJob.getUploadedImageObjectKey();
+    }
+
+    private ScanJob getScan(Long userId, Long scanId) {
+        ScanJob scanJob = scanJobRepository.findById(scanId)
+                .orElseThrow(() -> new CustomException(
+                        ErrorCode.NOT_FOUND, "스캔 작업을 찾을 수 없습니다.", null));
+
+        if (!scanJob.getUserId().equals(userId)) {
+            //남의 스캔에는 성분표 원문이 그대로 들어 있어 노출되면 안 된다.
+            throw new CustomException(ErrorCode.FORBIDDEN, "본인의 스캔만 조회할 수 있습니다.", null);
+        }
         return scanJob;
     }
 

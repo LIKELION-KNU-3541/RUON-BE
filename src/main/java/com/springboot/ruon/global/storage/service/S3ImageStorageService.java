@@ -7,6 +7,7 @@ import com.springboot.ruon.global.storage.key.ImageObjectKeyGenerator;
 import com.springboot.ruon.global.storage.validation.ImageFileValidator;
 import com.springboot.ruon.global.storage.validation.ImageFormat;
 import java.io.IOException;
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,8 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 
 /**
  * S3 기반 {@link ImageStorageService} 구현체.
@@ -27,7 +30,11 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @RequiredArgsConstructor
 public class S3ImageStorageService implements ImageStorageService {
 
+    //화면에 오래 머무는 경우를 고려한 값 1시간.
+    private static final Duration VIEW_URL_TTL = Duration.ofHours(1);
+
     private final S3Client s3Client;
+    private final S3Presigner s3Presigner;
     private final S3Properties properties;
     private final ImageFileValidator validator;
     private final ImageObjectKeyGenerator keyGenerator;
@@ -74,6 +81,25 @@ public class S3ImageStorageService implements ImageStorageService {
             throw new ImageStorageException(ErrorCode.NOT_FOUND, "이미지를 찾을 수 없습니다: " + objectKey, e);
         } catch (SdkException e) {
             throw new ImageStorageException(ErrorCode.INTERNAL_ERROR, "S3 이미지 조회에 실패했습니다: " + objectKey, e);
+        }
+    }
+
+    @Override
+    public String generateViewUrl(String objectKey) {
+        requireObjectKey(objectKey);
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(properties.bucket())
+                .key(objectKey)
+                .build();
+        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(VIEW_URL_TTL)
+                .getObjectRequest(getObjectRequest)
+                .build();
+        try {
+            return s3Presigner.presignGetObject(presignRequest).url().toString();
+        } catch (SdkException e) {
+            throw new ImageStorageException(
+                    ErrorCode.INTERNAL_ERROR, "이미지 URL 발급에 실패했습니다: " + objectKey, e);
         }
     }
 

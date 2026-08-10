@@ -23,6 +23,10 @@ public interface ImageStorageService {
     byte[] download(String objectKey);
 
 
+    //objectKey->이미지 url 생성.
+    String generateViewUrl(String objectKey);
+
+
     //이미지를 삭제한다. 존재하지 않는 objectKey 삭제는 no-op
     void delete(String objectKey);
 }

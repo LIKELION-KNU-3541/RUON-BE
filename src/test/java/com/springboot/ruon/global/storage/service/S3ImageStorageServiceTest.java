@@ -32,6 +32,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 @ExtendWith(MockitoExtension.class)
 class S3ImageStorageServiceTest {
@@ -41,13 +42,16 @@ class S3ImageStorageServiceTest {
     @Mock
     private S3Client s3Client;
 
+    @Mock
+    private S3Presigner s3Presigner;
+
     private S3ImageStorageService service;
 
     @BeforeEach
     void setUp() {
         S3Properties properties = new S3Properties("ap-northeast-2", BUCKET);
         service = new S3ImageStorageService(
-                s3Client, properties, new ImageFileValidator(), new ImageObjectKeyGenerator());
+                s3Client, s3Presigner, properties, new ImageFileValidator(), new ImageObjectKeyGenerator());
     }
 
     /** 형식별 유효한 매직 바이트로 시작하는 테스트 데이터를 만든다. */

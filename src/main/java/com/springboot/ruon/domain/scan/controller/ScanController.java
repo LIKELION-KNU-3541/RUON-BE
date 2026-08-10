@@ -2,6 +2,7 @@ package com.springboot.ruon.domain.scan.controller;
 
 import com.springboot.ruon.auth.security.CustomUserDetails;
 import com.springboot.ruon.domain.scan.dto.response.ScanCreateResponse;
+import com.springboot.ruon.domain.scan.dto.response.ScanDetailResponse;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.service.ScanService;
 import com.springboot.ruon.global.response.ApiResponse;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -33,5 +36,14 @@ public class ScanController {
 
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(ApiResponse.success(ScanCreateResponse.from(scanJob)));
+    }
+
+    @GetMapping("/{scanId}")
+    public ResponseEntity<ApiResponse<ScanDetailResponse>> getScan(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @PathVariable Long scanId) {
+
+        return ResponseEntity.ok(
+                ApiResponse.success(scanService.getScanDetail(userDetails.getUserId(), scanId)));
     }
 }
