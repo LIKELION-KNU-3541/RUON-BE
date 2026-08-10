@@ -1,7 +1,6 @@
 package com.springboot.ruon.auth.data.dto.request;
 
 import com.springboot.ruon.auth.data.entity.PregnancyStage;
-import com.springboot.ruon.auth.data.entity.RoutineTimeAvailable;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 
@@ -27,7 +26,4 @@ public class SignUpRequest {
     private int pregnancyWeekNum;
 
     private boolean breastfeeding;
-
-    @NotNull
-    private RoutineTimeAvailable routineTimeAvailable;
 }

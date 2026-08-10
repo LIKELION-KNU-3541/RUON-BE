@@ -45,7 +45,6 @@ class AuthServiceTest {
                 .pregnancyStage(PregnancyStage.PREGNANT)
                 .pregnancyWeekNum(20)
                 .breastfeeding(false)
-                .routineTimeAvailable(RoutineTimeAvailable.MEDIUM)
                 .build();
         user.setId(1L);
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
@@ -55,6 +54,7 @@ class AuthServiceTest {
         assertThat(response.getId()).isEqualTo(1L);
         assertThat(response.getEmail()).isEqualTo("user@example.com");
         assertThat(response.getName()).isEqualTo("루온");
+        assertThat(response.getRoutineTimeAvailable()).isEqualTo(RoutineTimeAvailable.MEDIUM);
     }
 
     @Test
