@@ -35,8 +35,18 @@ public class S3ImageStorageService implements ImageStorageService {
     @Override
     public String upload(Long userId, MultipartFile file) {
         ImageFormat format = validator.validate(file);
+        return putObject(userId, readBytes(file), format);
+    }
+
+    @Override
+    public String upload(Long userId, byte[] image, String contentType) {
+        ImageFormat format = validator.validate(image, contentType);
+        return putObject(userId, image, format);
+    }
+
+    //objectKey의 확장자와 Content-Type은 검증을 통과한 ImageFormat에서만 나온다.
+    private String putObject(Long userId, byte[] bytes, ImageFormat format) {
         String objectKey = keyGenerator.generate(userId, format);
-        byte[] bytes = readBytes(file);
         PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(properties.bucket())
                 .key(objectKey)
