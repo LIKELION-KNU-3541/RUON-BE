@@ -2,8 +2,10 @@ package com.springboot.ruon.domain.rag.controller;
 
 import com.springboot.ruon.domain.rag.dto.request.PregnancyCheckRequest;
 import com.springboot.ruon.domain.rag.dto.request.RagAnswerRequest;
+import com.springboot.ruon.domain.rag.dto.request.IngredientAnalysisRequest;
 import com.springboot.ruon.domain.rag.dto.response.PregnancyCheckResponse;
 import com.springboot.ruon.domain.rag.dto.response.RagAnswerResponse;
+import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
 import com.springboot.ruon.domain.rag.service.RagService;
 import com.springboot.ruon.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -31,5 +33,11 @@ public class RagController {
     public ResponseEntity<ApiResponse<PregnancyCheckResponse>> checkPregnancySafety(
             @Valid @RequestBody PregnancyCheckRequest request) {
         return ResponseEntity.ok(ApiResponse.success(ragService.checkPregnancySafety(request)));
+    }
+
+    @PostMapping("/ingredient-analysis")
+    public ResponseEntity<ApiResponse<IngredientAnalysisResponse>> analyzeIngredients(
+            @Valid @RequestBody IngredientAnalysisRequest request) {
+        return ResponseEntity.ok(ApiResponse.success(ragService.analyzeIngredients(request)));
     }
 }

@@ -3,6 +3,7 @@ package com.springboot.ruon.domain.rag.client;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springboot.ruon.domain.rag.dto.response.PregnancyCheckResponse;
 import com.springboot.ruon.domain.rag.dto.response.RagAnswerResponse;
+import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
 import com.springboot.ruon.global.exception.CustomException;
 import com.springboot.ruon.global.exception.ErrorCode;
 import java.util.List;
@@ -53,6 +54,19 @@ public class RagClient {
                 response.unknownIngredients() == null ? List.of() : response.unknownIngredients());
     }
 
+    public IngredientAnalysisResponse analyzeIngredients(List<String> ingredients) {
+        IngredientAnalysisResponse response = post(
+                "/ingredient-analysis",
+                new IngredientAnalysisRequestPayload(ingredients),
+                IngredientAnalysisResponse.class);
+        return new IngredientAnalysisResponse(
+                response.totalChecked(),
+                response.matchedCount(),
+                response.cautionCount(),
+                response.analyzedIngredients() == null ? List.of() : response.analyzedIngredients(),
+                response.unknownIngredients() == null ? List.of() : response.unknownIngredients());
+    }
+
     private <T> T post(String uri, Object request, Class<T> responseType) {
         try {
             T response = restClient.post()
@@ -80,6 +94,9 @@ public class RagClient {
     }
 
     private record PregnancyCheckRequestPayload(List<String> ingredients) {
+    }
+
+    private record IngredientAnalysisRequestPayload(List<String> ingredients) {
     }
 
     private record AnswerPayload(String answer, List<SourcePayload> sources) {
