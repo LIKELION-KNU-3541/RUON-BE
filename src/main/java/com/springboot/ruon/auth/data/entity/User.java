@@ -41,14 +41,14 @@ public class User {
 
     @Builder
     public User(String email, String password, String name, PregnancyStage pregnancyStage,
-                int pregnancyWeekNum, boolean breastfeeding, RoutineTimeAvailable routineTimeAvailable) {
+                int pregnancyWeekNum, boolean breastfeeding) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.pregnancyStage = pregnancyStage;
         this.pregnancyWeekNum = pregnancyWeekNum;
         this.breastfeeding = breastfeeding;
-        this.routineTimeAvailable = routineTimeAvailable;
+        this.routineTimeAvailable = RoutineTimeAvailable.MEDIUM;
     }
 
 }

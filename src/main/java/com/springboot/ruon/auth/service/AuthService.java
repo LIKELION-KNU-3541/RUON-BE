@@ -37,7 +37,6 @@ public class AuthService {
                 .pregnancyStage(request.getPregnancyStage())
                 .pregnancyWeekNum(request.getPregnancyWeekNum())
                 .breastfeeding(request.isBreastfeeding())
-                .routineTimeAvailable(request.getRoutineTimeAvailable())
                 .build();
 
         userRepository.save(user);
