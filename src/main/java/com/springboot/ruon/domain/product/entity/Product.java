@@ -33,6 +33,14 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
+    //스캔에서 읽히지 않으면 사용자가 비워둘 수 있어 필수로 두지 않는다.
+    @Column(name = "brand_name")
+    private String brandName;
+
+    //원문 표기를 그대로 보관한다. (예: 50ml, 1.7 fl.oz)
+    @Column(name = "capacity")
+    private String capacity;
+
     @Column(name = "category")
     private String category;
 
@@ -41,11 +49,13 @@ public class Product {
     private UsageStatus usageStatus;
 
     @Builder
-    public Product(Long scanId, Long userId, String productName, String category,
-                    UsageStatus usageStatus) {
+    public Product(Long scanId, Long userId, String productName, String brandName,
+                    String capacity, String category, UsageStatus usageStatus) {
         this.scanId = scanId;
         this.userId = userId;
         this.productName = productName;
+        this.brandName = brandName;
+        this.capacity = capacity;
         this.category = category;
         this.usageStatus = usageStatus != null ? usageStatus : UsageStatus.IN_USE;
     }
