@@ -155,7 +155,8 @@ public class RoutineLlmService {
             for (Product product : products) {
                 sb.append("- productId: ").append(product.getProductId())
                         .append(", 이름: ").append(product.getProductName())
-                        .append(", 카테고리: ").append(product.getCategory())
+                        .append(", 브랜드: ").append(product.getBrandName())
+                        .append(", 용량: ").append(product.getCapacity())
                         .append('\n');
             }
             sb.append('\n');

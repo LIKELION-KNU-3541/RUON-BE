@@ -13,6 +13,7 @@ public record ProductCreateRequest(
         @NotNull Long userId,
         Long scanId,
         @NotBlank String productName,
-        String category
+        @NotBlank String brandName,
+        @NotBlank String capacity
 ) {
 }
