@@ -23,7 +23,8 @@ public class ProductService {
                 .userId(request.userId())
                 .scanId(request.scanId())
                 .productName(request.productName())
-                .category(request.category())
+                .brandName(request.brandName())
+                .capacity(request.capacity())
                 .build();
 
         Product saved = productRepository.save(product);
