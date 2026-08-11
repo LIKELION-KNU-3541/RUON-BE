@@ -74,6 +74,9 @@ public class RoutineService {
         User user = userRepository.findById(request.userId())
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+        // 오늘 선택한 "사용 가능한 시간"을 User에 반영(덮어쓰기) - 매일 바뀔 수 있는 값이라 여기서 갱신
+        user.setRoutineTimeAvailable(request.routineTimeAvailable());
+
         Routine previousRoutine = routineRepository
                 .findFirstByUserIdOrderByGeneratedAtDesc(request.userId())
                 .orElse(null);
@@ -82,7 +85,7 @@ public class RoutineService {
 
         Routine routine = Routine.create(request.userId(), user.getPregnancyWeekNum());
 
-        // 오늘의 피부 컨디션 + User.routineTimeAvailable(오늘 사용 가능한 시간)을 반영해서 재생성
+        // 오늘의 피부 컨디션 + 방금 갱신한 User.routineTimeAvailable(오늘 사용 가능한 시간)을 반영해서 재생성
         RoutineLlmResult llmResult = routineLlmService.generateWithCondition(
                 user, registeredProducts, previousRoutine, request.skinFeelings(), request.customFeeling());
         applyLlmResultToRoutine(routine, llmResult);
