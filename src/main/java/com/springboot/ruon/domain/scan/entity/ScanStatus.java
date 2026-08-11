@@ -14,7 +14,10 @@ public enum ScanStatus {
     //OCR 성공, 원문을 제품 정보로 구조화하는 중
     STRUCTURING,
 
-    //구조화 성공, 구조화 결과로 대표 이미지를 찾는 중
+    //구조화된 전성분을 RAG 성분 데이터로 분석하는 중
+    ANALYZING,
+
+    //성분 분석 성공, 구조화 결과로 대표 이미지를 찾는 중
     IMAGE_SEARCHING,
 
     //모든 처리 완료. 대표 이미지를 못 찾아도 이 상태가 된다.

@@ -13,6 +13,18 @@ CREATE TABLE IF NOT EXISTS ingredients (
     caution         TEXT,                         -- 주의사항
     description     TEXT,                         -- 성분 설명 (임베딩 원문 소스)
     source          VARCHAR(255),                 -- 데이터 출처
+    restrict_category TEXT,
+    restrict_countries TEXT,
+    notice_name     TEXT,
+    banned_countries TEXT,
+    restricted_countries TEXT,
+    inci_functions TEXT,
+    irritancy_potential VARCHAR(20),
+    comedogenicity_rating TINYINT,
+    safety_score    TINYINT,
+    pregnancy_safe BOOLEAN,
+    pregnancy_notes TEXT,
+    is_allergen     BOOLEAN,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     -- 벡터 검색용 컬럼 (임베딩 모델 차원에 맞게 조정)
