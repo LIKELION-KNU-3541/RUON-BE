@@ -152,17 +152,24 @@ public class AnalysisSummaryService {
     }
 
     private Card createSecondaryCard(List<Ingredient> analyzed, int matchedCount) {
-        Map<BenefitCategory, Integer> counts = new EnumMap<>(BenefitCategory.class);
+        Map<BenefitCategory, List<Ingredient>> ingredientsByCategory =
+                new EnumMap<>(BenefitCategory.class);
         for (Ingredient ingredient : analyzed) {
             for (BenefitCategory category : BenefitCategory.values()) {
                 if (category.matches(ingredient.function())) {
-                    counts.merge(category, 1, Integer::sum);
+                    ingredientsByCategory
+                            .computeIfAbsent(category, ignored -> new java.util.ArrayList<>())
+                            .add(ingredient);
                 }
             }
         }
 
-        List<Map.Entry<BenefitCategory, Integer>> topCategories = counts.entrySet().stream()
-                .sorted(Map.Entry.<BenefitCategory, Integer>comparingByValue(Comparator.reverseOrder())
+        List<Map.Entry<BenefitCategory, List<Ingredient>>> topCategories =
+                ingredientsByCategory.entrySet().stream()
+                .sorted(Comparator
+                        .<Map.Entry<BenefitCategory, List<Ingredient>>>comparingInt(
+                                entry -> entry.getValue().size())
+                        .reversed()
                         .thenComparing(entry -> entry.getKey().ordinal()))
                 .limit(2)
                 .toList();
@@ -179,10 +186,14 @@ public class AnalysisSummaryService {
                 .reduce((left, right) -> left + "·" + right)
                 .orElse("") + " 케어 성분이 포함되어 있어요";
         String description = topCategories.stream()
-                .map(entry -> entry.getKey().label + " 관련 성분 " + entry.getValue() + "개")
+                .map(entry -> entry.getKey().label + " 관련 성분 " + entry.getValue().size() + "개")
                 .reduce((left, right) -> left + "와 " + right)
                 .orElse("") + "가 확인됐어요.";
-        return new Card(title, description, IconType.BENEFIT, List.of());
+        List<String> benefitIngredientNames = topCategories.stream()
+                .flatMap(entry -> ingredientNames(entry.getValue()).stream())
+                .distinct()
+                .toList();
+        return new Card(title, description, IconType.BENEFIT, benefitIngredientNames);
     }
 
     private CautionIngredient toCautionIngredient(Ingredient ingredient) {
@@ -201,14 +212,14 @@ public class AnalysisSummaryService {
     }
 
     private enum BenefitCategory {
-        MOISTURE("수분·보습", "보습", "습윤", "수분", "humectant", "moistur", "emollient"),
+        MOISTURE("수분·보습", "보습", "습윤", "수분", "humectant", "moistur", "emollient", "hydrating"),
         SOOTHING("진정", "진정", "soothing", "anti-inflammatory"),
-        BRIGHTENING("미백", "미백", "brighten"),
+        BRIGHTENING("미백", "미백", "brighten", "skin lightening"),
         ANTI_AGING("주름·탄력", "주름", "탄력", "anti-aging"),
         ANTIOXIDANT("항산화", "항산화", "antioxidant"),
-        UV_PROTECTION("자외선 차단", "자외선", "sunscreen", "uv filter"),
+        UV_PROTECTION("자외선 차단", "자외선", "sunscreen", "uv filter", "uv absorber"),
         CLEANSING("세정", "세정", "cleansing", "surfactant"),
-        CONDITIONING("피부 컨디셔닝", "피부 컨디셔닝", "skin conditioning");
+        CONDITIONING("피부 컨디셔닝", "피부 컨디셔닝", "피부컨디셔닝", "skin conditioning");
 
         private final String label;
         private final List<String> keywords;
