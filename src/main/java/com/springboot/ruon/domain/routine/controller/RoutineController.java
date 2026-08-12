@@ -1,6 +1,5 @@
 package com.springboot.ruon.domain.routine.controller;
 
-import com.springboot.ruon.domain.routine.dto.request.RoutineCreateRequest;
 import com.springboot.ruon.domain.routine.dto.request.StepStatusUpdateRequest;
 import com.springboot.ruon.domain.routine.dto.request.TodayConditionRequest;
 import com.springboot.ruon.domain.routine.dto.response.RoutineResponse;
@@ -19,14 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class RoutineController {
 
     private final RoutineService routineService;
-
-    // 루틴 생성
-    @PostMapping
-    public ResponseEntity<ApiResponse<RoutineResponse>> createRoutine(
-            @Valid @RequestBody RoutineCreateRequest request) {
-        RoutineResponse response = routineService.createRoutine(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(response));
-    }
 
     // 오늘의 컨디션 반영 → 오늘 사용 가능한 시간(User.routineTimeAvailable)에 맞춰 루틴 재생성
     @PostMapping("/condition")
