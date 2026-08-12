@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 화장대에 등록된 화장품 (ERD의 PRODUCT 테이블)
  *
- * userId / scanId는 User, ScanJob 엔티티가 아직 없어서
- * * 우선 Long 컬럼으로만 두고, 추후 엔티티가 준비되면 @ManyToOne 연관관계로 교체 예정.
- *
+ * userId / scanId는 User, ScanJob과 직접 연관관계를 맺지 않고 Long으로만 둠.
  */
 @Entity
 @Table(name = "product")
@@ -44,6 +42,11 @@ public class Product {
     @Column(name = "usage_status", nullable = false)
     private UsageStatus usageStatus;
 
+    // LLM이 생성한 한 줄 소개 문구. 제품당 한 번만 생성해서 재사용
+    @Lob
+    @Column(name = "description")
+    private String description;
+
     @Builder
     public Product(Long scanId, Long userId, String productName, String brandName,
                    String capacity, UsageStatus usageStatus) {
@@ -57,5 +60,9 @@ public class Product {
 
     public void changeUsageStatus(UsageStatus usageStatus) {
         this.usageStatus = usageStatus;
+    }
+
+    public void applyDescription(String description) {
+        this.description = description;
     }
 }

@@ -4,7 +4,6 @@ import com.springboot.ruon.auth.data.entity.User;
 import com.springboot.ruon.auth.data.repository.UserRepository;
 import com.springboot.ruon.domain.product.entity.Product;
 import com.springboot.ruon.domain.product.repository.ProductRepository;
-import com.springboot.ruon.domain.routine.dto.request.RoutineCreateRequest;
 import com.springboot.ruon.domain.routine.dto.request.SkinFeeling;
 import com.springboot.ruon.domain.routine.dto.request.TodayConditionRequest;
 import com.springboot.ruon.domain.routine.dto.response.RoutineResponse;
@@ -28,6 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,33 +41,6 @@ public class RoutineService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final RoutineLlmService routineLlmService;
-
-    @Transactional
-    public RoutineResponse createRoutine(RoutineCreateRequest request) {
-        User user = userRepository.findById(request.userId())
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
-        // 전체루틴 읽기: 이전에 생성된 루틴이 있으면 참고 자료로 사용
-        Routine previousRoutine = routineRepository
-                .findFirstByUserIdOrderByGeneratedAtDesc(request.userId())
-                .orElse(null);
-
-        // 화장대에 등록된 제품 목록 (LLM이 실제 존재하는 제품으로만 루틴을 구성하도록)
-        List<Product> registeredProducts = productRepository.findByUserId(request.userId());
-
-        Integer pregnancyWeek = request.basedOnPregnancyWeek() != null
-                ? request.basedOnPregnancyWeek()
-                : user.getPregnancyWeekNum();
-
-        Routine routine = Routine.create(request.userId(), pregnancyWeek);
-
-        // TODO: 성분 중복 확인 로직 - Ingredient 도메인 준비되면 여기에 연결 예정
-        RoutineLlmResult llmResult = routineLlmService.generate(user, registeredProducts, previousRoutine);
-        applyLlmResultToRoutine(routine, llmResult);
-
-        Routine saved = routineRepository.save(routine);
-        return RoutineResponse.from(saved);
-    }
 
     @Transactional
     public RoutineResponse reflectTodayCondition(TodayConditionRequest request) {
@@ -88,10 +63,11 @@ public class RoutineService {
         // 오늘의 피부 컨디션 + 방금 갱신한 User.routineTimeAvailable(오늘 사용 가능한 시간)을 반영해서 재생성
         RoutineLlmResult llmResult = routineLlmService.generateWithCondition(
                 user, registeredProducts, previousRoutine, request.skinFeelings(), request.customFeeling());
-        applyLlmResultToRoutine(routine, llmResult);
+        Map<Long, Product> productsById = toProductMap(registeredProducts);
+        applyLlmResultToRoutine(routine, llmResult, user, productsById);
 
         Routine saved = routineRepository.save(routine);
-        return RoutineResponse.from(saved);
+        return RoutineResponse.from(saved, productsById);
     }
 
     // 컨디션 미선택 시 루틴 추천 불가: 최소 1개 선택 필수, CUSTOM(직접 작성) 선택 시 텍스트 필수
@@ -105,7 +81,7 @@ public class RoutineService {
         }
     }
 
-    private void applyLlmResultToRoutine(Routine routine, RoutineLlmResult llmResult) {
+    private void applyLlmResultToRoutine(Routine routine, RoutineLlmResult llmResult, User user, Map<Long, Product> productsById) {
         try {
             for (LlmStepResult stepResult : llmResult.steps()) {
                 Step step = Step.create(
@@ -115,12 +91,23 @@ public class RoutineService {
                         StepAction.valueOf(stepResult.action())
                 );
                 routine.addStep(step);
+
+                // 이 제품의 한 줄 소개가 아직 없으면 지금 한 번만 생성해서 저장 (이후로는 재사용, 재호출 없음)
+                Product product = productsById.get(stepResult.productId());
+                if (product != null && product.getDescription() == null) {
+                    String description = routineLlmService.generateProductDescription(product, user);
+                    product.applyDescription(description);
+                }
             }
             routine.applyLlmResult(llmResult.explanation(), llmResult.recommendedAction());
         } catch (IllegalArgumentException e) {
             // LLM이 정의되지 않은 enum 값을 반환한 경우
             throw new CustomException(ErrorCode.LLM_GENERATION_FAILED);
         }
+    }
+
+    private Map<Long, Product> toProductMap(List<Product> products) {
+        return products.stream().collect(Collectors.toMap(Product::getProductId, Function.identity()));
     }
 
     public RoutineResponse getTodayRoutine(Long userId) {
@@ -132,7 +119,10 @@ public class RoutineService {
                 .findFirstByUserIdAndGeneratedAtBetweenOrderByGeneratedAtDesc(userId, start, end)
                 .orElseThrow(() -> new CustomException(ErrorCode.ROUTINE_NOT_FOUND));
 
-        return RoutineResponse.from(routine);
+        List<Long> productIds = routine.getSteps().stream().map(Step::getProductId).distinct().toList();
+        Map<Long, Product> productsById = toProductMap(productRepository.findAllById(productIds));
+
+        return RoutineResponse.from(routine, productsById);
     }
 
     @Transactional
@@ -145,6 +135,7 @@ public class RoutineService {
         }
 
         step.changeStatus(status);
-        return StepResponse.from(step);
+        Product product = productRepository.findById(step.getProductId()).orElse(null);
+        return StepResponse.from(step, product);
     }
 }

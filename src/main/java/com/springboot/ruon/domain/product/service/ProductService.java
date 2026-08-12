@@ -11,6 +11,10 @@ import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Anal
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.AnalysisSummaryService;
+import com.springboot.ruon.domain.scan.entity.ScanJob;
+import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
+import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmResult;
+import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
 import com.springboot.ruon.global.exception.CustomException;
 import com.springboot.ruon.global.exception.ErrorCode;
 import java.util.EnumMap;
@@ -31,19 +35,67 @@ public class ProductService {
     private final ScanJobRepository scanJobRepository;
     private final RagService ragService;
     private final AnalysisSummaryService analysisSummaryService;
+    private final ProductInfoLlmService productInfoLlmService;
 
     @Transactional
     public ProductResponse createProduct(Long userId, ProductCreateRequest request) {
+        ProductFields fields = request.scanId() != null
+                ? resolveFromScan(userId, request)
+                : resolveFromRequest(request);
+
         Product product = Product.builder()
                 .userId(userId)
                 .scanId(request.scanId())
-                .productName(request.productName())
-                .brandName(request.brandName())
-                .capacity(request.capacity())
+                .productName(fields.productName())
+                .brandName(fields.brandName())
+                .capacity(fields.capacity())
                 .build();
 
         Product saved = productRepository.save(product);
         return ProductResponse.from(saved);
+    }
+
+    // scanId가 있으면 스캔 결과(구조화된 값)로 채운다. 직접 입력한 값이 있으면 스캔 결과보다 우선한다.
+    private ProductFields resolveFromScan(Long userId, ProductCreateRequest request) {
+        ScanJob scanJob = scanJobRepository.findById(request.scanId())
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND, "스캔 작업을 찾을 수 없습니다.", null));
+
+        if (!scanJob.getUserId().equals(userId)) {
+            throw new CustomException(ErrorCode.FORBIDDEN, "본인의 스캔만 사용할 수 있습니다.", null);
+        }
+
+        ProductInfoLlmResult scanResult = productInfoLlmService.fromJson(scanJob.getStructuredResult());
+        if (scanResult == null) {
+            throw new CustomException(ErrorCode.INVALID_REQUEST, "아직 분석이 완료되지 않은 스캔입니다.", null);
+        }
+
+        String productName = orElse(request.productName(), scanResult.productName());
+        String brandName = orElse(request.brandName(), scanResult.brandName());
+        String capacity = orElse(request.capacity(), scanResult.capacity());
+        return requireComplete(new ProductFields(productName, brandName, capacity));
+    }
+
+    // scanId가 없으면 직접 입력한 값만 사용한다.
+    private ProductFields resolveFromRequest(ProductCreateRequest request) {
+        return requireComplete(new ProductFields(request.productName(), request.brandName(), request.capacity()));
+    }
+
+    private ProductFields requireComplete(ProductFields fields) {
+        if (isBlank(fields.productName()) || isBlank(fields.brandName()) || isBlank(fields.capacity())) {
+            throw new CustomException(ErrorCode.INVALID_REQUEST, "제품명/브랜드명/용량을 확인할 수 없습니다.", null);
+        }
+        return fields;
+    }
+
+    private String orElse(String requestValue, String scanValue) {
+        return !isBlank(requestValue) ? requestValue : scanValue;
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.isBlank();
+    }
+
+    private record ProductFields(String productName, String brandName, String capacity) {
     }
 
     public ProductResponse getProduct(Long userId, Long productId) {
@@ -102,6 +154,7 @@ public class ProductService {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
     }
+
     private void requireOwner(Product product, Long userId) {
         if (!product.getUserId().equals(userId)) {
             throw new CustomException(ErrorCode.FORBIDDEN, "본인의 제품만 접근할 수 있습니다.", null);
