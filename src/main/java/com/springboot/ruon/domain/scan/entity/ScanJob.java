@@ -64,6 +64,11 @@ public class ScanJob {
     @Column(name = "ingredient_analysis_result", length = 500_000)
     private String ingredientAnalysisResult;
 
+    //상세 분석 결과에서 생성한 화면 표시용 요약 JSON
+    @Lob
+    @Column(name = "analysis_summary", length = 100_000)
+    private String analysisSummary;
+
     //FAILED 상태일 때 어느 처리 단계에서 실패했는지 구분
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -97,8 +102,9 @@ public class ScanJob {
         this.status = ScanStatus.ANALYZING;
     }
 
-    public void completeAnalysis(String ingredientAnalysisResult) {
+    public void completeAnalysis(String ingredientAnalysisResult, String analysisSummary) {
         this.ingredientAnalysisResult = ingredientAnalysisResult;
+        this.analysisSummary = analysisSummary;
         this.status = ScanStatus.IMAGE_SEARCHING;
     }
 

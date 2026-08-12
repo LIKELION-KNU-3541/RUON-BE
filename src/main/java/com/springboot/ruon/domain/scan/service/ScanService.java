@@ -32,6 +32,7 @@ public class ScanService {
     private final ScanProcessor scanProcessor;
     private final ProductInfoLlmService productInfoLlmService;
     private final RagService ragService;
+    private final AnalysisSummaryService analysisSummaryService;
 
     /**
      * 이미지를 저장하고 스캔 작업을 생성한다.
@@ -73,6 +74,7 @@ public class ScanService {
                 scanJob,
                 productInfoLlmService.fromJson(scanJob.getStructuredResult()),
                 ragService.fromJson(scanJob.getIngredientAnalysisResult()),
+                analysisSummaryService.fromJson(scanJob.getAnalysisSummary()),
                 imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)));
     }
 

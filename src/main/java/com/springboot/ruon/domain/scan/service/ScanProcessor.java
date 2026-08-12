@@ -2,6 +2,7 @@ package com.springboot.ruon.domain.scan.service;
 
 import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
 import com.springboot.ruon.domain.rag.service.RagService;
+import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse;
 import com.springboot.ruon.domain.scan.entity.ScanFailureStage;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
@@ -29,6 +30,7 @@ public class ScanProcessor {
     private final OcrService ocrService;
     private final ProductInfoLlmService productInfoLlmService;
     private final RagService ragService;
+    private final AnalysisSummaryService analysisSummaryService;
     private final RepresentativeImageService representativeImageService;
 
     @Async(AsyncConfig.SCAN_EXECUTOR)
@@ -60,7 +62,10 @@ public class ScanProcessor {
             currentStage = ScanFailureStage.RAG_ANALYSIS;
             IngredientAnalysisResponse ingredientAnalysis =
                     ragService.analyzeIngredients(productInfo.fullIngredients());
-            scanJob.completeAnalysis(ragService.toJson(ingredientAnalysis));
+            AnalysisSummaryResponse analysisSummary = analysisSummaryService.create(ingredientAnalysis);
+            scanJob.completeAnalysis(
+                    ragService.toJson(ingredientAnalysis),
+                    analysisSummaryService.toJson(analysisSummary));
             scanJobRepository.save(scanJob);
 
             //대표 이미지는 선택 기능이라 못 찾으면 null이 오고, 그래도 완료로 본다.
