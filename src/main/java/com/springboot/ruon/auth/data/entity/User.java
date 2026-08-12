@@ -27,7 +27,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = PregnancyStageConverter.class)
     @Column(nullable = false)
     private PregnancyStage pregnancyStage;
 
@@ -37,7 +37,7 @@ public class User {
     @Column(nullable = false)
     private boolean breastfeeding;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = RoutineTimeAvailableConverter.class)
     @Column(nullable = false)
     private RoutineTimeAvailable routineTimeAvailable;
 

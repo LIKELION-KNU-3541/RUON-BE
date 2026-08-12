@@ -12,6 +12,7 @@ public record ScanDetailResponse(
         ScanStatus status,
         ProductInfoLlmResult structuredResult,
         IngredientAnalysisResponse ingredientAnalysisResult,
+        AnalysisSummaryResponse analysisSummary,
         ScanFailureStage failureStage,
         String failureCode,
         String imageUrl) {
@@ -21,12 +22,14 @@ public record ScanDetailResponse(
             ScanJob scanJob,
             ProductInfoLlmResult structuredResult,
             IngredientAnalysisResponse ingredientAnalysisResult,
+            AnalysisSummaryResponse analysisSummary,
             String imageUrl) {
         return new ScanDetailResponse(
                 scanJob.getScanId(),
                 scanJob.getStatus(),
                 structuredResult,
                 ingredientAnalysisResult,
+                analysisSummary,
                 scanJob.getFailureStage(),
                 scanJob.getFailureCode(),
                 imageUrl);
