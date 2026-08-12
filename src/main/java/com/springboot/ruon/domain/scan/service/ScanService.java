@@ -1,10 +1,12 @@
 package com.springboot.ruon.domain.scan.service;
 
 import com.springboot.ruon.domain.scan.dto.response.ScanDetailResponse;
+import com.springboot.ruon.domain.scan.dto.response.ScanAnalysisResponse;
 import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
 import com.springboot.ruon.domain.rag.service.RagService;
 import com.springboot.ruon.domain.scan.entity.ScanFailureStage;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
+import com.springboot.ruon.domain.scan.entity.ScanStatus;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
 import com.springboot.ruon.global.exception.CustomException;
@@ -70,15 +72,31 @@ public class ScanService {
      */
     public ScanDetailResponse getScanDetail(Long userId, Long scanId) {
         ScanJob scanJob = getScan(userId, scanId);
-        IngredientAnalysisResponse ingredientAnalysis =
-                ragService.fromJson(scanJob.getIngredientAnalysisResult());
         //DB에는 JSON 문자열로 있어서, 그대로 내보내면 프론트가 한 번 더 파싱해야 한다.
         return ScanDetailResponse.from(
                 scanJob,
                 productInfoLlmService.fromJson(scanJob.getStructuredResult()),
-                ingredientAnalysis,
-                ingredientAnalysis == null ? null : analysisSummaryService.create(ingredientAnalysis),
                 imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)));
+    }
+
+    /**
+     * 완료된 RAG 상세 결과를 화면용 요약으로 변환해 반환한다.
+     * 대표 이미지 검색이 끝나지 않았더라도 성분 분석 결과가 저장됐으면 조회할 수 있다.
+     */
+    public ScanAnalysisResponse getScanAnalysis(Long userId, Long scanId) {
+        ScanJob scanJob = getScan(userId, scanId);
+        String analysisResult = scanJob.getIngredientAnalysisResult();
+
+        if (analysisResult == null || analysisResult.isBlank()) {
+            if (scanJob.getStatus() == ScanStatus.FAILED) {
+                throw new CustomException(ErrorCode.INGREDIENT_ANALYSIS_FAILED);
+            }
+            throw new CustomException(ErrorCode.ANALYSIS_NOT_READY);
+        }
+
+        IngredientAnalysisResponse ingredientAnalysis = ragService.fromJson(analysisResult);
+        return ScanAnalysisResponse.from(
+                scanJob.getScanId(), analysisSummaryService.create(ingredientAnalysis));
     }
 
     //대표 이미지는 못 찾을 수 있다. 그때는 사용자가 올린 사진을 보여준다.

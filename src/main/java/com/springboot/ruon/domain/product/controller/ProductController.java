@@ -4,6 +4,7 @@ import com.springboot.ruon.auth.security.CustomUserDetails;
 import com.springboot.ruon.domain.product.dto.request.ProductCreateRequest;
 import com.springboot.ruon.domain.product.dto.request.ProductUsageStatusUpdateRequest;
 import com.springboot.ruon.domain.product.dto.response.ProductResponse;
+import com.springboot.ruon.domain.product.dto.response.ProductAnalysisSummaryResponse;
 import com.springboot.ruon.domain.product.service.ProductService;
 import com.springboot.ruon.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -27,6 +28,14 @@ public class ProductController {
             @Valid @RequestBody ProductCreateRequest request) {
         ProductResponse response = productService.createProduct(userDetails.getUserId(), request);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(response));
+    }
+
+    // 화장대에 등록된 화장품의 RAG 분류별 개수 조회
+    @GetMapping("/analysis-summary")
+    public ResponseEntity<ApiResponse<ProductAnalysisSummaryResponse>> getAnalysisSummary(
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
+        return ResponseEntity.ok(
+                ApiResponse.success(productService.getAnalysisSummary(userDetails.getUserId())));
     }
 
     // 화장품 단일 제품 조회
