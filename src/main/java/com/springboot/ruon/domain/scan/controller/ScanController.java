@@ -3,6 +3,7 @@ package com.springboot.ruon.domain.scan.controller;
 import com.springboot.ruon.auth.security.CustomUserDetails;
 import com.springboot.ruon.domain.scan.dto.response.ScanCreateResponse;
 import com.springboot.ruon.domain.scan.dto.response.ScanDetailResponse;
+import com.springboot.ruon.domain.scan.dto.response.ScanAnalysisResponse;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.service.ScanService;
 import com.springboot.ruon.global.response.ApiResponse;
@@ -45,5 +46,14 @@ public class ScanController {
 
         return ResponseEntity.ok(
                 ApiResponse.success(scanService.getScanDetail(userDetails.getUserId(), scanId)));
+    }
+
+    @GetMapping("/{scanId}/analysis")
+    public ResponseEntity<ApiResponse<ScanAnalysisResponse>> getScanAnalysis(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @PathVariable Long scanId) {
+
+        return ResponseEntity.ok(
+                ApiResponse.success(scanService.getScanAnalysis(userDetails.getUserId(), scanId)));
     }
 }
