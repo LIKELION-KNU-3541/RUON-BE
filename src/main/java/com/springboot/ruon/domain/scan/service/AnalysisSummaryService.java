@@ -44,7 +44,7 @@ public class AnalysisSummaryService {
         return new AnalysisSummaryResponse(
                 status,
                 resolveCategory(cautions.size(), selectiveUse.size(), unknown.size()),
-                createPrimaryCard(summary, cautions, selectiveUse.size()),
+                createPrimaryCard(summary, cautions, selectiveUse, unknown),
                 createSecondaryCard(analyzed, analysis.matchedCount()),
                 summary,
                 cautions.stream().map(this::toCautionIngredient).toList(),
@@ -74,29 +74,37 @@ public class AnalysisSummaryService {
         return cautionCount > 0 ? OverallStatus.CAUTION : OverallStatus.NO_CAUTION_FOUND;
     }
 
-    private Card createPrimaryCard(Summary summary, List<Ingredient> cautions, int selectiveUseCount) {
+    private Card createPrimaryCard(
+            Summary summary,
+            List<Ingredient> cautions,
+            List<Ingredient> selectiveUse,
+            List<String> unknown) {
         if (!cautions.isEmpty()) {
             return new Card(
                     "잠시 보류",
-                    cautionDescription(cautions, summary.cautionCount()),
-                    IconType.WARNING);
+                    "임신 중 주의가 필요한 성분 " + summary.cautionCount() + "개가 확인됐어요.",
+                    IconType.WARNING,
+                    ingredientNames(cautions));
         }
-        if (selectiveUseCount > 0) {
+        if (!selectiveUse.isEmpty()) {
             return new Card(
                     "선택 사용",
-                    "알레르기·자극 또는 사용 제한을 확인할 성분 " + selectiveUseCount + "개가 있어요.",
-                    IconType.WARNING);
+                    "알레르기·자극 또는 사용 제한을 확인할 성분 " + selectiveUse.size() + "개가 있어요.",
+                    IconType.WARNING,
+                    ingredientNames(selectiveUse));
         }
         if (summary.unknownCount() > 0) {
             return new Card(
                     "추가 확인",
                     "추가 확인이 필요한 성분 " + summary.unknownCount() + "개가 있어요.",
-                    IconType.INFO);
+                    IconType.INFO,
+                    unknown.stream().filter(this::hasText).distinct().toList());
         }
         return new Card(
                 "사용 유지",
                 "임신 중 주의 성분이 확인되지 않았어요.",
-                IconType.CHECK);
+                IconType.CHECK,
+                List.of());
     }
 
     private AnalysisCategory resolveCategory(int pauseCount, int selectiveUseCount, int needsReviewCount) {
@@ -133,14 +141,14 @@ public class AnalysisSummaryService {
         return value != null && !value.isBlank();
     }
 
-    private String cautionDescription(List<Ingredient> cautions, int cautionCount) {
-        String ingredientName = cautions.stream()
-                .findFirst()
-                .map(ingredient -> ingredient.korName() != null && !ingredient.korName().isBlank()
+    private List<String> ingredientNames(List<Ingredient> ingredients) {
+        return ingredients.stream()
+                .map(ingredient -> hasText(ingredient.korName())
                         ? ingredient.korName()
                         : ingredient.input())
-                .orElse("주의 성분");
-        return ingredientName + " 등 임신 중 주의가 필요한 성분 " + cautionCount + "개가 확인됐어요.";
+                .filter(this::hasText)
+                .distinct()
+                .toList();
     }
 
     private Card createSecondaryCard(List<Ingredient> analyzed, int matchedCount) {
@@ -162,7 +170,8 @@ public class AnalysisSummaryService {
             return new Card(
                     "성분 분석을 완료했어요",
                     "RAG 성분 데이터에서 " + matchedCount + "개 성분 정보를 확인했어요.",
-                    IconType.INFO);
+                    IconType.INFO,
+                    List.of());
         }
 
         String title = topCategories.stream()
@@ -173,7 +182,7 @@ public class AnalysisSummaryService {
                 .map(entry -> entry.getKey().label + " 관련 성분 " + entry.getValue() + "개")
                 .reduce((left, right) -> left + "와 " + right)
                 .orElse("") + "가 확인됐어요.";
-        return new Card(title, description, IconType.BENEFIT);
+        return new Card(title, description, IconType.BENEFIT, List.of());
     }
 
     private CautionIngredient toCautionIngredient(Ingredient ingredient) {

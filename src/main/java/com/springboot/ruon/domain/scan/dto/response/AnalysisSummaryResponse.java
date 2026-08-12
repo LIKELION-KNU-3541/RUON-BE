@@ -30,7 +30,15 @@ public record AnalysisSummaryResponse(
         NEEDS_REVIEW
     }
 
-    public record Card(String title, String description, IconType iconType) {
+    public record Card(
+            String title,
+            String description,
+            IconType iconType,
+            List<String> ingredientNames) {
+
+        public Card {
+            ingredientNames = ingredientNames == null ? List.of() : List.copyOf(ingredientNames);
+        }
     }
 
     public record Summary(
