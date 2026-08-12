@@ -1,6 +1,7 @@
 package com.springboot.ruon.domain.scan.service;
 
 import com.springboot.ruon.domain.scan.dto.response.ScanDetailResponse;
+import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
 import com.springboot.ruon.domain.rag.service.RagService;
 import com.springboot.ruon.domain.scan.entity.ScanFailureStage;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
@@ -69,12 +70,14 @@ public class ScanService {
      */
     public ScanDetailResponse getScanDetail(Long userId, Long scanId) {
         ScanJob scanJob = getScan(userId, scanId);
+        IngredientAnalysisResponse ingredientAnalysis =
+                ragService.fromJson(scanJob.getIngredientAnalysisResult());
         //DB에는 JSON 문자열로 있어서, 그대로 내보내면 프론트가 한 번 더 파싱해야 한다.
         return ScanDetailResponse.from(
                 scanJob,
                 productInfoLlmService.fromJson(scanJob.getStructuredResult()),
-                ragService.fromJson(scanJob.getIngredientAnalysisResult()),
-                analysisSummaryService.fromJson(scanJob.getAnalysisSummary()),
+                ingredientAnalysis,
+                ingredientAnalysis == null ? null : analysisSummaryService.create(ingredientAnalysis),
                 imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)));
     }
 

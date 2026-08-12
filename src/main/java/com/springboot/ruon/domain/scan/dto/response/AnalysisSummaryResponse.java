@@ -12,13 +12,11 @@ public record AnalysisSummaryResponse(
 
     public enum OverallStatus {
         CAUTION,
-        UNKNOWN,
         NO_CAUTION_FOUND
     }
 
     public enum IconType {
         WARNING,
-        UNKNOWN,
         CHECK,
         BENEFIT,
         INFO
@@ -31,7 +29,6 @@ public record AnalysisSummaryResponse(
             int totalCount,
             int matchedCount,
             int cautionCount,
-            int unclassifiedCount,
             int unknownCount) {
     }
 

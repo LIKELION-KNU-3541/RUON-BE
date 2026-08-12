@@ -11,7 +11,6 @@ import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Over
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Summary;
 import com.springboot.ruon.global.exception.CustomException;
 import com.springboot.ruon.global.exception.ErrorCode;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
@@ -30,21 +29,16 @@ public class AnalysisSummaryService {
         List<Ingredient> cautions = analyzed.stream()
                 .filter(ingredient -> Boolean.FALSE.equals(ingredient.pregnancySafe()))
                 .toList();
-        int unclassifiedCount = (int) analyzed.stream()
-                .filter(ingredient -> ingredient.pregnancySafe() == null)
-                .count();
-
-        OverallStatus status = resolveStatus(cautions.size(), unclassifiedCount, unknown.size());
+        OverallStatus status = resolveStatus(cautions.size());
         Summary summary = new Summary(
                 analysis.totalChecked(),
                 analysis.matchedCount(),
                 cautions.size(),
-                unclassifiedCount,
                 unknown.size());
 
         return new AnalysisSummaryResponse(
                 status,
-                createPrimaryCard(status, summary),
+                createPrimaryCard(status, summary, cautions),
                 createSecondaryCard(analyzed, analysis.matchedCount()),
                 summary,
                 cautions.stream().map(this::toCautionIngredient).toList(),
@@ -70,42 +64,32 @@ public class AnalysisSummaryService {
         }
     }
 
-    private OverallStatus resolveStatus(int cautionCount, int unclassifiedCount, int unknownCount) {
-        if (cautionCount > 0) {
-            return OverallStatus.CAUTION;
-        }
-        if (unclassifiedCount > 0 || unknownCount > 0) {
-            return OverallStatus.UNKNOWN;
-        }
-        return OverallStatus.NO_CAUTION_FOUND;
+    private OverallStatus resolveStatus(int cautionCount) {
+        return cautionCount > 0 ? OverallStatus.CAUTION : OverallStatus.NO_CAUTION_FOUND;
     }
 
-    private Card createPrimaryCard(OverallStatus status, Summary summary) {
+    private Card createPrimaryCard(
+            OverallStatus status, Summary summary, List<Ingredient> cautions) {
         return switch (status) {
             case CAUTION -> new Card(
                     "사용 전 확인이 필요해요",
-                    "임신 중 주의가 필요한 성분 " + summary.cautionCount() + "개가 확인됐어요.",
+                    cautionDescription(cautions, summary.cautionCount()),
                     IconType.WARNING);
-            case UNKNOWN -> new Card(
-                    "확인된 주의 성분은 없어요",
-                    unknownDescription(summary),
-                    IconType.UNKNOWN);
             case NO_CAUTION_FOUND -> new Card(
-                    "확인된 주의 성분이 없어요",
-                    "분석된 " + summary.matchedCount() + "개 성분에서는 임신 중 주의 성분이 발견되지 않았어요.",
+                    "사용 유지",
+                    "임신 중 주의 성분이 확인되지 않았어요.",
                     IconType.CHECK);
         };
     }
 
-    private String unknownDescription(Summary summary) {
-        List<String> reasons = new ArrayList<>();
-        if (summary.unclassifiedCount() > 0) {
-            reasons.add("임신 안전성 정보가 없는 성분 " + summary.unclassifiedCount() + "개");
-        }
-        if (summary.unknownCount() > 0) {
-            reasons.add("데이터에서 확인하지 못한 성분 " + summary.unknownCount() + "개");
-        }
-        return String.join(", ", reasons) + "가 포함되어 있어 사용 가능 여부를 단정하기 어려워요.";
+    private String cautionDescription(List<Ingredient> cautions, int cautionCount) {
+        String ingredientName = cautions.stream()
+                .findFirst()
+                .map(ingredient -> ingredient.korName() != null && !ingredient.korName().isBlank()
+                        ? ingredient.korName()
+                        : ingredient.input())
+                .orElse("주의 성분");
+        return ingredientName + " 등 임신 중 주의가 필요한 성분 " + cautionCount + "개가 확인됐어요.";
     }
 
     private Card createSecondaryCard(List<Ingredient> analyzed, int matchedCount) {
