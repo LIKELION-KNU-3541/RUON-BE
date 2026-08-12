@@ -48,3 +48,4 @@ __pycache__/
 .DS_Store
 .venv/
 venv/
+rag-service/data/.inci_functions_api_cache.*

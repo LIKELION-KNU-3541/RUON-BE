@@ -1,10 +1,11 @@
 from typing import Dict, List, Optional
 
 from app.db import get_conn
+from app.analysis.function_enrichment import enrich_missing_functions
 
 
 ANALYSIS_COLUMNS = """
-    kor_name, inci_name, synonyms, cas_no, function_kor, origin,
+    id, kor_name, inci_name, synonyms, cas_no, function_kor, origin,
     usage_limit, caution, description, source, inci_functions,
     irritancy_potential, comedogenicity_rating, safety_score,
     pregnancy_safe, pregnancy_notes, is_allergen
@@ -51,42 +52,52 @@ def _find_ingredient(cur, name: str) -> Optional[Dict]:
 
 
 def analyze_ingredients(ingredients: List[str]) -> Dict:
-    analyzed = []
+    matched = []
     unknown = []
 
     with get_conn() as conn:
         cur = conn.cursor(dictionary=True)
-        for raw_name in ingredients:
-            name = raw_name.strip()
-            if not name:
-                continue
+        try:
+            for raw_name in ingredients:
+                name = raw_name.strip()
+                if not name:
+                    continue
 
-            row = _find_ingredient(cur, name)
-            if row is None:
-                unknown.append(name)
-                continue
+                row = _find_ingredient(cur, name)
+                if row is None:
+                    unknown.append(name)
+                    continue
 
-            analyzed.append(
-                {
-                    "input": name,
-                    "korName": row.get("kor_name"),
-                    "inciName": row.get("inci_name"),
-                    "synonyms": row.get("synonyms"),
-                    "casNo": row.get("cas_no"),
-                    "function": row.get("inci_functions") or row.get("function_kor"),
-                    "origin": row.get("origin"),
-                    "usageLimit": row.get("usage_limit"),
-                    "caution": row.get("caution"),
-                    "description": row.get("description"),
-                    "irritancyPotential": row.get("irritancy_potential"),
-                    "comedogenicityRating": row.get("comedogenicity_rating"),
-                    "safetyScore": row.get("safety_score"),
-                    "pregnancySafe": _normalize_boolean(row.get("pregnancy_safe")),
-                    "pregnancyNotes": row.get("pregnancy_notes"),
-                    "allergen": _normalize_boolean(row.get("is_allergen")),
-                    "source": row.get("source"),
-                }
-            )
+                matched.append((name, row))
+        finally:
+            cur.close()
+
+    # 비어 있는 기능만 API로 보강하고 DB 저장과 현재 응답에 동시에 반영한다.
+    enrich_missing_functions([row for _, row in matched])
+
+    analyzed = []
+    for name, row in matched:
+        analyzed.append(
+            {
+                "input": name,
+                "korName": row.get("kor_name"),
+                "inciName": row.get("inci_name"),
+                "synonyms": row.get("synonyms"),
+                "casNo": row.get("cas_no"),
+                "function": row.get("inci_functions") or row.get("function_kor"),
+                "origin": row.get("origin"),
+                "usageLimit": row.get("usage_limit"),
+                "caution": row.get("caution"),
+                "description": row.get("description"),
+                "irritancyPotential": row.get("irritancy_potential"),
+                "comedogenicityRating": row.get("comedogenicity_rating"),
+                "safetyScore": row.get("safety_score"),
+                "pregnancySafe": _normalize_boolean(row.get("pregnancy_safe")),
+                "pregnancyNotes": row.get("pregnancy_notes"),
+                "allergen": _normalize_boolean(row.get("is_allergen")),
+                "source": row.get("source"),
+            }
+        )
 
     caution_count = sum(
         1 for item in analyzed
