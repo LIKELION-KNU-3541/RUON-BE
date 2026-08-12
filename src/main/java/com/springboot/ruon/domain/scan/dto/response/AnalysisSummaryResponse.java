@@ -4,6 +4,7 @@ import java.util.List;
 
 public record AnalysisSummaryResponse(
         OverallStatus overallStatus,
+        AnalysisCategory category,
         Card primaryCard,
         Card secondaryCard,
         Summary summary,
@@ -20,6 +21,13 @@ public record AnalysisSummaryResponse(
         CHECK,
         BENEFIT,
         INFO
+    }
+
+    public enum AnalysisCategory {
+        KEEP_USING,
+        PAUSE,
+        SELECTIVE_USE,
+        NEEDS_REVIEW
     }
 
     public record Card(String title, String description, IconType iconType) {

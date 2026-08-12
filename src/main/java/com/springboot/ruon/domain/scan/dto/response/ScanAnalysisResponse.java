@@ -1,6 +1,7 @@
 package com.springboot.ruon.domain.scan.dto.response;
 
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Card;
+import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.AnalysisCategory;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.CautionIngredient;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.OverallStatus;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Summary;
@@ -10,6 +11,7 @@ import java.util.List;
 public record ScanAnalysisResponse(
         Long scanId,
         OverallStatus overallStatus,
+        AnalysisCategory category,
         Card primaryCard,
         Card secondaryCard,
         Summary summary,
@@ -20,6 +22,7 @@ public record ScanAnalysisResponse(
         return new ScanAnalysisResponse(
                 scanId,
                 analysis.overallStatus(),
+                analysis.category(),
                 analysis.primaryCard(),
                 analysis.secondaryCard(),
                 analysis.summary(),

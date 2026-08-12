@@ -5,6 +5,7 @@ import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse;
 import com.springboot.ruon.domain.rag.dto.response.IngredientAnalysisResponse.Ingredient;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Card;
+import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.AnalysisCategory;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.CautionIngredient;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.IconType;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.OverallStatus;
@@ -29,6 +30,10 @@ public class AnalysisSummaryService {
         List<Ingredient> cautions = analyzed.stream()
                 .filter(ingredient -> Boolean.FALSE.equals(ingredient.pregnancySafe()))
                 .toList();
+        List<Ingredient> selectiveUse = analyzed.stream()
+                .filter(ingredient -> !Boolean.FALSE.equals(ingredient.pregnancySafe()))
+                .filter(this::requiresSelectiveUse)
+                .toList();
         OverallStatus status = resolveStatus(cautions.size());
         Summary summary = new Summary(
                 analysis.totalChecked(),
@@ -38,7 +43,8 @@ public class AnalysisSummaryService {
 
         return new AnalysisSummaryResponse(
                 status,
-                createPrimaryCard(status, summary, cautions),
+                resolveCategory(cautions.size(), selectiveUse.size(), unknown.size()),
+                createPrimaryCard(summary, cautions, selectiveUse.size()),
                 createSecondaryCard(analyzed, analysis.matchedCount()),
                 summary,
                 cautions.stream().map(this::toCautionIngredient).toList(),
@@ -68,18 +74,63 @@ public class AnalysisSummaryService {
         return cautionCount > 0 ? OverallStatus.CAUTION : OverallStatus.NO_CAUTION_FOUND;
     }
 
-    private Card createPrimaryCard(
-            OverallStatus status, Summary summary, List<Ingredient> cautions) {
-        return switch (status) {
-            case CAUTION -> new Card(
-                    "사용 전 확인이 필요해요",
+    private Card createPrimaryCard(Summary summary, List<Ingredient> cautions, int selectiveUseCount) {
+        if (!cautions.isEmpty()) {
+            return new Card(
+                    "잠시 보류",
                     cautionDescription(cautions, summary.cautionCount()),
                     IconType.WARNING);
-            case NO_CAUTION_FOUND -> new Card(
-                    "사용 유지",
-                    "임신 중 주의 성분이 확인되지 않았어요.",
-                    IconType.CHECK);
-        };
+        }
+        if (selectiveUseCount > 0) {
+            return new Card(
+                    "선택 사용",
+                    "알레르기·자극 또는 사용 제한을 확인할 성분 " + selectiveUseCount + "개가 있어요.",
+                    IconType.WARNING);
+        }
+        if (summary.unknownCount() > 0) {
+            return new Card(
+                    "추가 확인",
+                    "추가 확인이 필요한 성분 " + summary.unknownCount() + "개가 있어요.",
+                    IconType.INFO);
+        }
+        return new Card(
+                "사용 유지",
+                "임신 중 주의 성분이 확인되지 않았어요.",
+                IconType.CHECK);
+    }
+
+    private AnalysisCategory resolveCategory(int pauseCount, int selectiveUseCount, int needsReviewCount) {
+        if (pauseCount > 0) {
+            return AnalysisCategory.PAUSE;
+        }
+        if (selectiveUseCount > 0) {
+            return AnalysisCategory.SELECTIVE_USE;
+        }
+        if (needsReviewCount > 0) {
+            return AnalysisCategory.NEEDS_REVIEW;
+        }
+        return AnalysisCategory.KEEP_USING;
+    }
+
+    private boolean requiresSelectiveUse(Ingredient ingredient) {
+        if (Boolean.TRUE.equals(ingredient.allergen())
+                || hasText(ingredient.usageLimit())
+                || hasText(ingredient.caution())) {
+            return true;
+        }
+        if (!hasText(ingredient.irritancyPotential())) {
+            return false;
+        }
+        String irritancy = ingredient.irritancyPotential().strip().toLowerCase(Locale.ROOT);
+        return irritancy.contains("moderate")
+                || irritancy.contains("medium")
+                || irritancy.contains("high")
+                || irritancy.contains("중간")
+                || irritancy.contains("높");
+    }
+
+    private boolean hasText(String value) {
+        return value != null && !value.isBlank();
     }
 
     private String cautionDescription(List<Ingredient> cautions, int cautionCount) {
