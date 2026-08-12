@@ -47,18 +47,44 @@ public class RoutineLlmService {
             - 성분 중복 확인 기능은 아직 지원하지 않으니 언급하지 마세요.
             """;
 
+    private static final String DESCRIPTION_SYSTEM_PROMPT = """
+            당신은 임산부/수유부를 위한 스킨케어 제품 한 줄 소개를 작성하는 시스템입니다.
+            주어진 제품 정보(브랜드, 제품명, 용량)와 사용자 정보를 참고해서,
+            이 제품을 스킨케어 루틴에서 사용할 때 어떤 효과/역할을 하는지 1문장으로 작성하세요.
+            제품 설명(성분, 브랜드 소개)이 아니라, "이 스텝이 피부에 어떤 도움을 주는지"를 알려주는
+            베네핏 중심의 짧은 한 줄이어야 합니다. (예: "세안 후 예민해진 피부에 수분을 가볍게 채워요.")
+
+            반드시 아래 JSON 형식으로만 응답하세요. 그 외 텍스트는 절대 포함하지 마세요.
+            { "description": string }
+            """;
+
     private final OpenAiClient openAiClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public RoutineLlmResult generate(User user, List<Product> registeredProducts, Routine previousRoutine) {
-        String userPrompt = buildUserPrompt(user, registeredProducts, previousRoutine);
-        String content = openAiClient.requestJsonCompletion(SYSTEM_PROMPT, userPrompt);
+    /**
+     * 제품 하나에 대한 한 줄 소개를 생성한다.
+     * 제품당 한 번만 호출되도록 호출부(RoutineService)에서 product.getDescription()이 null일 때만 불러야 함
+     */
+    public String generateProductDescription(Product product, User user) {
+        String userPrompt = "[제품 정보]\n"
+                + "브랜드: " + product.getBrandName() + "\n"
+                + "제품명: " + product.getProductName() + "\n"
+                + "용량: " + product.getCapacity() + "\n\n"
+                + "[사용자 정보]\n"
+                + "임신 상태: " + describePregnancyStage(user.getPregnancyStage()) + "\n"
+                + "임신 주차: " + user.getPregnancyWeekNum() + "\n"
+                + "수유 여부: " + (user.isBreastfeeding() ? "예" : "아니오") + "\n";
 
+        String content = openAiClient.requestJsonCompletion(DESCRIPTION_SYSTEM_PROMPT, userPrompt);
         try {
-            return objectMapper.readValue(content, RoutineLlmResult.class);
+            ProductDescriptionLlmResult result = objectMapper.readValue(content, ProductDescriptionLlmResult.class);
+            return result.description();
         } catch (Exception e) {
             throw new CustomException(ErrorCode.LLM_GENERATION_FAILED);
         }
+    }
+
+    private record ProductDescriptionLlmResult(String description) {
     }
 
     /**
