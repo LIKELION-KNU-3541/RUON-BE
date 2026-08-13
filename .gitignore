@@ -49,3 +49,7 @@ __pycache__/
 .venv/
 venv/
 rag-service/data/.inci_functions_api_cache.*
+
+### RAG local dump (개인 로컬 테스트용, 용량 커서 커밋 제외) ###
+rag-service/cosmetic_rag_dump*.sql
+rag-service/cosmetic_rag_dump*.sql.gz
