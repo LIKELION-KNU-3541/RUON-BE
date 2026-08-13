@@ -1,5 +1,6 @@
 package com.springboot.ruon.domain.product.entity;
 
+import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.AnalysisCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -46,16 +47,27 @@ public class Product {
     @Lob
     @Column(name = "description")
     private String description;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "analysis_category")
+    private AnalysisCategory analysisCategory;
+
+    //목록 카드에 보여줄 한 줄 문구. 루틴용 description과 용도가 다름.
+    @Column(name = "analysis_description", length = 500)
+    private String analysisDescription;
 
     @Builder
     public Product(Long scanId, Long userId, String productName, String brandName,
-                   String capacity, UsageStatus usageStatus) {
+                   String capacity, UsageStatus usageStatus,
+                   AnalysisCategory analysisCategory, String analysisDescription) {
         this.scanId = scanId;
         this.userId = userId;
         this.productName = productName;
         this.brandName = brandName;
         this.capacity = capacity;
         this.usageStatus = usageStatus != null ? usageStatus : UsageStatus.IN_USE;
+        this.analysisCategory = analysisCategory;
+        this.analysisDescription = analysisDescription;
     }
 
     public void changeUsageStatus(UsageStatus usageStatus) {
@@ -64,5 +76,9 @@ public class Product {
 
     public void applyDescription(String description) {
         this.description = description;
+    }
+
+    public void applyAnalysisDescription(String analysisDescription) {
+        this.analysisDescription = analysisDescription;
     }
 }

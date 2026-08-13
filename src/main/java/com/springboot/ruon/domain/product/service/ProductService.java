@@ -6,8 +6,11 @@ import com.springboot.ruon.domain.product.dto.request.ProductCreateRequest;
 import com.springboot.ruon.domain.product.dto.response.ProductResponse;
 import com.springboot.ruon.domain.product.dto.response.ProductAnalysisSummaryResponse;
 import com.springboot.ruon.domain.product.dto.response.ProductDetailResponse;
+import com.springboot.ruon.domain.product.dto.response.ProductListResponse;
+import com.springboot.ruon.domain.product.dto.response.ProductPageResponse;
 import com.springboot.ruon.domain.product.entity.Product;
 import com.springboot.ruon.domain.product.entity.UsageStatus;
+import com.springboot.ruon.domain.product.dto.response.CategoryCount;
 import com.springboot.ruon.domain.product.repository.ProductRepository;
 import com.springboot.ruon.domain.rag.service.RagService;
 import com.springboot.ruon.domain.routine.service.llm.RoutineLlmService;
@@ -30,6 +33,8 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,14 +66,27 @@ public class ProductService {
                 .productName(fields.productName())
                 .brandName(fields.brandName())
                 .capacity(fields.capacity())
+                .analysisCategory(fields.analysisCategory())
                 .build();
 
         // 루틴 스텝에 표시할 한 줄 소개를 등록 시점에 바로 생성한다 (실패해도 등록 자체는 진행,
         // 이후 루틴 생성 시 description이 비어있으면 그때 다시 한번 생성을 시도함).
         generateDescriptionQuietly(product, userId);
 
+        product.applyAnalysisDescription(
+                resolveAnalysisDescription(product, fields.analysisReason()));
+
         Product saved = productRepository.save(product);
         return ProductResponse.from(saved);
+    }
+    //전체 화장품 목록 카드에 쓸 한줄 문구, 주의할게 없으면 제품의 베네핏 소개 사용,  그외 primaryCard.description에 있는 내용을 사용을 함.
+    // 소개 생성이 실패해 비어있는 경우는 분석 사유로 대체
+    private String resolveAnalysisDescription(Product product, String analysisReason) {
+        if (product.getAnalysisCategory() == AnalysisCategory.KEEP_USING
+                && !isBlank(product.getDescription())) {
+            return product.getDescription();
+        }
+        return analysisReason;
     }
 
     private void generateDescriptionQuietly(Product product, Long userId) {
@@ -99,12 +117,22 @@ public class ProductService {
         String productName = orElse(request.productName(), scanResult.productName());
         String brandName = orElse(request.brandName(), scanResult.brandName());
         String capacity = orElse(request.capacity(), scanResult.capacity());
-        return requireComplete(new ProductFields(productName, brandName, capacity));
+
+        // 목록의 카테고리 필터·정렬을 SQL로 처리하려면 컬럼에 있어야 함 JSON이 아니라 컬럼에 있어야함.
+        AnalysisCategory analysisCategory = classify(scanJob);
+        AnalysisSummaryResponse summary = analysisSummaryService.fromJson(scanJob.getAnalysisSummary());
+        String analysisReason = summary != null && summary.primaryCard() != null
+                ? summary.primaryCard().description()
+                : null;
+
+        return requireComplete(new ProductFields(
+                productName, brandName, capacity, analysisCategory, analysisReason));
     }
 
-    // scanId가 없으면 직접 입력한 값만 사용한다.
+    // scanId가 없으면 직접 입력한 값만 사용한다. 분석 결과가 없으므로 카테고리도 비워 둔다.
     private ProductFields resolveFromRequest(ProductCreateRequest request) {
-        return requireComplete(new ProductFields(request.productName(), request.brandName(), request.capacity()));
+        return requireComplete(new ProductFields(
+                request.productName(), request.brandName(), request.capacity(), null, null));
     }
 
     private ProductFields requireComplete(ProductFields fields) {
@@ -122,7 +150,8 @@ public class ProductService {
         return value == null || value.isBlank();
     }
 
-    private record ProductFields(String productName, String brandName, String capacity) {
+    private record ProductFields(String productName, String brandName, String capacity,
+                                 AnalysisCategory analysisCategory, String analysisReason) {
     }
 
     public ProductDetailResponse getProduct(Long userId, Long productId) {
@@ -170,21 +199,55 @@ public class ProductService {
                 : scanJob.getUploadedImageObjectKey();
     }
 
-    public ProductAnalysisSummaryResponse getAnalysisSummary(Long userId) {
-        var products = productRepository.findByUserId(userId);
-        var scanIds = products.stream()
+    /**
+     * 화장대 목록. 카테고리를 넘기지 않으면 전체를 본다.
+     * 이미지는 이 페이지에 보이는 제품의 스캔만 읽어서 만든다.
+     */
+    public ProductPageResponse getProducts(
+            Long userId, UsageStatus usageStatus, AnalysisCategory category, Pageable pageable) {
+
+        Page<Product> page = productRepository.findForList(userId, usageStatus, category, pageable);
+
+        Map<Long, ScanJob> scansById = findScansOf(page.getContent(), userId);
+        List<ProductListResponse> products = page.getContent().stream()
+                .map(product -> ProductListResponse.of(product, imageUrlOf(product, scansById)))
+                .toList();
+
+        return ProductPageResponse.of(products, page);
+    }
+
+    private Map<Long, ScanJob> findScansOf(List<Product> products, Long userId) {
+        List<Long> scanIds = products.stream()
                 .map(Product::getScanId)
                 .filter(Objects::nonNull)
                 .distinct()
                 .toList();
-        Map<Long, ScanJob> scansById = scanJobRepository.findAllById(scanIds).stream()
+        if (scanIds.isEmpty()) {
+            return Map.of();
+        }
+        return scanJobRepository.findAllById(scanIds).stream()
                 .filter(scan -> scan.getUserId().equals(userId))
                 .collect(Collectors.toMap(ScanJob::getScanId, Function.identity()));
-        Map<AnalysisCategory, Integer> counts = new EnumMap<>(AnalysisCategory.class);
+    }
 
-        for (Product product : products) {
-            AnalysisCategory category = classify(scansById.get(product.getScanId()));
-            counts.merge(category, 1, Integer::sum);
+    //스캔 없이 직접 등록했거나 스캔이 지워졌으면 보여줄 이미지가 없다. // 필요 없어보이기는 한데 일단 둠, 스캔 없이 화장품을 등록하는 경로가 있어서 일단 만들긴 함
+    private String imageUrlOf(Product product, Map<Long, ScanJob> scansById) {
+        if (product.getScanId() == null) {
+            return null;
+        }
+        ScanJob scanJob = scansById.get(product.getScanId());
+        return scanJob != null ? imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)) : null;
+    }
+
+    public ProductAnalysisSummaryResponse getAnalysisSummary(Long userId) {
+        Map<AnalysisCategory, Integer> counts = new EnumMap<>(AnalysisCategory.class);
+        for (CategoryCount row : productRepository.countByAnalysisCategory(userId)) {
+            //스캔 없이 직접 등록한 제품은 카테고리가 없다. 분류할 근거가 없으므로 추가 확인으로 본다.
+            //원래 기획에서는 제품을 직접 등록 할 수 없게 되어있는 알고있는데 해당 코드를 만든 부분이 이미 있길래 일단 처리는 해두었습니다..
+            AnalysisCategory category = row.category() != null
+                    ? row.category()
+                    : AnalysisCategory.NEEDS_REVIEW;
+            counts.merge(category, (int) row.count(), Integer::sum);
         }
         return ProductAnalysisSummaryResponse.from(counts);
     }
