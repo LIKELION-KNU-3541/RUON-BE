@@ -6,6 +6,9 @@ load_dotenv()
 
 class Settings:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    INCI_API_KEY = os.getenv("INCI_API_KEY")
+    INCI_API_TIMEOUT_SECONDS = float(os.getenv("INCI_API_TIMEOUT_SECONDS", "5"))
+    INCI_ENRICH_MAX_WORKERS = int(os.getenv("INCI_ENRICH_MAX_WORKERS", "5"))
     EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
     CHAT_MODEL = os.getenv("CHAT_MODEL", "gpt-4o-mini")
     EMBEDDING_DIM = 1536  # text-embedding-3-small 기준. large(3072) 쓰면 스키마도 변경 필요
