@@ -1,5 +1,7 @@
 package com.springboot.ruon.domain.product.service;
 
+import com.springboot.ruon.auth.data.entity.User;
+import com.springboot.ruon.auth.data.repository.UserRepository;
 import com.springboot.ruon.domain.product.dto.request.ProductCreateRequest;
 import com.springboot.ruon.domain.product.dto.response.ProductResponse;
 import com.springboot.ruon.domain.product.dto.response.ProductAnalysisSummaryResponse;
@@ -7,12 +9,11 @@ import com.springboot.ruon.domain.product.entity.Product;
 import com.springboot.ruon.domain.product.entity.UsageStatus;
 import com.springboot.ruon.domain.product.repository.ProductRepository;
 import com.springboot.ruon.domain.rag.service.RagService;
+import com.springboot.ruon.domain.routine.service.llm.RoutineLlmService;
 import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.AnalysisCategory;
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.AnalysisSummaryService;
-import com.springboot.ruon.domain.scan.entity.ScanJob;
-import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmResult;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
 import com.springboot.ruon.global.exception.CustomException;
@@ -23,6 +24,8 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,11 +34,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class ProductService {
 
+    private static final Logger log = LoggerFactory.getLogger(ProductService.class);
+
     private final ProductRepository productRepository;
     private final ScanJobRepository scanJobRepository;
     private final RagService ragService;
     private final AnalysisSummaryService analysisSummaryService;
     private final ProductInfoLlmService productInfoLlmService;
+    private final UserRepository userRepository;
+    private final RoutineLlmService routineLlmService;
 
     @Transactional
     public ProductResponse createProduct(Long userId, ProductCreateRequest request) {
@@ -51,8 +58,23 @@ public class ProductService {
                 .capacity(fields.capacity())
                 .build();
 
+        // 루틴 스텝에 표시할 한 줄 소개를 등록 시점에 바로 생성한다 (실패해도 등록 자체는 진행,
+        // 이후 루틴 생성 시 description이 비어있으면 그때 다시 한번 생성을 시도함).
+        generateDescriptionQuietly(product, userId);
+
         Product saved = productRepository.save(product);
         return ProductResponse.from(saved);
+    }
+
+    private void generateDescriptionQuietly(Product product, Long userId) {
+        try {
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+            String description = routineLlmService.generateProductDescription(product, user);
+            product.applyDescription(description);
+        } catch (Exception e) {
+            log.warn("제품 등록 시 한 줄 소개 생성에 실패했습니다. productName={}", product.getProductName(), e);
+        }
     }
 
     // scanId가 있으면 스캔 결과(구조화된 값)로 채운다. 직접 입력한 값이 있으면 스캔 결과보다 우선한다.
