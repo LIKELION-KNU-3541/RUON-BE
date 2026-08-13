@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 화장대에 등록된 화장품 (ERD의 PRODUCT 테이블)
- *
  * userId / scanId는 User, ScanJob과 직접 연관관계를 맺지 않고 Long으로만 둠.
  */
 @Entity
@@ -59,7 +58,7 @@ public class Product {
     @Builder
     public Product(Long scanId, Long userId, String productName, String brandName,
                    String capacity, UsageStatus usageStatus,
-                   AnalysisCategory analysisCategory, String analysisDescription) {
+                   AnalysisCategory analysisCategory) {
         this.scanId = scanId;
         this.userId = userId;
         this.productName = productName;
@@ -67,7 +66,6 @@ public class Product {
         this.capacity = capacity;
         this.usageStatus = usageStatus != null ? usageStatus : UsageStatus.IN_USE;
         this.analysisCategory = analysisCategory;
-        this.analysisDescription = analysisDescription;
     }
 
     public void changeUsageStatus(UsageStatus usageStatus) {

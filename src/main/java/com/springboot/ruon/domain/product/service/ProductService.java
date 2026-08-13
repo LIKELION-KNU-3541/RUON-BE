@@ -230,7 +230,7 @@ public class ProductService {
                 .collect(Collectors.toMap(ScanJob::getScanId, Function.identity()));
     }
 
-    //스캔 없이 직접 등록했거나 스캔이 지워졌으면 보여줄 이미지가 없다. // 필요 없어보이기는 한데 일단 둠, 스캔 없이 화장품을 등록하는 경로가 있어서 일단 만들긴 함
+    //스캔 없이 직접 등록했거나 스캔이 지워졌으면 보여줄 이미지가 없다.
     private String imageUrlOf(Product product, Map<Long, ScanJob> scansById) {
         if (product.getScanId() == null) {
             return null;
