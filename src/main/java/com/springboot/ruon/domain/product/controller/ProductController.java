@@ -5,6 +5,7 @@ import com.springboot.ruon.domain.product.dto.request.ProductCreateRequest;
 import com.springboot.ruon.domain.product.dto.request.ProductUsageStatusUpdateRequest;
 import com.springboot.ruon.domain.product.dto.response.ProductResponse;
 import com.springboot.ruon.domain.product.dto.response.ProductAnalysisSummaryResponse;
+import com.springboot.ruon.domain.product.dto.response.ProductDetailResponse;
 import com.springboot.ruon.domain.product.service.ProductService;
 import com.springboot.ruon.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -38,12 +39,12 @@ public class ProductController {
                 ApiResponse.success(productService.getAnalysisSummary(userDetails.getUserId())));
     }
 
-    // 화장품 단일 제품 조회
+    // 화장품 단일 제품 조회 (scanId가 있으면 이미지·전성분·분석 카드까지 함께 반환)
     @GetMapping("/{productId}")
-    public ResponseEntity<ApiResponse<ProductResponse>> getProduct(
+    public ResponseEntity<ApiResponse<ProductDetailResponse>> getProduct(
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @PathVariable Long productId) {
-        ProductResponse response = productService.getProduct(userDetails.getUserId(), productId);
+        ProductDetailResponse response = productService.getProduct(userDetails.getUserId(), productId);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 
