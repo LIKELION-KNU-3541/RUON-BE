@@ -14,4 +14,7 @@ public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
     // 루틴 생성 시 "전체 루틴 읽기" 용도 - 유저의 가장 최근 루틴 1건
     Optional<Routine> findFirstByUserIdOrderByGeneratedAtDesc(Long userId);
+
+    // "내일 루틴 추천" 용도 - 반응 기록(reactionScore)이 있는 가장 최근 루틴 1건. 없으면 "데이터 없음" 처리.
+    Optional<Routine> findFirstByUserIdAndReactionScoreIsNotNullOrderByGeneratedAtDesc(Long userId);
 }

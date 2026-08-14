@@ -12,18 +12,20 @@ public record StepResponse(
         String productName,
         String brandName,
         String description,
+        String imageUrl,
         TimeOfDay timeOfDay,
         Integer stepOrder,
         StepAction action,
         StepStatus status
 ) {
-    public static StepResponse from(Step step, Product product) {
+    public static StepResponse from(Step step, Product product, String imageUrl) {
         return new StepResponse(
                 step.getStepId(),
                 step.getProductId(),
                 product != null ? product.getProductName() : null,
                 product != null ? product.getBrandName() : null,
                 product != null ? product.getDescription() : null,
+                imageUrl,
                 step.getTimeOfDay(),
                 step.getStepOrder(),
                 step.getAction(),
