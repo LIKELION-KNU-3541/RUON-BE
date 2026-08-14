@@ -1,5 +1,6 @@
 package com.springboot.ruon.domain.product.entity;
 
+import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.AnalysisCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 화장대에 등록된 화장품 (ERD의 PRODUCT 테이블)
- *
  * userId / scanId는 User, ScanJob과 직접 연관관계를 맺지 않고 Long으로만 둠.
  */
 @Entity
@@ -46,16 +46,26 @@ public class Product {
     @Lob
     @Column(name = "description")
     private String description;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "analysis_category")
+    private AnalysisCategory analysisCategory;
+
+    //목록 카드에 보여줄 한 줄 문구. 루틴용 description과 용도가 다름.
+    @Column(name = "analysis_description", length = 500)
+    private String analysisDescription;
 
     @Builder
     public Product(Long scanId, Long userId, String productName, String brandName,
-                   String capacity, UsageStatus usageStatus) {
+                   String capacity, UsageStatus usageStatus,
+                   AnalysisCategory analysisCategory) {
         this.scanId = scanId;
         this.userId = userId;
         this.productName = productName;
         this.brandName = brandName;
         this.capacity = capacity;
         this.usageStatus = usageStatus != null ? usageStatus : UsageStatus.IN_USE;
+        this.analysisCategory = analysisCategory;
     }
 
     public void changeUsageStatus(UsageStatus usageStatus) {
@@ -64,5 +74,9 @@ public class Product {
 
     public void applyDescription(String description) {
         this.description = description;
+    }
+
+    public void applyAnalysisDescription(String analysisDescription) {
+        this.analysisDescription = analysisDescription;
     }
 }
