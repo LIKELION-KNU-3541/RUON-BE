@@ -1,12 +1,9 @@
 package com.springboot.ruon.global.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 /**
  * 팀 공동 응답 포맷
  * { "success": boolean, "data": T, "error": ErrorDetail }
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
 
     private final boolean success;
