@@ -3,6 +3,9 @@ package com.springboot.ruon.auth.data.dto.response;
 import com.springboot.ruon.auth.data.entity.PregnancyStage;
 import com.springboot.ruon.auth.data.entity.RoutineTimeAvailable;
 import com.springboot.ruon.auth.data.entity.User;
+import com.springboot.ruon.auth.data.entity.SkinConcern;
+import com.springboot.ruon.auth.data.entity.SkinType;
+import java.util.Set;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,6 +19,8 @@ public class UserResponse {
     private int pregnancyWeekNum;
     private boolean breastfeeding;
     private RoutineTimeAvailable routineTimeAvailable;
+    private Set<SkinConcern> skinConcerns;
+    private SkinType skinType;
 
     public static UserResponse from(User user) {
         return UserResponse.builder()
@@ -26,6 +31,8 @@ public class UserResponse {
                 .pregnancyWeekNum(user.getPregnancyWeekNum())
                 .breastfeeding(user.isBreastfeeding())
                 .routineTimeAvailable(user.getRoutineTimeAvailable())
+                .skinConcerns(user.getSkinConcerns() == null ? Set.of() : user.getSkinConcerns())
+                .skinType(user.getSkinType())
                 .build();
     }
 }

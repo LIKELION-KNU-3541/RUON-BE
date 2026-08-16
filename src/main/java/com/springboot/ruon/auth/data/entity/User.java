@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -41,9 +42,18 @@ public class User {
     @Column(nullable = false)
     private RoutineTimeAvailable routineTimeAvailable;
 
+    @Convert(converter = SkinConcernSetConverter.class)
+    @Column(name = "skin_concerns", length = 120)
+    private Set<SkinConcern> skinConcerns;
+
+    @Convert(converter = SkinTypeConverter.class)
+    @Column(name = "skin_type", length = 20)
+    private SkinType skinType;
+
     @Builder
     public User(String email, String password, String name, PregnancyStage pregnancyStage,
-                int pregnancyWeekNum, boolean breastfeeding) {
+                int pregnancyWeekNum, boolean breastfeeding,
+                Set<SkinConcern> skinConcerns, SkinType skinType) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -51,6 +61,8 @@ public class User {
         this.pregnancyWeekNum = pregnancyWeekNum;
         this.breastfeeding = breastfeeding;
         this.routineTimeAvailable = RoutineTimeAvailable.MEDIUM;
+        this.skinConcerns = skinConcerns == null ? Set.of() : Set.copyOf(skinConcerns);
+        this.skinType = skinType;
     }
 
 }
