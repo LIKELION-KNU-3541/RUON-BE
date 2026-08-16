@@ -21,7 +21,7 @@
         <br><br>
         <b>재현</b>
         <br>
-        <sub>🏫 학교명 입력</sub>
+        <sub>🏫 강남대학교 멋쟁이사자처럼 14기</sub>
         <br><br>
         <a href="https://github.com/wogus21">@wogus21</a>
       </td>
