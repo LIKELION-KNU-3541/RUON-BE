@@ -30,7 +30,7 @@
         <br><br>
         <b>최정원</b>
         <br>
-        <sub>강남대학교 멋쟁이사자처럼 14기</sub>
+        <sub>🏫 강남대학교 멋쟁이사자처럼 14기</sub>
         <br><br>
         <a href="https://github.com/Garden0728">@Garden0728</a>
       </td>
