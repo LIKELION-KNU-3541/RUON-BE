@@ -15,9 +15,10 @@ import java.util.List;
  *
  * "오늘 사용 가능한 시간"(30초 퀵루틴/기본 루틴/여유 루틴)도 매일 바뀔 수 있는 값이라
  * 여기서 함께 받아서 User.routineTimeAvailable에 반영(덮어쓰기)한 뒤 루틴을 생성함.
+ *
+ * userId는 더 이상 여기서 받지 않음 - 로그인 토큰(@AuthenticationPrincipal)에서 꺼내 씀
  */
 public record TodayConditionRequest(
-        @NotNull Long userId,
         @NotEmpty List<SkinFeeling> skinFeelings,
         String customFeeling,
         @NotNull RoutineTimeAvailable routineTimeAvailable
