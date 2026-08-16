@@ -234,6 +234,16 @@ public class RoutineLlmService {
                 .append("임신 상태: ").append(describePregnancyStage(user.getPregnancyStage())).append('\n')
                 .append("임신 주차: ").append(user.getPregnancyWeekNum()).append('\n')
                 .append("수유 여부: ").append(user.isBreastfeeding() ? "예" : "아니오").append('\n')
+                .append("피부 타입: ")
+                .append(user.getSkinType() != null ? user.getSkinType().getLabel() : "알 수 없음")
+                .append('\n')
+                .append("피부 고민: ")
+                .append(user.getSkinConcerns() == null || user.getSkinConcerns().isEmpty()
+                        ? "없음"
+                        : user.getSkinConcerns().stream()
+                                .map(concern -> concern.getLabel())
+                                .collect(java.util.stream.Collectors.joining(", ")))
+                .append('\n')
                 .append("루틴 가능 시간대: ").append(describeRoutineTimeAvailable(user.getRoutineTimeAvailable())).append("\n\n");
 
         sb.append("[화장대에 등록된 제품]\n");

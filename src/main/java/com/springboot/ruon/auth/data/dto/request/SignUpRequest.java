@@ -1,7 +1,10 @@
 package com.springboot.ruon.auth.data.dto.request;
 
 import com.springboot.ruon.auth.data.entity.PregnancyStage;
+import com.springboot.ruon.auth.data.entity.SkinConcern;
+import com.springboot.ruon.auth.data.entity.SkinType;
 import jakarta.validation.constraints.*;
+import java.util.Set;
 import lombok.Getter;
 
 @Getter
@@ -26,4 +29,10 @@ public class SignUpRequest {
     private int pregnancyWeekNum;
 
     private boolean breastfeeding;
+
+    @Size(max = 6, message = "피부 고민은 최대 6개까지 선택할 수 있습니다.")
+    private Set<SkinConcern> skinConcerns = Set.of();
+
+    @NotNull(message = "피부 타입을 선택해주세요.")
+    private SkinType skinType;
 }
