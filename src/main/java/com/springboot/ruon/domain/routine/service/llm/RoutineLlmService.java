@@ -43,6 +43,9 @@ public class RoutineLlmService {
 
             규칙:
             - steps의 productId는 반드시 사용자가 화장대에 등록한 제품 목록에 있는 productId 중 하나여야 합니다.
+            - 화장대에 제품이 1개 이상 등록되어 있다면 아침(MORNING) 루틴과 저녁(EVENING) 루틴을 각각 최소 1개 이상의 스텝으로 반드시 구성하세요.
+              저녁에 특별히 더 적합한 제품이 없어 보여도, 등록된 제품 중 세안 등 기본적인 것으로 최소한의 저녁 루틴을 만드세요.
+              아침 또는 저녁 중 한쪽만 만들고 나머지를 빈 채로 두면 안 됩니다.
             - 등록된 제품이 없으면 steps는 빈 배열([])로 반환하고, explanation에 그 이유를 설명하세요.
             - 성분 중복 확인 기능은 아직 지원하지 않으니 언급하지 마세요.
             """;
@@ -163,6 +166,65 @@ public class RoutineLlmService {
             case PREGNANT -> "임신 중";
             case POSTPARTUM -> "출산 후";
         };
+    }
+
+    private static final String TOMORROW_SYSTEM_PROMPT = """
+            당신은 임산부/수유부를 위한 스킨케어 루틴 추천 시스템입니다.
+            사용자가 오늘 루틴에 대해 남긴 반응 점수(1~5)를 참고해서 내일 아침에 사용할 루틴을 구성하세요.
+            반드시 사용자의 화장대에 이미 등록된 제품만 사용해야 하며, 화장대에 없는 새로운 제품을 추천하면 안 됩니다.
+
+            반드시 아래 JSON 형식으로만 응답하세요. 그 외 텍스트는 절대 포함하지 마세요.
+            {
+              "steps": [
+                { "productId": number, "order": number, "action": "CLEANSE" | "TONER" | "ESSENCE" | "SERUM" | "MOISTURIZER" | "SUNSCREEN" }
+              ],
+              "explanation": string,
+              "recommendedAction": string
+            }
+
+            규칙:
+            - steps의 productId는 반드시 사용자가 화장대에 등록한 제품 목록에 있는 productId 중 하나여야 합니다.
+            - 이 루틴은 항상 아침 루틴처럼 구성합니다(timeOfDay는 응답에 포함하지 않습니다).
+            - 등록된 제품이 없으면 steps는 빈 배열([])로 반환하고, explanation에 그 이유를 설명하세요.
+            """;
+
+    /**
+     * "내일 루틴 추천" (GET /api/v1/routines/tomorrow)
+     * 반응 기록이 있는 가장 최근 루틴(lastReactedRoutine)의 reactionScore(1~5)에 따라 지시를 다르게 주되,
+     * steps + explanation/recommendedAction은 항상 같은 구조로 한 번만 호출한다 (점수별 분기 호출 없음).
+     * 결과는 저장하지 않고 호출할 때마다 즉석으로 계산한다.
+     */
+    public TomorrowRoutineLlmResult generateTomorrowRecommendation(
+            User user, List<Product> registeredProducts, Routine lastReactedRoutine) {
+        String userPrompt = buildTomorrowUserPrompt(user, registeredProducts, lastReactedRoutine);
+        String content = openAiClient.requestJsonCompletion(TOMORROW_SYSTEM_PROMPT, userPrompt);
+
+        try {
+            return objectMapper.readValue(content, TomorrowRoutineLlmResult.class);
+        } catch (Exception e) {
+            throw new CustomException(ErrorCode.LLM_GENERATION_FAILED);
+        }
+    }
+
+    private String buildTomorrowUserPrompt(User user, List<Product> products, Routine lastReactedRoutine) {
+        StringBuilder sb = new StringBuilder(buildUserPrompt(user, products, lastReactedRoutine));
+
+        int score = lastReactedRoutine.getReactionScore();
+        sb.append("[오늘 루틴에 대한 반응 점수]\n").append(score).append("점 (1~5점 중)\n\n");
+
+        sb.append("[지시사항]\n");
+        if (score >= 4) {
+            sb.append("반응이 좋았습니다. 위 [이전 루틴]과 완전히 동일한 productId, order, action으로 steps를 구성하세요. ")
+                    .append("explanation과 recommendedAction은 이 루틴을 그대로 이어가도 좋다는 격려 톤의 짧은 문구로 작성하세요.\n");
+        } else if (score == 3) {
+            sb.append("반응이 평소와 같았습니다. 위 [이전 루틴]과 완전히 동일한 productId, order, action으로 steps를 구성하세요. ")
+                    .append("explanation과 recommendedAction은 큰 변화가 필요 없다는 톤의 짧은 문구로 작성하세요.\n");
+        } else {
+            sb.append("반응이 좋지 않았습니다(당김/건조 또는 따가움/붉어짐). 화장대에 등록된 제품 중에서 1~2개 정도만 조정(교체 또는 스텝 순서 변경)해서 steps를 구성하세요. ")
+                    .append("explanation과 recommendedAction에는 무엇을 왜 조정했는지 설명하세요. 화장대에 없는 제품은 절대 추천하지 마세요.\n");
+        }
+
+        return sb.toString();
     }
 
     private String buildUserPrompt(User user, List<Product> products, Routine previousRoutine) {

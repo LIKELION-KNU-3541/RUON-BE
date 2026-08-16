@@ -19,11 +19,11 @@ import com.springboot.ruon.domain.scan.dto.response.AnalysisSummaryResponse.Anal
 import com.springboot.ruon.domain.scan.entity.ScanJob;
 import com.springboot.ruon.domain.scan.repository.ScanJobRepository;
 import com.springboot.ruon.domain.scan.service.AnalysisSummaryService;
+import com.springboot.ruon.domain.scan.service.ScanImageUrlService;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmResult;
 import com.springboot.ruon.domain.scan.service.llm.ProductInfoLlmService;
 import com.springboot.ruon.global.exception.CustomException;
 import com.springboot.ruon.global.exception.ErrorCode;
-import com.springboot.ruon.global.storage.service.ImageStorageService;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class ProductService {
     private final ProductInfoLlmService productInfoLlmService;
     private final UserRepository userRepository;
     private final RoutineLlmService routineLlmService;
-    private final ImageStorageService imageStorageService;
+    private final ScanImageUrlService scanImageUrlService;
 
     @Transactional
     public ProductResponse createProduct(Long userId, ProductCreateRequest request) {
@@ -173,7 +173,7 @@ public class ProductService {
             return ProductDetailResponse.withoutScanData(product);
         }
 
-        String imageUrl = imageStorageService.generateViewUrl(viewImageObjectKey(scanJob));
+        String imageUrl = scanImageUrlService.resolveViewUrl(scanJob);
 
         ProductInfoLlmResult structured = productInfoLlmService.fromJson(scanJob.getStructuredResult());
         List<String> fullIngredients = structured != null && structured.fullIngredients() != null
@@ -189,14 +189,6 @@ public class ProductService {
                 fullIngredients,
                 summary != null ? summary.primaryCard() : null,
                 summary != null ? summary.secondaryCard() : null);
-    }
-
-    //대표 이미지는 못 찾을 수 있다. 그때는 사용자가 올린 사진을 보여준다. (ScanService와 동일한 로직)
-    private String viewImageObjectKey(ScanJob scanJob) {
-        String representativeImageObjectKey = scanJob.getRepresentativeImageObjectKey();
-        return representativeImageObjectKey != null
-                ? representativeImageObjectKey
-                : scanJob.getUploadedImageObjectKey();
     }
 
     /**
@@ -235,8 +227,7 @@ public class ProductService {
         if (product.getScanId() == null) {
             return null;
         }
-        ScanJob scanJob = scansById.get(product.getScanId());
-        return scanJob != null ? imageStorageService.generateViewUrl(viewImageObjectKey(scanJob)) : null;
+        return scanImageUrlService.resolveViewUrl(scansById.get(product.getScanId()));
     }
 
     public ProductAnalysisSummaryResponse getAnalysisSummary(Long userId) {

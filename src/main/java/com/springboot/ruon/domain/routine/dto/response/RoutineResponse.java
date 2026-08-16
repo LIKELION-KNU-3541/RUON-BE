@@ -1,6 +1,8 @@
 package com.springboot.ruon.domain.routine.dto.response;
 
+import com.springboot.ruon.auth.data.entity.RoutineTimeAvailable;
 import com.springboot.ruon.domain.product.entity.Product;
+import com.springboot.ruon.domain.routine.dto.request.SkinFeeling;
 import com.springboot.ruon.domain.routine.entity.Routine;
 
 import java.time.LocalDateTime;
@@ -12,21 +14,34 @@ public record RoutineResponse(
         Long userId,
         LocalDateTime generatedAt,
         Integer basedOnPregnancyWeek,
+        List<SkinFeeling> skinFeelings,
+        String customFeeling,
+        RoutineTimeAvailable routineTimeAvailable,
+        Integer reactionScore,
         String explanation,
         String recommendedAction,
         List<StepResponse> steps
 ) {
     // productsById: 이 루틴의 스텝들이 참조하는 productId -> Product. 없으면 해당 스텝의 productName/brandName/description은 null로 나감.
-    public static RoutineResponse from(Routine routine, Map<Long, Product> productsById) {
+    // imageUrlsByProductId: productId -> 이미지 URL (scanId 기반, 없으면 null)
+    public static RoutineResponse from(
+            Routine routine, Map<Long, Product> productsById, Map<Long, String> imageUrlsByProductId) {
         return new RoutineResponse(
                 routine.getRoutineId(),
                 routine.getUserId(),
                 routine.getGeneratedAt(),
                 routine.getBasedOnPregnancyWeek(),
+                routine.getSkinFeelings(),
+                routine.getCustomFeeling(),
+                routine.getRoutineTimeAvailable(),
+                routine.getReactionScore(),
                 routine.getExplanation(),
                 routine.getRecommendedAction(),
                 routine.getSteps().stream()
-                        .map(step -> StepResponse.from(step, productsById.get(step.getProductId())))
+                        .map(step -> StepResponse.from(
+                                step,
+                                productsById.get(step.getProductId()),
+                                imageUrlsByProductId.get(step.getProductId())))
                         .toList()
         );
     }
