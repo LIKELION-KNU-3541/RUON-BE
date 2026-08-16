@@ -12,7 +12,7 @@
         <br><br>
         <b>김민재</b>
         <br>
-        <sub>🏫 학교명 입력</sub>
+        <sub>🏫 강남대학교 멋쟁이사자처럼 14기</sub>
         <br><br>
         <a href="https://github.com/tangerinem">@tangerinem</a>
       </td>
