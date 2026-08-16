@@ -53,24 +53,24 @@ public class RoutineService {
     private final ScanImageUrlService scanImageUrlService;
 
     @Transactional
-    public RoutineResponse reflectTodayCondition(TodayConditionRequest request) {
+    public RoutineResponse reflectTodayCondition(Long userId, TodayConditionRequest request) {
         validateCondition(request);
 
-        User user = userRepository.findById(request.userId())
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         // 오늘 선택한 "사용 가능한 시간"을 User에 반영(덮어쓰기) - 매일 바뀔 수 있는 값이라 여기서 갱신
         user.setRoutineTimeAvailable(request.routineTimeAvailable());
 
         Routine previousRoutine = routineRepository
-                .findFirstByUserIdOrderByGeneratedAtDesc(request.userId())
+                .findFirstByUserIdOrderByGeneratedAtDesc(userId)
                 .orElse(null);
 
-        List<Product> registeredProducts = productRepository.findByUserId(request.userId());
+        List<Product> registeredProducts = productRepository.findByUserId(userId);
 
         // 오늘의 컨디션(피부 느낌)과 방금 반영한 사용 가능한 시간을 이 루틴에 스냅샷으로 저장
         Routine routine = Routine.create(
-                request.userId(), user.getPregnancyWeekNum(),
+                userId, user.getPregnancyWeekNum(),
                 request.skinFeelings(), request.customFeeling(), request.routineTimeAvailable());
 
         // 오늘의 피부 컨디션 + 방금 갱신한 User.routineTimeAvailable(오늘 사용 가능한 시간)을 반영해서 재생성
@@ -184,9 +184,10 @@ public class RoutineService {
 
     // 반응 기록(재제출 가능/upsert). 점수 자체의 1~5 범위 검증은 RoutineReactionRequest에서 이미 끝남.
     @Transactional
-    public RoutineResponse recordReaction(Long routineId, Integer score) {
+    public RoutineResponse recordReaction(Long userId, Long routineId, Integer score) {
         Routine routine = routineRepository.findById(routineId)
                 .orElseThrow(() -> new CustomException(ErrorCode.ROUTINE_NOT_FOUND));
+        requireOwner(routine, userId);
 
         routine.applyReaction(score);
 
@@ -197,13 +198,14 @@ public class RoutineService {
     }
 
     @Transactional
-    public StepResponse updateStepStatus(Long routineId, Long stepId, StepStatus status) {
+    public StepResponse updateStepStatus(Long userId, Long routineId, Long stepId, StepStatus status) {
         Step step = stepRepository.findById(stepId)
                 .orElseThrow(() -> new CustomException(ErrorCode.STEP_NOT_FOUND));
 
         if (!step.getRoutine().getRoutineId().equals(routineId)) {
             throw new CustomException(ErrorCode.STEP_NOT_FOUND);
         }
+        requireOwner(step.getRoutine(), userId);
 
         step.changeStatus(status);
         Product product = productRepository.findById(step.getProductId()).orElse(null);
@@ -214,5 +216,12 @@ public class RoutineService {
         String imageUrl = scanImageUrlService.resolveViewUrl(scanJob);
 
         return StepResponse.from(step, product, imageUrl);
+    }
+
+    // routineId/stepId는 순차 생성되는 값이라 남의 것도 추측 가능 - 소유자 검증 필수(issue #61)
+    private void requireOwner(Routine routine, Long userId) {
+        if (!routine.getUserId().equals(userId)) {
+            throw new CustomException(ErrorCode.FORBIDDEN, "본인의 루틴만 접근할 수 있습니다.", null);
+        }
     }
 }
