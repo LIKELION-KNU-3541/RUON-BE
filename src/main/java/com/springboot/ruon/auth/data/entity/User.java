@@ -65,4 +65,27 @@ public class User {
         this.skinType = skinType;
     }
 
+    public void updateProfile(String name, PregnancyStage pregnancyStage,
+                              Integer pregnancyWeekNum, Boolean breastfeeding,
+                              Set<SkinConcern> skinConcerns, SkinType skinType) {
+        if (name != null) {
+            this.name = name.trim();
+        }
+        if (pregnancyStage != null) {
+            this.pregnancyStage = pregnancyStage;
+        }
+        if (pregnancyWeekNum != null) {
+            this.pregnancyWeekNum = pregnancyWeekNum;
+        }
+        if (breastfeeding != null) {
+            this.breastfeeding = breastfeeding;
+        }
+        if (skinConcerns != null) {
+            this.skinConcerns = Set.copyOf(skinConcerns);
+        }
+        if (skinType != null) {
+            this.skinType = skinType;
+        }
+    }
+
 }

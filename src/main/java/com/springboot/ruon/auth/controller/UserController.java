@@ -1,13 +1,17 @@
 package com.springboot.ruon.auth.controller;
 
+import com.springboot.ruon.auth.data.dto.request.UpdateMyInfoRequest;
 import com.springboot.ruon.auth.data.dto.response.UserResponse;
 import com.springboot.ruon.auth.security.CustomUserDetails;
 import com.springboot.ruon.auth.service.AuthService;
 import com.springboot.ruon.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +26,14 @@ public class UserController {
     public ResponseEntity<ApiResponse<UserResponse>> getMyInfo(
             @AuthenticationPrincipal CustomUserDetails userDetails) {
         UserResponse response = authService.getMyInfo(userDetails.getUserId());
+        return ResponseEntity.ok(ApiResponse.success(response));
+    }
+
+    @PatchMapping("/me")
+    public ResponseEntity<ApiResponse<UserResponse>> updateMyInfo(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @Valid @RequestBody UpdateMyInfoRequest request) {
+        UserResponse response = authService.updateMyInfo(userDetails.getUserId(), request);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }
