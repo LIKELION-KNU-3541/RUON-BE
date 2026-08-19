@@ -2,6 +2,7 @@ package com.springboot.ruon.auth.service;
 
 import com.springboot.ruon.auth.data.dto.request.LoginRequest;
 import com.springboot.ruon.auth.data.dto.request.SignUpRequest;
+import com.springboot.ruon.auth.data.dto.request.UpdateMyInfoRequest;
 import com.springboot.ruon.auth.data.dto.response.SignUpResponse;
 import com.springboot.ruon.auth.data.dto.response.TokenResponse;
 import com.springboot.ruon.auth.data.dto.response.UserResponse;
@@ -63,6 +64,21 @@ public class AuthService {
     public UserResponse getMyInfo(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+
+        return UserResponse.from(user);
+    }
+
+    public UserResponse updateMyInfo(Long userId, UpdateMyInfoRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+
+        user.updateProfile(
+                request.getName(),
+                request.getPregnancyStage(),
+                request.getPregnancyWeekNum(),
+                request.getBreastfeeding(),
+                request.getSkinConcerns(),
+                request.getSkinType());
 
         return UserResponse.from(user);
     }
