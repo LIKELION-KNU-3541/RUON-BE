@@ -96,7 +96,15 @@ public class RoutineService {
 
     private void applyLlmResultToRoutine(Routine routine, RoutineLlmResult llmResult, User user, Map<Long, Product> productsById) {
         try {
+            // LLM이 같은 시간대(timeOfDay)에 동일한 productId+action 조합을 중복으로 반환하는 경우가 있어
+            // (예: 저녁 CLEANSE 스텝이 같은 제품으로 두 번), 프롬프트로 막는 것과 별개로 여기서도 한 번 더 걸러낸다.
+            java.util.Set<String> seenSteps = new java.util.HashSet<>();
             for (LlmStepResult stepResult : llmResult.steps()) {
+                String dedupKey = stepResult.timeOfDay() + "|" + stepResult.productId() + "|" + stepResult.action();
+                if (!seenSteps.add(dedupKey)) {
+                    continue;
+                }
+
                 Step step = Step.create(
                         stepResult.productId(),
                         TimeOfDay.valueOf(stepResult.timeOfDay()),
